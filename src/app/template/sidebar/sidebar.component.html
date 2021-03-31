@@ -1,58 +1,74 @@
-<div id="layoutSidenav_nav">
-  <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-    <div class="sb-sidenav-menu">
-      <div class="nav">
-        <div class="sb-sidenav-menu-heading">Sistema</div>
-        <a class="nav-link" routerLink="/home">
-          <div class="sb-nav-link-icon">
-            <i class="fas fa-tachometer-alt"></i>
-          </div>
-          Home
-        </a>
-        <div class="sb-sidenav-menu-heading">Cadastros</div>
-        <a
-          class="nav-link collapsed"
-          routerLink="/clientes"
-          data-toggle="collapse"
-          data-target="#collapseLayouts"
-          aria-expanded="false"
-          aria-controls="collapseLayouts"
-          ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-          Clientes
-        </a>
+<!-- Sidebar -->
+<ul
+  class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+  id="accordionSidebar"
+>
+  <!-- Sidebar - Brand -->
+  <a
+    class="sidebar-brand d-flex align-items-center justify-content-center"
+    href="#"
+  >
+    <div class="sidebar-brand-icon">
+      <i class="fas fa-dolly"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">stock WMS</div>
+  </a>
 
-        <a
-          class="nav-link collapsed"
-          routerLink="/servicos-prestados"
-          data-toggle="collapse"
-          data-target="#collapseLayouts"
-          aria-expanded="false"
-          aria-controls="collapseLayouts"
-          ><div class="sb-nav-link-icon">
-            <i class="fas fa-address-card"></i>
-          </div>
-          Serviços Prestados
-        </a>
+  <!-- Divider -->
+  <hr class="sidebar-divider" />
 
-        <div class="sb-sidenav-menu-heading">Logout</div>
-        <a
-          class="nav-link collapsed"
-          (click)="logout()"
-          href="#"
-          data-toggle="collapse"
-          data-target="#collapseLayouts"
-          aria-expanded="false"
-          aria-controls="collapseLayouts"
-          ><div class="sb-nav-link-icon">
-            <i class="fas fa-sign-out-alt"></i>
-          </div>
-          Sair
-        </a>
+  <!-- Heading -->
+  <div class="sidebar-heading">Sistema</div>
+
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item active">
+    <a class="nav-link" href="index.html">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Home</span></a
+    >
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider" />
+
+  <!-- Heading -->
+  <div class="sidebar-heading">Cadastros</div>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a
+      class="nav-link collapsed"
+      href="#"
+      data-toggle="collapse"
+      data-target="#collapsePages"
+      aria-expanded="true"
+      aria-controls="collapsePages"
+    >
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Básicos</span>
+    </a>
+    <div
+      id="collapsePages"
+      class="collapse"
+      aria-labelledby="headingPages"
+      data-parent="#accordionSidebar"
+    >
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Cadastros:</h6>
+        <a class="collapse-item" routerLink="/clientes">Clientes</a>
+        <a class="collapse-item" routerLink="/servicos-prestados"
+          >Serviços Prestados</a
+        >
       </div>
     </div>
-    <div class="sb-sidenav-footer">
-      <div class="small">Usuário Logado:</div>
-      {{ usuarioLogado }}
-    </div>
-  </nav>
-</div>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block" />
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+</ul>
+<!-- End of Sidebar -->

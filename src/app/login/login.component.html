@@ -1,93 +1,134 @@
-<div class="bg-primary">
-  <div id="layoutAuthentication">
-    <div id="layoutAuthentication_content">
-      <main>
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-5">
-              <div class="card shadow-lg border-0 rounded-lg mt-5">
-                <div class="card-header">
-                  <h3 class="text-center font-weight-light my-4">
-                    {{ cadastrando ? "Cadastro de Novo Usuário" : "Entrar" }}
-                  </h3>
+<div class="container">
+  <!-- Outer Row -->
+  <div class="row justify-content-center">
+    <div class="col-xl-10 col-lg-12 col-md-9">
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row">
+            <div
+              class="col-lg-6 d-none d-lg-block bg-login-image"
+              [ngClass]="{
+                'col-lg-6 d-none d-lg-block bg-login-image': !cadastrando,
+                'col-lg-5 d-none d-lg-block bg-register-image': cadastrando
+              }"
+            ></div>
+            <div class="col-lg-6">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4">
+                    {{
+                      cadastrando
+                        ? "Cadastro de Novo Usuário"
+                        : "Bem vindo ao e-stock WMS!"
+                    }}
+                  </h1>
                 </div>
-                <div class="card-body">
-                  <div class="alert alert-success" *ngIf="mensagemSucesso">
-                    {{ mensagemSucesso }}
+
+                <div class="alert alert-success" *ngIf="mensagemSucesso">
+                  {{ mensagemSucesso }}
+                </div>
+
+                <div class="alert alert-danger" *ngFor="let erro of errors">
+                  {{ erro }}
+                </div>
+                <form class="user" #loginForm="ngForm" (submit)="onSubmit()">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="username"
+                      [(ngModel)]="username"
+                      class="form-control form-control-user"
+                      aria-describedby="emailHelp"
+                      placeholder="Enter Email Address..."
+                    />
                   </div>
-
-                  <div class="alert alert-danger" *ngFor="let erro of errors">
-                    {{ erro }}
+                  <div class="form-group">
+                    <input
+                      type="password"
+                      name="password"
+                      [(ngModel)]="password"
+                      class="form-control form-control-user"
+                      placeholder="Password"
+                    />
                   </div>
-
-                  <form #loginForm="ngForm" (submit)="onSubmit()">
-                    <div class="form-group">
-                      <label class="small mb-1">Login</label>
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox small">
                       <input
-                        type="text"
-                        name="username"
-                        [(ngModel)]="username"
-                        autocomplete="off"
-                        class="form-control py-4"
-                        placeholder="Digite seu login"
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="customCheck"
                       />
-                    </div>
-
-                    <div class="form-group">
-                      <label class="small mb-1">Senha</label>
-                      <input
-                        type="password"
-                        name="password"
-                        [(ngModel)]="password"
-                        class="form-control py-4"
-                        placeholder="Digite sua Senha"
-                      />
-                    </div>
-
-                    <div
-                      class="form-group align-items-center justify-content-between mt-4 mb-0"
-                    >
-                      <button
-                        type="submit"
-                        class="btn btn-primary"
-                        *ngIf="!cadastrando"
+                      <label class="custom-control-label" for="customCheck"
+                        >Lembrar senha</label
                       >
-                        Enviar
-                      </button>
-
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-user btn-block"
+                    *ngIf="!cadastrando"
+                  >
+                    Entrar
+                  </button>
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
                       <button
                         type="button"
-                        class="btn btn-success"
+                        class="btn btn-primary btn-user btn-block"
                         (click)="cadastrar()"
                         *ngIf="cadastrando"
                       >
                         Cadastrar
                       </button>
-
+                    </div>
+                    <div class="col-sm-6">
                       <button
                         type="button"
                         (click)="cancelaCadastro()"
-                        class="btn btn-danger ml-1"
+                        class="btn btn-danger btn-user btn-block"
                         *ngIf="cadastrando"
                       >
                         Cancelar
                       </button>
                     </div>
-                  </form>
-                </div>
-
-                <div class="card-footer text-center">
-                  <div class="small">
-                    <a href="#" (click)="preparaCadastrar($event)">
-                      Não possui Usuário? Cadastre-se!
-                    </a>
                   </div>
+                  <hr />
+                  <a href="#" class="btn btn-google btn-user btn-block">
+                    <i class="fab fa-google fa-fw"></i>
+                    {{
+                      cadastrando ? "Cadastrar com Google" : "Login com Google"
+                    }}
+                  </a>
+                  <a href="#" class="btn btn-facebook btn-user btn-block">
+                    <i class="fab fa-facebook-f fa-fw"></i>
+                    {{
+                      cadastrando
+                        ? "Cadastrar com Facebook"
+                        : "Login com Facebook"
+                    }}
+                  </a>
+                </form>
+                <hr />
+                <div class="text-center">
+                  <a class="small" href="#" *ngIf="!cadastrando"
+                    >Esqueceu a senha?</a
+                  >
+                </div>
+                <div class="text-center">
+                  <a
+                    class="small"
+                    href="#"
+                    (click)="preparaCadastrar($event)"
+                    *ngIf="!cadastrando"
+                    >Criar uma conta!</a
+                  >
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   </div>
 </div>

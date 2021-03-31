@@ -21,12 +21,13 @@
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/styles.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+              "node_modules/jquery.easing/bower_components/jquery-easing-original/jquery.easing.min.js"
             ]
           },
           "configurations": {

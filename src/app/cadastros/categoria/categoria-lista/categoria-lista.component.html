@@ -1,4 +1,4 @@
-<h1 class="h3 mb-2 text-gray-800">Clientes</h1>
+<h1 class="h3 mb-2 text-gray-800">Categoria</h1>
 <div class="row">
   <div class="col-md-12">
     <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
@@ -24,7 +24,7 @@
 <br />
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Categoria de produtos</h6>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -37,28 +37,26 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nome</th>
-            <th>CPF</th>
+            <th>Descrição</th>
             <th>Data Cadastro</th>
             <th>Ação</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let cliente of clientes">
-            <td>{{ cliente.id }}</td>
-            <td>{{ cliente.nome }}</td>
-            <td>{{ cliente.cpf }}</td>
-            <td>{{ cliente.dataCadastro }}</td>
+          <tr *ngFor="let categoria of categorias">
+            <td>{{ categoria.id }}</td>
+            <td>{{ categoria.descricao }}</td>
+            <td>{{ categoria.dataCadastro }}</td>
             <td>
               <button
                 class="btn btn-primary btn-circle ml-5"
-                routerLink="/clientes/form/{{ cliente.id }}"
+                routerLink="/categoria/form/{{ categoria.id }}"
               >
                 <i class="fas fa-edit"></i>
               </button>
               <button
                 class="btn btn-danger btn-circle ml-2"
-                (click)="preparaDelecao(cliente)"
+                (click)="preparaDelecao(categoria)"
                 data-toggle="modal"
                 data-target="#modalDelecao"
               >
@@ -79,14 +77,15 @@
         <h4>Confirmação</h4>
       </div>
 
-      <div class="modal-body" *ngIf="clienteSelecionado">
-        Confirma a deleção do(a) Cliente {{ clienteSelecionado.nome }}?
+      <div class="modal-body" *ngIf="categoriaSelecionado">
+        Confirma a deleção da Categoria
+        {{ categoriaSelecionado.descricao }}?
       </div>
 
       <div class="modal-footer">
         <button
           class="btn btn-success"
-          (click)="deletarCliente()"
+          (click)="deletarCategoria()"
           data-dismiss="modal"
         >
           Confirmar

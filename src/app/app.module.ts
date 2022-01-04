@@ -16,6 +16,12 @@ import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthService } from './auth.service';
 import { TokenInterceptor } from './token.interceptor';
+import { UnidadeMedidaService } from './cadastros/unidade-medida/unidade-medida.service';
+import { CategoriaService } from './cadastros/categoria/categoria.service';
+import { ProdutoService } from './cadastros/produto/produto.service';
+import { UnidadeMedidaModule } from './cadastros/unidade-medida/unidada-medida.module';
+import { CategoriaaModule } from './cadastros/categoria/categoria.module';
+import { ProdutoaModule } from './cadastros/produto/produto.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, LayoutComponent],
@@ -25,10 +31,16 @@ import { TokenInterceptor } from './token.interceptor';
     HttpClientModule,
     AppRoutingModule,
     TemplateModule,
+    UnidadeMedidaModule,
+    CategoriaaModule,
     ClientesModule,
+    ProdutoaModule,
     ServicoPrestadoModule,
   ],
   providers: [
+    UnidadeMedidaService,
+    CategoriaService,
+    ProdutoService,
     ClientesService,
     ServicoPrestadoService,
     AuthService,

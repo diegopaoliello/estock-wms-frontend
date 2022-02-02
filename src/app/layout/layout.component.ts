@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
 
 import jQuery from 'jquery';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-layout',
@@ -11,7 +12,11 @@ import jQuery from 'jquery';
   styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent implements AfterViewInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private socialAuthService: SocialAuthService
+  ) {}
 
   ngAfterViewInit() {
     (function ($) {
@@ -82,6 +87,7 @@ export class LayoutComponent implements AfterViewInit {
 
   logout() {
     this.authService.encerrarSessao();
+    this.socialAuthService.signOut();
     this.router.navigate(['/login']);
   }
 }

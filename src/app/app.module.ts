@@ -22,6 +22,7 @@ import { ProdutoService } from './cadastros/produto/produto.service';
 import { UnidadeMedidaModule } from './cadastros/unidade-medida/unidada-medida.module';
 import { CategoriaaModule } from './cadastros/categoria/categoria.module';
 import { ProdutoaModule } from './cadastros/produto/produto.module';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, LayoutComponent],
@@ -36,6 +37,7 @@ import { ProdutoaModule } from './cadastros/produto/produto.module';
     ClientesModule,
     ProdutoaModule,
     ServicoPrestadoModule,
+    SocialLoginModule,
   ],
   providers: [
     UnidadeMedidaService,
@@ -49,6 +51,20 @@ import { ProdutoaModule } from './cadastros/produto/produto.module';
       useClass: TokenInterceptor,
       multi: true,
     },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '500901473946-67h7h05slq3n10cnrnbsiuqi3nvh4248.apps.googleusercontent.com'
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent],
 })

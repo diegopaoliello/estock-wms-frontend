@@ -21,6 +21,7 @@
     "@angular/router": "~9.1.13",
     "@auth0/angular-jwt": "^5.0.2",
     "@fortawesome/fontawesome-free": "^5.15.1",
+    "angularx-social-login": "^3.5.7",
     "bootstrap": "^4.5.3",
     "datatables.net-bs4": "^1.10.22",
     "express": "^4.17.1",

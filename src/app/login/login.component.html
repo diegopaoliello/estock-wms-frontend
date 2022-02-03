@@ -94,7 +94,10 @@
                     </div>
                   </div>
                   <hr />
-                  <a href="#" class="btn btn-google btn-user btn-block">
+                  <a
+                    (click)="loginGoogle()"
+                    class="btn btn-google btn-user btn-block"
+                  >
                     <i class="fab fa-google fa-fw"></i>
                     {{
                       cadastrando ? "Cadastrar com Google" : "Login com Google"

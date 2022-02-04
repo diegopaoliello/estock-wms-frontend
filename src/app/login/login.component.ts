@@ -111,7 +111,7 @@ export class LoginComponent implements OnInit, DoCheck {
   }
 
   cadastrar() {
-    console.log('cadastrando');
+    console.log('cadastrando...');
     const usuario: Usuario = new Usuario();
     usuario.username = this.username;
     usuario.password = this.password;

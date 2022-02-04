@@ -43,13 +43,19 @@ export class LoginComponent implements OnInit, DoCheck {
   ngDoCheck() {
     console.log('ngDoCheck');
     console.log(this.isLoggedin);
+    let existsUser: boolean = false; 
+
     if (this.isLoggedin) {
       console.log('ngDoCheck in');
       this.isLoggedin = false;
       this.username = this.socialUser.email;
       this.password = this.socialUser.id;
+      existsUser = this.existsUser(this.username);
 
-      if (!this.existsUser(this.username)) {
+      console.log('existsUser:' + existsUser);
+
+      if (!existsUser) {
+        console.log('entrou cadastrar');
         this.cadastrar();
       }
 
@@ -104,6 +110,7 @@ export class LoginComponent implements OnInit, DoCheck {
   }
 
   cadastrar() {
+    console.log('cadastrando');
     const usuario: Usuario = new Usuario();
     usuario.username = this.username;
     usuario.password = this.password;

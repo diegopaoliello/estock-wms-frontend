@@ -96,7 +96,8 @@ export class LoginComponent implements OnInit, DoCheck {
     return saida;
   }
 
-  loginGoogle(): void {
+  loginGoogle(event): void {
+    event.preventDefault();
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 

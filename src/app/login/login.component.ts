@@ -29,6 +29,9 @@ export class LoginComponent implements OnInit, DoCheck {
   ) {}
 
   ngOnInit() {
+    console.log('ngOnInit');
+    this.isLoggedin = false;
+
     this.socialAuthService.authState.subscribe((user) => {
       this.socialUser = user;
       this.isLoggedin = user != null;
@@ -38,11 +41,15 @@ export class LoginComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
+    console.log('ngDoCheck');
+    console.log(this.isLoggedin);
     if (this.isLoggedin) {
+      console.log('ngDoCheck in');
+      this.isLoggedin = false;
       this.username = this.socialUser.email;
+      this.password = this.socialUser.id;
 
-      if (this.existsUser(this.username)) {
-        this.password = this.socialUser.id;
+      if (!this.existsUser(this.username)) {
         this.cadastrar();
       }
 
@@ -55,6 +62,7 @@ export class LoginComponent implements OnInit, DoCheck {
   }
 
   login(): void {
+    console.log('login');
     this.authService.tentarLogar(this.username, this.password).subscribe(
       (response) => {
         const access_token = JSON.stringify(response);
@@ -68,21 +76,22 @@ export class LoginComponent implements OnInit, DoCheck {
   }
 
   existsUser(username: string): boolean {
+    let saida: boolean = false;
+
+    console.log('existsUser');
+    
     this.authService.getUsuario(username).subscribe(
       (response) => {
         console.log('response' + response);
-      },
-      (errorResponse) => {
-        this.errors = errorResponse.error.errors;
+        saida = true;
       }
     );
 
-    return true;
+    return saida;
   }
 
   loginGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    console.log(this.username);
   }
 
   preparaCadastrar(event) {

@@ -54,12 +54,12 @@ export class AuthService {
     return this.http.post<any>(this.apiURL, usuario);
   }
 
-  getUsuario(username: string): Observable<Usuario> {
+  getUsuario(username: string): Observable<any> {
     const httpParams = new HttpParams()
       .set('username', username);
 
       const url = this.apiURL + '?' + httpParams.toString();
-      return this.http.get<Usuario>(url);
+      return this.http.get<any>(url);
   }
 
   tentarLogar(username: string, password: string): Observable<any> {

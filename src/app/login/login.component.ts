@@ -99,7 +99,10 @@ export class LoginComponent implements OnInit {
         );
       },
       () => {
-        if (this.errors == undefined) {
+        if (
+          this.errors == undefined ||
+          (this.errors != undefined && this.errors.length == 0)
+        ) {
           this.login();
         }
       }

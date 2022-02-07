@@ -16,6 +16,7 @@ export class AuthService {
   clientID: string = environment.clientId;
   clientSecret: string = environment.clientSecret;
   jwtHelper: JwtHelperService = new JwtHelperService();
+  isLogoutAction: Boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -30,6 +31,7 @@ export class AuthService {
 
   encerrarSessao() {
     localStorage.removeItem('access_token');
+    this.isLogoutAction = true;
   }
 
   getUsuarioAutenticado() {
@@ -55,11 +57,10 @@ export class AuthService {
   }
 
   getUsuario(username: string): Observable<any> {
-    const httpParams = new HttpParams()
-      .set('username', username);
+    const httpParams = new HttpParams().set('username', username);
 
-      const url = this.apiURL + '?' + httpParams.toString();
-      return this.http.get<any>(url);
+    const url = this.apiURL + '?' + httpParams.toString();
+    return this.http.get<any>(url);
   }
 
   tentarLogar(username: string, password: string): Observable<any> {

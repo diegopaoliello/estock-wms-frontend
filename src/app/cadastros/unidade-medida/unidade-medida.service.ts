@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class UnidadeMedidaService {
-  apiURL: string = environment.apiURLBase + '/api/unidade-medida';
+  apiURL: string = environment.apiURLBase + '/api/unidades-medida';
 
   constructor(private http: HttpClient) {}
 

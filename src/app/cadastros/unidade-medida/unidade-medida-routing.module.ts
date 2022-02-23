@@ -7,14 +7,14 @@ import { AuthGuard } from 'src/app/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'unidade-medida',
+    path: 'unidades-medida',
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
       { path: 'form', component: UnidadeMedidaFormComponent },
       { path: 'form/:id', component: UnidadeMedidaFormComponent },
       { path: 'lista', component: UnidadeMedidaListaComponent },
-      { path: '', redirectTo: '/unidade-medida/lista', pathMatch: 'full' },
+      { path: '', redirectTo: '/unidades-medida/lista', pathMatch: 'full' },
     ],
   },
 ];

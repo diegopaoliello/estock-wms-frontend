@@ -7,14 +7,14 @@ import { AuthGuard } from 'src/app/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'produto',
+    path: 'produtos',
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
       { path: 'form', component: ProdutoFormComponent },
       { path: 'form/:id', component: ProdutoFormComponent },
       { path: 'lista', component: ProdutoListaComponent },
-      { path: '', redirectTo: '/produto/lista', pathMatch: 'full' },
+      { path: '', redirectTo: '/produtos/lista', pathMatch: 'full' },
     ],
   },
 ];

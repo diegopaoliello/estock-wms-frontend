@@ -1,0 +1,111 @@
+<h1 class="mt-4">Fornecedor</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">
+    {{ fornecedor.id ? "Edição" : "Cadastro" }}
+  </li>
+</ol>
+<div class="container">
+  <form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success" role="alert" *ngIf="success == true">
+          Fornecedor salvo/atualizado com sucesso!
+        </div>
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngFor="let erro of errors"
+        >
+          {{ erro }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="fornecedor.id">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>ID:</label>
+          <input
+            type="text"
+            [ngModel]="fornecedor.id"
+            name="id"
+            class="form-control"
+            disabled="true"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Data Cadastro:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="dataCadastro"
+            [ngModel]="fornecedor.dataCadastro"
+            disabled="true"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Razão Social: *</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="fornecedor.razaoSocial"
+            name="razaoSocial"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Nome Fantasia: *</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="fornecedor.nomeFantasia"
+            name="nomeFantasia"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>CNPJ: *</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="fornecedor.cnpj"
+            name="cnpj"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-success" *ngIf="!fornecedor.id">
+          <i class="fa fa-save"></i> Salvar
+        </button>
+
+        <button type="submit" class="btn btn-primary" *ngIf="fornecedor.id">
+          <i class="fa fa-sync-alt"></i> Atualizar
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger ml-1"
+          (click)="voltarParaListagem()"
+        >
+          <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

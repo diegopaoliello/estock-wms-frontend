@@ -1,4 +1,4 @@
-import { Cliente } from '../../clientes/cliente';
+import { Cliente } from 'src/app/cadastros/clientes/cliente';
 
 export class ServicoPrestadoBusca {
   descricao: string;

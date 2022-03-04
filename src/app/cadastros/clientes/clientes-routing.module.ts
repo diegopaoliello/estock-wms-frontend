@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ClientesFormComponent } from './clientes-form/clientes-form.component';
 import { ClientesListaComponent } from './clientes-lista/clientes-lista.component';
-import { LayoutComponent } from '../layout/layout.component';
-import { AuthGuard } from '../auth.guard';
+import { LayoutComponent } from 'src/app/layout/layout.component';
+import { AuthGuard } from 'src/app/auth.guard';
 
 const routes: Routes = [
   {

@@ -8,21 +8,29 @@ import { AppComponent } from './app.component';
 
 import { TemplateModule } from './template/template.module';
 import { HomeComponent } from './home/home.component';
-import { ClientesModule } from './clientes/clientes.module';
-import { ClientesService } from './clientes.service';
 import { ServicoPrestadoModule } from './servico-prestado/servico-prestado.module';
 import { ServicoPrestadoService } from './servico-prestado.service';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthService } from './auth.service';
 import { TokenInterceptor } from './token.interceptor';
+import { ClientesModule } from './cadastros/clientes/clientes.module';
+import { ClientesService } from './cadastros/clientes/clientes.service';
 import { UnidadeMedidaService } from './cadastros/unidade-medida/unidade-medida.service';
 import { CategoriaService } from './cadastros/categoria/categoria.service';
 import { ProdutoService } from './cadastros/produto/produto.service';
+import { PedidoService } from './operacoes/entrada/pedido/pedido.service';
+import { FornecedorService } from './cadastros/fornecedor/fornecedor.service';
 import { UnidadeMedidaModule } from './cadastros/unidade-medida/unidada-medida.module';
 import { CategoriaaModule } from './cadastros/categoria/categoria.module';
 import { ProdutoaModule } from './cadastros/produto/produto.module';
-import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { PedidoModule } from './operacoes/entrada/pedido/pedido.module';
+import { FornecedorModule } from './cadastros/fornecedor/fornecedor.module';
+import {
+  GoogleLoginProvider,
+  SocialAuthServiceConfig,
+  SocialLoginModule,
+} from 'angularx-social-login';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, LayoutComponent],
@@ -35,7 +43,9 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
     UnidadeMedidaModule,
     CategoriaaModule,
     ClientesModule,
+    FornecedorModule,
     ProdutoaModule,
+    PedidoModule,
     ServicoPrestadoModule,
     SocialLoginModule,
   ],
@@ -43,7 +53,9 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
     UnidadeMedidaService,
     CategoriaService,
     ProdutoService,
+    PedidoService,
     ClientesService,
+    FornecedorService,
     ServicoPrestadoService,
     AuthService,
     {
@@ -60,11 +72,11 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
               '210183096332-f5cf4bqjm1ombs95klht3aak0l1nukje.apps.googleusercontent.com'
-            )
-          }
-        ]
+            ),
+          },
+        ],
       } as SocialAuthServiceConfig,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })

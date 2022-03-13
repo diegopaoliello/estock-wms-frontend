@@ -1,1 +1,83 @@
-<p>pedido-lista works!</p>
+<h1 class="h3 mb-2 text-gray-800">Pedido</h1>
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+      {{ mensagemSucesso }}
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+      {{ mensagemErro }}
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1">
+    <button class="btn btn-warning btn-icon-split" (click)="novoCadastro()">
+      <span class="icon text-white-50">
+        <i class="fas fa-plus"></i>
+      </span>
+      <span class="text">Novo</span>
+    </button>
+  </div>
+</div>
+<br />
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Pedido de compras</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Nº Pedido</th>
+            <th>Status</th>
+            <th>Fornecedor</th>
+            <th>Data Cadastro</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pedido of pedidos">
+            <td>{{ pedido.id }}</td>
+            <td>{{ pedido.status }}</td>
+            <td>{{ pedido.fornecedor.razaoSocial }}</td>
+            <td>{{ pedido.dataCadastro }}</td>
+            <td>
+              <button class="btn btn-primary btn-circle ml-5" routerLink="/pedidos/form/{{ pedido.id }}">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn btn-danger btn-circle ml-2" (click)="preparaDelecao(pedido)" data-toggle="modal"
+                data-target="#modalDelecao">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="modalDelecao" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirmação</h4>
+      </div>
+
+      <div class="modal-body" *ngIf="pedidoSelecionado">
+        Confirma a deleção da Pedido
+        {{ pedidoSelecionado.id }}?
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-success" (click)="deletarPedido()" data-dismiss="modal">
+          Confirmar
+        </button>
+        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

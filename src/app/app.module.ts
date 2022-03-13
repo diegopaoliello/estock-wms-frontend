@@ -31,6 +31,7 @@ import {
   SocialAuthServiceConfig,
   SocialLoginModule,
 } from 'angularx-social-login';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, LayoutComponent],
@@ -71,7 +72,7 @@ import {
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '210183096332-f5cf4bqjm1ombs95klht3aak0l1nukje.apps.googleusercontent.com'
+              environment.googleId
             ),
           },
         ],

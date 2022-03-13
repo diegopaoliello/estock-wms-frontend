@@ -26,6 +26,7 @@ export class PedidoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.pedido = new Pedido();
+    this.pedido.fornecedor = new Fornecedor();
   }
 
   ngOnInit(): void {
@@ -46,7 +47,7 @@ export class PedidoFormComponent implements OnInit {
   }
 
   voltarParaListagem() {
-    this.router.navigate(['/pedido/lista']);
+    this.router.navigate(['/pedidos/lista']);
   }
 
   onSubmit() {

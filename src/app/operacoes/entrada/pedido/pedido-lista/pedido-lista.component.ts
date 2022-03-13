@@ -1,15 +1,42 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Pedido } from '../pedido';
+import { PedidoService } from '../pedido.service';
 
 @Component({
   selector: 'app-pedido-lista',
   templateUrl: './pedido-lista.component.html',
-  styleUrls: ['./pedido-lista.component.css']
+  styleUrls: ['./pedido-lista.component.css'],
 })
 export class PedidoListaComponent implements OnInit {
+  pedidos: Pedido[] = [];
+  pedidoSelecionado: Pedido;
+  mensagemSucesso: string;
+  mensagemErro: string;
 
-  constructor() { }
+  constructor(private service: PedidoService, private router: Router) { }
 
   ngOnInit(): void {
+    this.service
+      .getPedidos()
+      .subscribe((resposta) => (this.pedidos = resposta));
   }
 
+  novoCadastro() {
+    this.router.navigate(['/pedidos/form']);
+  }
+
+  preparaDelecao(pedido: Pedido) {
+    this.pedidoSelecionado = pedido;
+  }
+
+  deletarPedido() {
+    this.service.deletar(this.pedidoSelecionado).subscribe(
+      (response) => {
+        this.mensagemSucesso = 'Pedido deletado com sucesso!';
+        this.ngOnInit();
+      },
+      (erro) => (this.mensagemErro = 'Ocorreu um erro ao deletar o pedido.')
+    );
+  }
 }

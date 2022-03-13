@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   apiURLBase: 'http://localhost:8080',
   clientId: 'my-angular-app',
+  googleId: '500901473946-67h7h05slq3n10cnrnbsiuqi3nvh4248.apps.googleusercontent.com',
   clientSecret: '@321',
   obterTokenUrl: '/api/oauth/token',
 };

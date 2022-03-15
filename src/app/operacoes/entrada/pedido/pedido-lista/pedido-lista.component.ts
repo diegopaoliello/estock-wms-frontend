@@ -29,7 +29,7 @@ export class PedidoListaComponent implements OnInit, AfterViewInit {
     $(function () {
       setTimeout(() => {
         $('#dataTable').DataTable();
-      }, 100);
+      }, 1000);
     });
   }
 

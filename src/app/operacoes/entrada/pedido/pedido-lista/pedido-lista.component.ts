@@ -9,7 +9,7 @@ declare var $: any;
   templateUrl: './pedido-lista.component.html',
   styleUrls: ['./pedido-lista.component.css'],
 })
-export class PedidoListaComponent implements OnInit {
+export class PedidoListaComponent implements OnInit, AfterViewInit {
   pedidos: Pedido[] = [];
   pedidoSelecionado: Pedido;
   mensagemSucesso: string;
@@ -23,11 +23,13 @@ export class PedidoListaComponent implements OnInit {
     this.service
       .getPedidos()
       .subscribe((resposta) => (this.pedidos = resposta));
+  }
 
+  ngAfterViewInit(): void {
     $(function () {
       setTimeout(() => {
         $('#dataTable').DataTable();
-      }, 5);
+      }, 100);
     });
   }
 

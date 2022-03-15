@@ -11,14 +11,14 @@ import { SocialAuthService } from 'angularx-social-login';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements AfterViewInit {
   constructor(
     private authService: AuthService,
     private router: Router,
     private socialAuthService: SocialAuthService
   ) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     $(function () {
       "use strict"; // Start of use strict
 

@@ -1,9 +1,9 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
 
-import jQuery from 'jquery';
+declare var $: any;
 import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
@@ -11,15 +11,15 @@ import { SocialAuthService } from 'angularx-social-login';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
 })
-export class LayoutComponent implements AfterViewInit {
+export class LayoutComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
     private socialAuthService: SocialAuthService
   ) { }
 
-  ngAfterViewInit() {
-    (function ($) {
+  ngOnInit(): void {
+    $(function () {
       "use strict"; // Start of use strict
 
       // Toggle the side navigation
@@ -73,9 +73,7 @@ export class LayoutComponent implements AfterViewInit {
         }, 1000, 'easeInOutExpo');
         e.preventDefault();
       });
-
-    })(jQuery); // End of use strict
-
+    })
   }
 
   logout() {

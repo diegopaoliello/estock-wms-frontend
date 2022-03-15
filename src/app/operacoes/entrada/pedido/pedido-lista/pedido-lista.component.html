@@ -28,31 +28,42 @@
   </div>
   <div class="card-body">
     <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Fornecedor</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th>Id</th>
-                    <th>Fornecedor</th>
-                    <th>Status</th>
-                </tr>
-            </tfoot>
-            <tbody>
-                <tr *ngFor="let pedido of pedidos">
-                    <td>{{ pedido.id }}</td>
-                    <td>{{ pedido.fornecedor.razaoSocial }}</td>
-                    <td>{{ pedido.status }}</td>
-                </tr>
-            </tbody>
-        </table>
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Fornecedor</th>
+            <th>Status</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Id</th>
+            <th>Fornecedor</th>
+            <th>Status</th>
+            <th>Ação</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <tr *ngFor="let pedido of pedidos">
+            <td>{{ pedido.id }}</td>
+            <td>{{ pedido.fornecedor.razaoSocial }}</td>
+            <td>{{ pedido.status }}</td>
+            <td>
+              <button class="btn btn-primary btn-circle ml-5" routerLink="/clientes/form/{{ pedido.id }}">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn btn-danger btn-circle ml-2" (click)="preparaDelecao(pedido)" data-toggle="modal"
+                data-target="#modalDelecao">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-</div>
+  </div>
 </div>
 
 <div id="modalDelecao" class="modal fade" role="dialog">

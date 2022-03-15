@@ -33,8 +33,7 @@
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/jquery.easing/bower_components/jquery-easing-original/jquery.easing.min.js",
               "node_modules/datatables.net/js/jquery.dataTables.min.js",
-              "node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js",
-              "src/assets/js/demo/datatables-demo.js"
+              "node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"
             ]
           },
           "configurations": {

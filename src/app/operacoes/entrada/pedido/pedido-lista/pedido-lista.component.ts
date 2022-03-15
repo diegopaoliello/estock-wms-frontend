@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pedido } from '../pedido';
 import { PedidoService } from '../pedido.service';
-import jQuery from 'jquery';
+declare var $: any;
 
 @Component({
   selector: 'app-pedido-lista',
@@ -23,6 +23,12 @@ export class PedidoListaComponent implements OnInit {
     this.service
       .getPedidos()
       .subscribe((resposta) => (this.pedidos = resposta));
+
+    $(function () {
+      setTimeout(() => {
+        $('#dataTable').DataTable();
+      }, 5);
+    });
   }
 
   novoCadastro() {

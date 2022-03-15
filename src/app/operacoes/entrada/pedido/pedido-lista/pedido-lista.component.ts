@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pedido } from '../pedido';
 import { PedidoService } from '../pedido.service';
+import jQuery from 'jquery';
 
 @Component({
   selector: 'app-pedido-lista',
@@ -17,6 +18,8 @@ export class PedidoListaComponent implements OnInit {
   constructor(private service: PedidoService, private router: Router) { }
 
   ngOnInit(): void {
+    this.pedidos = [];
+
     this.service
       .getPedidos()
       .subscribe((resposta) => (this.pedidos = resposta));

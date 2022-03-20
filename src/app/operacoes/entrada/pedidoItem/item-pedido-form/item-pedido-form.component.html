@@ -1,1 +1,79 @@
-<p>item-pedido-form works!</p>
+<h1 class="mt-4">Item do Pedido</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">
+    {{ itemPedido.id ? "Edição" : "Cadastro" }}
+  </li>
+</ol>
+<div class="container">
+  <form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success" role="alert" *ngIf="success == true">
+          Item do Pedido salvo/atualizado com sucesso!
+        </div>
+        <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+          {{ erro }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="itemPedido.id">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>ID:</label>
+          <input type="text" [ngModel]="itemPedido.id" name="id" class="form-control" disabled="true" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Data Cadastro:</label>
+          <input type="text" class="form-control" name="dataCadastro" [ngModel]="itemPedido.dataCadastro"
+            disabled="true" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Produto: *</label>
+          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="itemPedido.produto.id">
+            <option value="">Selecione...</option>
+            <option *ngFor="let produto of produtos" [ngValue]="produto.id">
+              {{ produto.descricao }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Preço: *</label>
+          <input type="text" class="form-control" [(ngModel)]="itemPedido.preco" name="preco" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Desconto: </label>
+          <input type="text" class="form-control" [(ngModel)]="itemPedido.desconto" name="desconto" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-success" *ngIf="!itemPedido.id">
+          <i class="fa fa-save"></i> Salvar
+        </button>
+
+        <button type="submit" class="btn btn-primary" *ngIf="itemPedido.id">
+          <i class="fa fa-sync-alt"></i> Atualizar
+        </button>
+
+        <button type="button" class="btn btn-danger ml-1" (click)="voltarParaListagem()">
+          <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

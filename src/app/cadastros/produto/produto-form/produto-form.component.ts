@@ -54,7 +54,7 @@ export class ProdutoFormComponent implements OnInit {
   }
 
   voltarParaListagem() {
-    this.router.navigate(['/produto/lista']);
+    this.router.navigate(['/produtos/lista']);
   }
 
   onSubmit() {

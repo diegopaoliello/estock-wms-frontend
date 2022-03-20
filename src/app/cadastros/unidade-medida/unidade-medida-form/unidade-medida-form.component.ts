@@ -38,7 +38,7 @@ export class UnidadeMedidaFormComponent implements OnInit {
   }
 
   voltarParaListagem() {
-    this.router.navigate(['/unidade-medida/lista']);
+    this.router.navigate(['/unidades-medida/lista']);
   }
 
   onSubmit() {

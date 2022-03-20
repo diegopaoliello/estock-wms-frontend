@@ -17,30 +17,21 @@
       </div>
     </div>
 
-    <div class="row" *ngIf="pedido.id">
-      <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-6" *ngIf="pedido.id">
         <div class="form-group">
           <label>ID:</label>
           <input type="text" [ngModel]="pedido.id" name="id" class="form-control" disabled="true" />
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6" *ngIf="pedido.id">
         <div class="form-group">
           <label>Status:</label>
           <input type="text" [ngModel]="pedido.status" name="status" class="form-control" disabled="true" />
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Data Cadastro:</label>
-          <input type="text" class="form-control" name="dataCadastro" [ngModel]="pedido.dataCadastro" disabled="true" />
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
       <div class="col-md-6">
         <div class="form-group">
           <label>Fornecedor: </label>
@@ -52,10 +43,17 @@
           </select>
         </div>
       </div>
+
+      <div class="col-md-6" *ngIf="pedido.id">
+        <div class="form-group">
+          <label>Data Cadastro:</label>
+          <input type="text" class="form-control" name="dataCadastro" [ngModel]="pedido.dataCadastro" disabled="true" />
+        </div>
+      </div>
     </div>
 
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-6">
         <button type="submit" class="btn btn-success" *ngIf="!pedido.id">
           <i class="fa fa-save"></i> Salvar
         </button>
@@ -67,7 +65,13 @@
         <button type="button" class="btn btn-danger ml-1" (click)="voltarParaListagem()">
           <i class="fa fa-arrow-alt-circle-left"></i> Voltar
         </button>
+
+        <button type="button" class="btn btn-warning ml-1" (click)="novoItem()">
+          <i class="fas fa-plus"></i> Item
+        </button>
       </div>
     </div>
   </form>
 </div>
+<br />
+<app-item-pedido-lista></app-item-pedido-lista>

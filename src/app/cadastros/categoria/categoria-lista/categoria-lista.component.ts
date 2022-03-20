@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Categoria } from '../categoria';
 import { CategoriaService } from '../categoria.service';
+declare var $: any;
 
 @Component({
   selector: 'app-categoria-lista',
@@ -14,16 +15,35 @@ export class CategoriaListaComponent implements OnInit {
   mensagemSucesso: string;
   mensagemErro: string;
 
-  constructor(private service: CategoriaService, private router: Router) {}
+  constructor(private service: CategoriaService, private router: Router) { }
 
   ngOnInit(): void {
     this.service
       .getCategorias()
-      .subscribe((resposta) => (this.categorias = resposta));
+      .subscribe((resposta) => {
+        this.categorias = resposta;
+        $(function () {
+          $('#dataTable').DataTable({
+            'retrieve': true,
+            'language': {
+              'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
+            },
+            'responsive': true
+          });
+
+          $('#dataTable').on('click', '.delete', function () {
+            var table = $('#dataTable').DataTable();
+            table
+              .row($(this).parents('tr'))
+              .remove()
+              .draw();
+          });
+        });
+      });
   }
 
   novoCadastro() {
-    this.router.navigate(['/categoria/form']);
+    this.router.navigate(['/categorias/form']);
   }
 
   preparaDelecao(categoria: Categoria) {

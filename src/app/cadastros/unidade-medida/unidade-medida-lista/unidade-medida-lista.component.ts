@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UnidadeMedida } from '../unidade-medida';
 import { UnidadeMedidaService } from '../unidade-medida.service';
+declare var $: any;
 
 @Component({
   selector: 'app-unidade-medida-lista',
@@ -14,16 +15,35 @@ export class UnidadeMedidaListaComponent implements OnInit {
   mensagemSucesso: string;
   mensagemErro: string;
 
-  constructor(private service: UnidadeMedidaService, private router: Router) {}
+  constructor(private service: UnidadeMedidaService, private router: Router) { }
 
   ngOnInit(): void {
     this.service
       .getUnidadesMedida()
-      .subscribe((resposta) => (this.unidadesMedida = resposta));
+      .subscribe((resposta) => {
+        this.unidadesMedida = resposta;
+        $(function () {
+          $('#dataTable').DataTable({
+            'retrieve': true,
+            'language': {
+              'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
+            },
+            'responsive': true
+          });
+
+          $('#dataTable').on('click', '.delete', function () {
+            var table = $('#dataTable').DataTable();
+            table
+              .row($(this).parents('tr'))
+              .remove()
+              .draw();
+          });
+        });
+      });
   }
 
   novoCadastro() {
-    this.router.navigate(['/unidade-medida/form']);
+    this.router.navigate(['/unidades-medida/form']);
   }
 
   preparaDelecao(unidadeMedida: UnidadeMedida) {

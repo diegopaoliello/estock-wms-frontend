@@ -51,10 +51,10 @@
             <td>{{ pedido.fornecedor.razaoSocial }}</td>
             <td>{{ pedido.status }}</td>
             <td>
-              <button class="btn btn-primary btn-circle ml-5" routerLink="/clientes/form/{{ pedido.id }}">
+              <button class="btn btn-primary btn-circle ml-5" routerLink="/pedidos/form/{{ pedido.id }}">
                 <i class="fas fa-edit"></i>
               </button>
-              <button class="btn btn-danger btn-circle ml-2" (click)="preparaDelecao(pedido)" data-toggle="modal"
+              <button class="btn btn-danger btn-circle ml-2 delete" (click)="preparaDelecao(pedido)" data-toggle="modal"
                 data-target="#modalDelecao">
                 <i class="fas fa-trash"></i>
               </button>

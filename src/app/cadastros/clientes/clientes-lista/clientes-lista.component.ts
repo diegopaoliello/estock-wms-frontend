@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cliente } from '../cliente';
 import { ClientesService } from '../clientes.service';
+declare var $: any;
 
 @Component({
   selector: 'app-clientes-lista',
@@ -14,12 +15,31 @@ export class ClientesListaComponent implements OnInit {
   mensagemSucesso: string;
   mensagemErro: string;
 
-  constructor(private service: ClientesService, private router: Router) {}
+  constructor(private service: ClientesService, private router: Router) { }
 
   ngOnInit(): void {
     this.service
       .getClientes()
-      .subscribe((resposta) => (this.clientes = resposta));
+      .subscribe((resposta) => {
+        this.clientes = resposta;
+        $(function () {
+          $('#dataTable').DataTable({
+            'retrieve': true,
+            'language': {
+              'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
+            },
+            'responsive': true
+          });
+
+          $('#dataTable').on('click', '.delete', function () {
+            var table = $('#dataTable').DataTable();
+            table
+              .row($(this).parents('tr'))
+              .remove()
+              .draw();
+          });
+        });
+      });
   }
 
   novoCadastro() {

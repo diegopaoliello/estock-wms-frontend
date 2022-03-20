@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Pedido } from '../pedido';
@@ -16,7 +16,7 @@ export class PedidoFormComponent implements OnInit {
   pedido: Pedido;
   success: boolean = false;
   errors: String[];
-  id: number;
+  id: number = 1;
   fornecedores: Fornecedor[] = [];
 
   constructor(
@@ -48,6 +48,10 @@ export class PedidoFormComponent implements OnInit {
 
   voltarParaListagem() {
     this.router.navigate(['/pedidos/lista']);
+  }
+
+  novoItem() {
+    this.router.navigate(['/itens-pedido/form']);
   }
 
   onSubmit() {

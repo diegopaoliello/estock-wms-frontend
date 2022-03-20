@@ -28,12 +28,7 @@
   </div>
   <div class="card-body">
     <div class="table-responsive">
-      <table
-        class="table table-bordered"
-        id="dataTable"
-        width="100%"
-        cellspacing="0"
-      >
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
             <th>ID</th>
@@ -42,24 +37,25 @@
             <th>Ação</th>
           </tr>
         </thead>
+        <tfoot>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Data Cadastro</th>
+            <th>Ação</th>
+          </tr>
+        </tfoot>
         <tbody>
           <tr *ngFor="let categoria of categorias">
             <td>{{ categoria.id }}</td>
             <td>{{ categoria.descricao }}</td>
             <td>{{ categoria.dataCadastro }}</td>
             <td>
-              <button
-                class="btn btn-primary btn-circle ml-5"
-                routerLink="/categoria/form/{{ categoria.id }}"
-              >
+              <button class="btn btn-primary btn-circle ml-5" routerLink="/categorias/form/{{ categoria.id }}">
                 <i class="fas fa-edit"></i>
               </button>
-              <button
-                class="btn btn-danger btn-circle ml-2"
-                (click)="preparaDelecao(categoria)"
-                data-toggle="modal"
-                data-target="#modalDelecao"
-              >
+              <button class="btn btn-danger btn-circle ml-2 delete" (click)="preparaDelecao(categoria)" data-toggle="modal"
+                data-target="#modalDelecao">
                 <i class="fas fa-trash"></i>
               </button>
             </td>
@@ -83,11 +79,7 @@
       </div>
 
       <div class="modal-footer">
-        <button
-          class="btn btn-success"
-          (click)="deletarCategoria()"
-          data-dismiss="modal"
-        >
+        <button class="btn btn-success" (click)="deletarCategoria()" data-dismiss="modal">
           Confirmar
         </button>
         <button class="btn btn-default" data-dismiss="modal">Cancelar</button>

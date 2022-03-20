@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Fornecedor } from '../fornecedor';
 import { FornecedorService } from '../fornecedor.service';
+declare var $: any;
 
 @Component({
   selector: 'app-fornecedor-lista',
@@ -14,12 +15,31 @@ export class FornecedorListaComponent implements OnInit {
   mensagemSucesso: string;
   mensagemErro: string;
 
-  constructor(private service: FornecedorService, private router: Router) {}
+  constructor(private service: FornecedorService, private router: Router) { }
 
   ngOnInit(): void {
     this.service
       .getFornecedores()
-      .subscribe((resposta) => (this.fornecedores = resposta));
+      .subscribe((resposta) => {
+        this.fornecedores = resposta;
+        $(function () {
+          $('#dataTable').DataTable({
+            'retrieve': true,
+            'language': {
+              'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
+            },
+            'responsive': true
+          });
+
+          $('#dataTable').on('click', '.delete', function () {
+            var table = $('#dataTable').DataTable();
+            table
+              .row($(this).parents('tr'))
+              .remove()
+              .draw();
+          });
+        });
+      });
   }
 
   novoCadastro() {

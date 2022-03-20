@@ -38,7 +38,7 @@ export class CategoriaFormComponent implements OnInit {
   }
 
   voltarParaListagem() {
-    this.router.navigate(['/categoria/lista']);
+    this.router.navigate(['/categorias/lista']);
   }
 
   onSubmit() {

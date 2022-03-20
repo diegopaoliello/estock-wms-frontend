@@ -25,7 +25,21 @@ export class PedidoListaComponent implements OnInit {
       .subscribe((resposta) => {
         this.pedidos = resposta;
         $(function () {
-          $('#dataTable').DataTable();
+          $('#dataTable').DataTable({
+            'retrieve': true,
+            'language': {
+              'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
+            },
+            'responsive': true
+          });
+
+          $('#dataTable').on('click', '.delete', function () {
+            var table = $('#dataTable').DataTable();
+            table
+              .row($(this).parents('tr'))
+              .remove()
+              .draw();
+          });
         });
       });
   }

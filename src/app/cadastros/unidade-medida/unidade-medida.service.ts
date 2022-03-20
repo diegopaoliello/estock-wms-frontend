@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class UnidadeMedidaService {
   apiURL: string = environment.apiURLBase + '/api/unidades-medida';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   salvar(unidadeMedida: UnidadeMedida): Observable<UnidadeMedida> {
     return this.http.post<UnidadeMedida>(`${this.apiURL}`, unidadeMedida);
@@ -20,7 +20,7 @@ export class UnidadeMedidaService {
   atualizar(unidadeMedida: UnidadeMedida): Observable<any> {
     return this.http.put<UnidadeMedida>(
       `${this.apiURL}/${unidadeMedida.id}`,
-      UnidadeMedida
+      unidadeMedida
     );
   }
 

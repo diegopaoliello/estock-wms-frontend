@@ -1,5 +1,6 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Params, ActivatedRoute } from '@angular/router';
 import { ItemPedido } from '../item-pedido';
 import { ItemPedidoService } from '../item-pedido.service';
 declare var $: any;
@@ -16,33 +17,41 @@ export class ItemPedidoListaComponent implements OnInit {
   mensagemErro: string;
   idPedido: number;
 
-  constructor(private service: ItemPedidoService, private router: Router) { }
+  constructor(private service: ItemPedidoService, private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.itens = [];
 
-    this.service
-      .getItensPedido(this.idPedido)
-      .subscribe((resposta) => {
-        this.itens = resposta;
-        $(function () {
-          $('#dataTable').DataTable({
-            'retrieve': true,
-            'language': {
-              'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
-            },
-            'responsive': true
-          });
+    let params: Observable<Params> = this.activatedRoute.params;
 
-          $('#dataTable').on('click', '.delete', function () {
-            var table = $('#dataTable').DataTable();
-            table
-              .row($(this).parents('tr'))
-              .remove()
-              .draw();
+    params.subscribe((urlParams) => {
+      this.idPedido = urlParams['id'];
+
+      this.service
+        .getItensPedido(this.idPedido)
+        .subscribe((resposta) => {
+          this.itens = resposta;
+          $(function () {
+            $('#dataTable').DataTable({
+              'retrieve': true,
+              'language': {
+                'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
+              },
+              'responsive': true
+            });
+
+            $('#dataTable').on('click', '.delete', function () {
+              var table = $('#dataTable').DataTable();
+              table
+                .row($(this).parents('tr'))
+                .remove()
+                .draw();
+            });
           });
         });
-      });
+
+    });
   }
 
   novoCadastro() {

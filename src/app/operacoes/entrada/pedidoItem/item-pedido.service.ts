@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { ItemPedido } from '../pedidoItem/item-pedido';
 import { Observable } from 'rxjs';
@@ -22,7 +22,11 @@ export class ItemPedidoService {
   }
 
   getItensPedido(idPedido: number): Observable<ItemPedido[]> {
-    return this.http.get<ItemPedido[]>(this.apiURL.replace('{id}', idPedido.toString()));
+    const httpParams = new HttpParams()
+      .set('idPedido', idPedido.toString());
+
+    const url = this.apiURL.replace('{id}', idPedido.toString()) + '?' + httpParams.toString();
+    return this.http.get<any>(url);
   }
 
   getItemPedidoById(idPedido: number, id: number): Observable<ItemPedido> {

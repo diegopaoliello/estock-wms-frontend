@@ -51,11 +51,19 @@
             <td>{{ pedido.fornecedor.razaoSocial }}</td>
             <td>{{ pedido.status }}</td>
             <td>
-              <button class="btn btn-primary btn-circle ml-5" routerLink="/pedidos/form/{{ pedido.id }}">
+              <button id="btnAprovar" class="btn btn-success btn-circle ml-3" data-toggle="tooltip" data-placement="top"
+                title="Aprovar" (click)="selecionarPedido(pedido)" data-toggle="modal" data-target="#modalAprovar">
+                <i class="fas fa-check"></i>
+              </button>
+              <button id="btnReprovar" class="btn btn-dark btn-circle ml-3" (click)="selecionarPedido(pedido)"
+                data-toggle="modal" data-target="#modalReprovar">
+                <i class="fas fa-times"></i>
+              </button>
+              <button class="btn btn-primary btn-circle ml-3" routerLink="/pedidos/form/{{ pedido.id }}">
                 <i class="fas fa-edit"></i>
               </button>
-              <button class="btn btn-danger btn-circle ml-2 delete" (click)="preparaDelecao(pedido)" data-toggle="modal"
-                data-target="#modalDelecao">
+              <button id="btnDeletar" class="btn btn-danger btn-circle ml-3 delete" (click)="selecionarPedido(pedido)"
+                data-toggle="modal" data-target="#modalDeletar">
                 <i class="fas fa-trash"></i>
               </button>
             </td>
@@ -66,7 +74,7 @@
   </div>
 </div>
 
-<div id="modalDelecao" class="modal fade" role="dialog">
+<div id="modalDeletar" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -74,12 +82,56 @@
       </div>
 
       <div class="modal-body" *ngIf="pedidoSelecionado">
-        Confirma a deleção da Pedido
+        Confirma a deleção do Pedido
         {{ pedidoSelecionado.id }}?
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer" id="cancelarModal">
         <button class="btn btn-success" (click)="deletarPedido()" data-dismiss="modal">
+          Confirmar
+        </button>
+        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalAprovar" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirmação</h4>
+      </div>
+
+      <div class="modal-body" *ngIf="pedidoSelecionado">
+        Confirma a aprovação do Pedido
+        {{ pedidoSelecionado.id }}?
+      </div>
+
+      <div class="modal-footer" id="cancelarModal">
+        <button class="btn btn-success" (click)="aprovarPedido()" data-dismiss="modal">
+          Confirmar
+        </button>
+        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalReprovar" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirmação</h4>
+      </div>
+
+      <div class="modal-body" *ngIf="pedidoSelecionado">
+        Confirma a reprovação do Pedido
+        {{ pedidoSelecionado.id }}?
+      </div>
+
+      <div class="modal-footer" id="cancelarModal">
+        <button class="btn btn-success" (click)="reprovarPedido()" data-dismiss="modal">
           Confirmar
         </button>
         <button class="btn btn-default" data-dismiss="modal">Cancelar</button>

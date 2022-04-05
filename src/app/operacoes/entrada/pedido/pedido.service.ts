@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class PedidoService {
   apiURL: string = environment.apiURLBase + '/api/pedidos';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   salvar(pedido: Pedido): Observable<Pedido> {
     return this.http.post<Pedido>(`${this.apiURL}`, pedido);
@@ -31,5 +31,13 @@ export class PedidoService {
 
   deletar(pedido: Pedido): Observable<any> {
     return this.http.delete<any>(`${this.apiURL}/${pedido.id}`);
+  }
+
+  aprovar(pedido: Pedido): Observable<any> {
+    return this.http.patch<Pedido>(`${this.apiURL}/${pedido.id}/${'aprovar'}`, null);
+  }
+
+  reprovar(pedido: Pedido): Observable<any> {
+    return this.http.patch<Pedido>(`${this.apiURL}/${pedido.id}/${'reprovar'}`, pedido);
   }
 }

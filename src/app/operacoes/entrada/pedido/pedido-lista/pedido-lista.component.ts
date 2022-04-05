@@ -18,8 +18,6 @@ export class PedidoListaComponent implements OnInit {
   constructor(private service: PedidoService, private router: Router) { }
 
   ngOnInit(): void {
-    this.pedidos = [];
-
     this.service
       .getPedidos()
       .subscribe((resposta) => {
@@ -27,6 +25,7 @@ export class PedidoListaComponent implements OnInit {
         $(function () {
           $('#dataTable').DataTable({
             'retrieve': true,
+            'order': [[ 1, 'desc' ]],
             'language': {
               'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
             },
@@ -40,15 +39,21 @@ export class PedidoListaComponent implements OnInit {
               .remove()
               .draw();
           });
+
+          $('[data-toggle="tooltip"]').tooltip();
         });
       });
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    })
   }
 
   novoCadastro() {
     this.router.navigate(['/pedidos/form']);
   }
 
-  preparaDelecao(pedido: Pedido) {
+  selecionarPedido(pedido: Pedido) {
     this.pedidoSelecionado = pedido;
   }
 
@@ -59,6 +64,26 @@ export class PedidoListaComponent implements OnInit {
         this.ngOnInit();
       },
       (erro) => (this.mensagemErro = 'Ocorreu um erro ao deletar o pedido.')
+    );
+  }
+
+  aprovarPedido() {
+    this.service.aprovar(this.pedidoSelecionado).subscribe(
+      (response) => {
+        this.mensagemSucesso = 'Pedido aprovado com sucesso!';
+        this.ngOnInit();
+      },
+      (erro) => (this.mensagemErro = 'Ocorreu um erro ao aprovar o pedido.')
+    );
+  }
+
+  reprovarPedido() {
+    this.service.reprovar(this.pedidoSelecionado).subscribe(
+      (response) => {
+        this.mensagemSucesso = 'Pedido reprovado com sucesso!';
+        this.ngOnInit();
+      },
+      (erro) => (this.mensagemErro = 'Ocorreu um erro ao reprovar o pedido.')
     );
   }
 }

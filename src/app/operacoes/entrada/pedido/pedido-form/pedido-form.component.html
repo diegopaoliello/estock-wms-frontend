@@ -17,6 +17,21 @@
       </div>
     </div>
 
+    <div class="row" *ngIf="pedido.id && (btnAprovar || btnReprovar || btnConcluir)">
+      <div class="col-md-6" *ngIf="pedido.id">
+        <div class="form-group">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalAprovar"
+              (click)="exibirModalStatus()" *ngIf="btnAprovar">Aprovar</button>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalReprovar"
+              (click)="exibirModalStatus()" *ngIf="btnReprovar">Reprovar</button>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalConcluir"
+              (click)="exibirModalStatus()" *ngIf="btnConcluir">Concluir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-md-6" *ngIf="pedido.id">
         <div class="form-group">
@@ -66,7 +81,7 @@
           <i class="fa fa-arrow-alt-circle-left"></i> Voltar
         </button>
 
-        <button type="button" class="btn btn-warning ml-1" (click)="novoItem()">
+        <button type="button" class="btn btn-warning ml-1" *ngIf="pedido.id" (click)="novoItem()">
           <i class="fas fa-plus"></i> Item
         </button>
       </div>
@@ -74,4 +89,70 @@
   </form>
 </div>
 <br />
-<app-item-pedido-lista></app-item-pedido-lista>
+<app-item-pedido-lista (existeItem)="existeItemOut($event)"></app-item-pedido-lista>
+
+<div id="modalAprovar" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirmação</h4>
+      </div>
+
+      <div class="modal-body" *ngIf="exibirModal">
+        Confirma a aprovação do Pedido
+        {{ pedido.id }}?
+      </div>
+
+      <div class="modal-footer" id="cancelarModal">
+        <button class="btn btn-success" (click)="alterarStatus('APROVADO')" data-dismiss="modal">
+          Confirmar
+        </button>
+        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalReprovar" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirmação</h4>
+      </div>
+
+      <div class="modal-body" *ngIf="exibirModal">
+        Confirma a reprovação do Pedido
+        {{ pedido.id }}?
+      </div>
+
+      <div class="modal-footer" id="cancelarModal">
+        <button class="btn btn-success" (click)="alterarStatus('REPROVADO')" data-dismiss="modal">
+          Confirmar
+        </button>
+        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalConcluir" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirmação</h4>
+      </div>
+
+      <div class="modal-body" *ngIf="exibirModal">
+        Confirma a reprovação do Pedido
+        {{ pedido.id }}?
+      </div>
+
+      <div class="modal-footer" id="cancelarModal">
+        <button class="btn btn-success" (click)="alterarStatus('CONCLUIDO')" data-dismiss="modal">
+          Confirmar
+        </button>
+        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

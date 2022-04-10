@@ -23,6 +23,7 @@
             <th>Produto</th>
             <th>Quantidade</th>
             <th>Preço</th>
+            <th>Desconto</th>
             <th>Ação</th>
           </tr>
         </thead>
@@ -32,6 +33,7 @@
             <th>Produto</th>
             <th>Quantidade</th>
             <th>Preço</th>
+            <th>Desconto</th>
             <th>Ação</th>
           </tr>
         </tfoot>
@@ -39,10 +41,12 @@
           <tr *ngFor="let item of itens">
             <td>{{ item.id }}</td>
             <td>{{ item.produto.descricao }}</td>
+            <td>{{ item.quantidade }}</td>
             <td>{{ item.preco }}</td>
             <td>{{ item.desconto }}</td>
             <td>
-              <button class="btn btn-primary btn-circle ml-5" routerLink="/itens-pedido/form/{{ item.id }}">
+              <button class="btn btn-primary btn-circle ml-5"
+                routerLink="/pedidos/{{item.pedido.id}}/itens-pedido/form/{{ item.id }}">
                 <i class="fas fa-edit"></i>
               </button>
               <button class="btn btn-danger btn-circle ml-2 delete" (click)="preparaDelecao(item)" data-toggle="modal"

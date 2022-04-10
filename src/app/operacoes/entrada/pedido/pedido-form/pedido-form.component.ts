@@ -1,5 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ItemPedido } from './../../pedidoItem/item-pedido';
+import { Component, OnInit, Output, AfterViewInit } from '@angular/core';
+import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 
 import { Pedido } from '../pedido';
 import { PedidoService } from '../pedido.service';
@@ -16,8 +17,14 @@ export class PedidoFormComponent implements OnInit {
   pedido: Pedido;
   success: boolean = false;
   errors: String[];
-  id: number = 1;
+  id: number;
   fornecedores: Fornecedor[] = [];
+  exibirModal: boolean = false;
+
+  existeItem: boolean = false;
+  btnAprovar: boolean = false;
+  btnReprovar: boolean = false;
+  btnConcluir: boolean = false;
 
   constructor(
     private fornecedorService: FornecedorService,
@@ -44,6 +51,28 @@ export class PedidoFormComponent implements OnInit {
     this.fornecedorService
       .getFornecedores()
       .subscribe((response) => (this.fornecedores = response));
+
+  }
+
+  ativarBotoes(): void {
+    if (this.pedido) {
+      this.btnAprovar = this.pedido.status == 'ABERTO' && this.existeItem;
+      this.btnReprovar = this.btnAprovar;
+      this.btnConcluir = this.pedido.status == 'APROVADO';
+    }
+  }
+
+  alterarStatus(status: string): void {
+    this.pedido.status = status;
+  }
+
+  exibirModalStatus(): void {
+    this.exibirModal = true;
+  }
+
+  existeItemOut(evento: boolean): void {
+    this.existeItem = evento;
+    this.ativarBotoes();
   }
 
   voltarParaListagem() {
@@ -51,7 +80,7 @@ export class PedidoFormComponent implements OnInit {
   }
 
   novoItem() {
-    this.router.navigate(['/itens-pedido/form']);
+    this.router.navigate(['pedidos/' + this.pedido.id + '/itens-pedido/form']);
   }
 
   onSubmit() {
@@ -60,6 +89,7 @@ export class PedidoFormComponent implements OnInit {
         (response) => {
           this.success = true;
           this.errors = null;
+          this.ativarBotoes();
         },
         (errorResponse) => {
           this.errors = ['Erro ao atualizar a pedido.'];

@@ -17,7 +17,7 @@ export class ItemPedidoFormComponent implements OnInit {
   success: boolean = false;
   errors: String[];
   id: number;
-  idPedido: number = 1;
+  idPedido: number;
   produtos: Produto[] = [];
 
   constructor(
@@ -35,8 +35,11 @@ export class ItemPedidoFormComponent implements OnInit {
       .subscribe((response) => (this.produtos = response));
 
     let params: Observable<Params> = this.activatedRoute.params;
+
     params.subscribe((urlParams) => {
       this.id = urlParams['id'];
+      this.idPedido = urlParams['idPedido'];
+
       if (this.id) {
         this.service.getItemPedidoById(this.idPedido, this.id).subscribe(
           (response) => (this.itemPedido = response),
@@ -62,7 +65,7 @@ export class ItemPedidoFormComponent implements OnInit {
         }
       );
     } else {
-      this.service.salvar(this.itemPedido).subscribe(
+      this.service.salvar(this.idPedido, this.itemPedido).subscribe(
         (response) => {
           this.success = true;
           this.errors = null;

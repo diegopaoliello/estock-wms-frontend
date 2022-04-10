@@ -5,6 +5,7 @@ export class ItemPedido {
   id: number;
   pedido: Pedido;
   produto: Produto;
+  quantidade: number;
   preco: string;
   desconto: string;
   dataCadastro: string;

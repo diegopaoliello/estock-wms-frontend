@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { ItemPedido } from '../item-pedido';
 import { ItemPedidoService } from '../item-pedido.service';
@@ -17,40 +17,46 @@ export class ItemPedidoListaComponent implements OnInit {
   mensagemErro: string;
   idPedido: number;
 
+  @Output() existeItem = new EventEmitter();
+
   constructor(private service: ItemPedidoService, private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.itens = [];
-
     let params: Observable<Params> = this.activatedRoute.params;
 
     params.subscribe((urlParams) => {
       this.idPedido = urlParams['id'];
+      this.existeItem.emit(false);
 
       this.service
         .getItensPedido(this.idPedido)
         .subscribe((resposta) => {
           this.itens = resposta;
-          $(function () {
-            $('#dataTable').DataTable({
-              'retrieve': true,
-              'language': {
-                'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
-              },
-              'responsive': true
-            });
-
-            $('#dataTable').on('click', '.delete', function () {
-              var table = $('#dataTable').DataTable();
-              table
-                .row($(this).parents('tr'))
-                .remove()
-                .draw();
-            });
-          });
+          this.atualizaDataTable();
+          this.existeItem.emit(this.itens.length > 0);
         });
 
+    });
+  }
+
+  atualizaDataTable(): void  {
+    $(function () {
+      $('#dataTable').DataTable({
+        'retrieve': true,
+        'language': {
+          'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
+        },
+        'responsive': true
+      });
+
+      $('#dataTable').on('click', '.delete', function () {
+        var table = $('#dataTable').DataTable();
+        table
+          .row($(this).parents('tr'))
+          .remove()
+          .draw();
+      });
     });
   }
 

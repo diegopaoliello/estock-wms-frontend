@@ -51,11 +51,11 @@
             <td>{{ pedido.fornecedor.razaoSocial }}</td>
             <td>{{ pedido.status }}</td>
             <td>
-              <button id="btnAprovar" class="btn btn-success btn-circle ml-3" data-toggle="tooltip" data-placement="top"
+              <button *ngIf="false" id="btnAprovar" class="btn btn-success btn-circle ml-3" data-toggle="tooltip" data-placement="top"
                 title="Aprovar" (click)="selecionarPedido(pedido)" data-toggle="modal" data-target="#modalAprovar">
                 <i class="fas fa-check"></i>
               </button>
-              <button id="btnReprovar" class="btn btn-dark btn-circle ml-3" (click)="selecionarPedido(pedido)"
+              <button id="btnReprovar" *ngIf="false" class="btn btn-dark btn-circle ml-3" (click)="selecionarPedido(pedido)"
                 data-toggle="modal" data-target="#modalReprovar">
                 <i class="fas fa-times"></i>
               </button>
@@ -88,50 +88,6 @@
 
       <div class="modal-footer" id="cancelarModal">
         <button class="btn btn-success" (click)="deletarPedido()" data-dismiss="modal">
-          Confirmar
-        </button>
-        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="modalAprovar" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4>Confirmação</h4>
-      </div>
-
-      <div class="modal-body" *ngIf="pedidoSelecionado">
-        Confirma a aprovação do Pedido
-        {{ pedidoSelecionado.id }}?
-      </div>
-
-      <div class="modal-footer" id="cancelarModal">
-        <button class="btn btn-success" (click)="aprovarPedido()" data-dismiss="modal">
-          Confirmar
-        </button>
-        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="modalReprovar" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4>Confirmação</h4>
-      </div>
-
-      <div class="modal-body" *ngIf="pedidoSelecionado">
-        Confirma a reprovação do Pedido
-        {{ pedidoSelecionado.id }}?
-      </div>
-
-      <div class="modal-footer" id="cancelarModal">
-        <button class="btn btn-success" (click)="reprovarPedido()" data-dismiss="modal">
           Confirmar
         </button>
         <button class="btn btn-default" data-dismiss="modal">Cancelar</button>

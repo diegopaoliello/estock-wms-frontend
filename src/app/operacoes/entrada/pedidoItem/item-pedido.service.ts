@@ -13,8 +13,8 @@ export class ItemPedidoService {
 
   constructor(private http: HttpClient) { }
 
-  salvar(itemPedido: ItemPedido): Observable<ItemPedido> {
-    return this.http.post<ItemPedido>(`${this.apiURL.replace('{id}', itemPedido.pedido.id.toString())}`, itemPedido);
+  salvar(idPedido: number, itemPedido: ItemPedido): Observable<ItemPedido> {
+    return this.http.post<ItemPedido>(`${this.apiURL.replace('{id}', idPedido.toString())}`, itemPedido);
   }
 
   atualizar(itemPedido: ItemPedido): Observable<any> {

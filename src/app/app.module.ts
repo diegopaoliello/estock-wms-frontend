@@ -1,3 +1,5 @@
+import { EstoqueService } from './estoque/estoque.service';
+import { EstoqueModule } from './estoque/estoque.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -46,6 +48,7 @@ import { environment } from 'src/environments/environment';
     ClientesModule,
     FornecedorModule,
     ProdutoaModule,
+    EstoqueModule,
     PedidoModule,
     ServicoPrestadoModule,
     SocialLoginModule,
@@ -54,6 +57,7 @@ import { environment } from 'src/environments/environment';
     UnidadeMedidaService,
     CategoriaService,
     ProdutoService,
+    EstoqueService,
     PedidoService,
     ClientesService,
     FornecedorService,
@@ -81,4 +85,4 @@ import { environment } from 'src/environments/environment';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

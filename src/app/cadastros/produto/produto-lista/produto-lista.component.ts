@@ -1,3 +1,5 @@
+import { DataTableUtil } from './../../../util/DataTableUtil';
+import { TableConfig } from './../../../util/tableConfig';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Produto } from '../produto';
@@ -14,6 +16,7 @@ export class ProdutoListaComponent implements OnInit {
   produtoSelecionado: Produto;
   mensagemSucesso: string;
   mensagemErro: string;
+  tableConfig: TableConfig = new TableConfig('Lista de Produtos', [0, 1, 2, 3, 4]);
 
   constructor(private service: ProdutoService, private router: Router) { }
 
@@ -22,23 +25,7 @@ export class ProdutoListaComponent implements OnInit {
       .getProdutos()
       .subscribe((resposta) => {
         this.produtos = resposta;
-        $(function () {
-          $('#dataTable').DataTable({
-            'retrieve': true,
-            'language': {
-              'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
-            },
-            'responsive': true
-          });
-
-          $('#dataTable').on('click', '.delete', function () {
-            var table = $('#dataTable').DataTable();
-            table
-              .row($(this).parents('tr'))
-              .remove()
-              .draw();
-          });
-        });
+        DataTableUtil.enableTable(this.tableConfig);
       });
   }
 

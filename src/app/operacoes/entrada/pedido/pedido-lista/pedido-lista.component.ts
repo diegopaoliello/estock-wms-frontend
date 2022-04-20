@@ -1,3 +1,5 @@
+import { TableConfig } from '../../../../util/tableConfig';
+import { DataTableUtil } from '../../../../util/DataTableUtil';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pedido } from '../pedido';
@@ -14,6 +16,7 @@ export class PedidoListaComponent implements OnInit {
   pedidoSelecionado: Pedido;
   mensagemSucesso: string;
   mensagemErro: string;
+  tableConfig: TableConfig = new TableConfig('Lista de Pedidos de Compras', [0, 1, 2]);
 
   constructor(private service: PedidoService, private router: Router) { }
 
@@ -22,26 +25,8 @@ export class PedidoListaComponent implements OnInit {
       .getPedidos()
       .subscribe((resposta) => {
         this.pedidos = resposta;
-        $(function () {
-          $('#dataTable').DataTable({
-            'retrieve': true,
-            'order': [[ 1, 'desc' ]],
-            'language': {
-              'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
-            },
-            'responsive': true
-          });
 
-          $('#dataTable').on('click', '.delete', function () {
-            var table = $('#dataTable').DataTable();
-            table
-              .row($(this).parents('tr'))
-              .remove()
-              .draw();
-          });
-
-          $('[data-toggle="tooltip"]').tooltip();
-        });
+        DataTableUtil.enableTable(this.tableConfig);
       });
 
     $(function () {

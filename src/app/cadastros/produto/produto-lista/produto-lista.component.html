@@ -24,7 +24,7 @@
 <br />
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Lista de produtos</h6>
+    <h6 class="m-0 font-weight-bold text-primary">{{tableConfig.title}}</h6>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -60,8 +60,8 @@
               <button class="btn btn-primary btn-circle ml-5" routerLink="/produtos/form/{{ produto.id }}">
                 <i class="fas fa-edit"></i>
               </button>
-              <button class="btn btn-danger btn-circle ml-2 delete" (click)="preparaDelecao(produto)" data-toggle="modal"
-                data-target="#modalDelecao">
+              <button class="btn btn-danger btn-circle ml-2 delete" (click)="preparaDelecao(produto)"
+                data-toggle="modal" data-target="#modalDelecao">
                 <i class="fas fa-trash"></i>
               </button>
             </td>

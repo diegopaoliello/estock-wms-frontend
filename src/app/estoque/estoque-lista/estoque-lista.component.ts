@@ -1,6 +1,8 @@
+import { TableConfig } from './../../util/tableConfig';
+import { DataTableUtil } from '../../util/DataTableUtil';
 import { ProdutoService } from './../../cadastros/produto/produto.service';
 import { Produto } from './../../cadastros/produto/produto';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Estoque } from '../estoque';
 import { EstoqueService } from '../estoque.service';
@@ -19,6 +21,7 @@ export class EstoqueListaComponent implements OnInit {
   produtos: Produto[] = [];
   idProduto: number;
   quantidade: number;
+  tableConfig: TableConfig = new TableConfig('Lista de produtos em estoque', [0, 1, 2, 3]);
 
   constructor(private produtoService: ProdutoService, private service: EstoqueService, private router: Router) { }
 
@@ -30,29 +33,12 @@ export class EstoqueListaComponent implements OnInit {
     this.consultar();
   }
 
-
   consultar() {
     this.service
       .getEstoques(this.idProduto, this.quantidade)
       .subscribe((resposta) => {
         this.estoques = resposta;
-        $(function () {
-          $('#dataTable').DataTable({
-            'retrieve': true,
-            'language': {
-              'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
-            },
-            'responsive': true
-          });
-
-          $('#dataTable').on('click', '.delete', function () {
-            var table = $('#dataTable').DataTable();
-            table
-              .row($(this).parents('tr'))
-              .remove()
-              .draw();
-          });
-        });
+        DataTableUtil.enableTable(this.tableConfig);
       });
   }
 }

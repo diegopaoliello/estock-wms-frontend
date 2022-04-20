@@ -1,4 +1,4 @@
-<h1 class="h3 mb-2 text-gray-800">Pedido</h1>
+<h1 class="h3 mb-2 text-gray-800">Pedido de Compras</h1>
 <div class="row">
   <div class="col-md-12">
     <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
@@ -24,7 +24,7 @@
 <br />
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Pedido de compras</h6>
+    <h6 class="m-0 font-weight-bold text-primary">{{tableConfig.title}}</h6>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -51,12 +51,13 @@
             <td>{{ pedido.fornecedor.razaoSocial }}</td>
             <td>{{ pedido.status }}</td>
             <td>
-              <button *ngIf="false" id="btnAprovar" class="btn btn-success btn-circle ml-3" data-toggle="tooltip" data-placement="top"
-                title="Aprovar" (click)="selecionarPedido(pedido)" data-toggle="modal" data-target="#modalAprovar">
+              <button *ngIf="false" id="btnAprovar" class="btn btn-success btn-circle ml-3" data-toggle="tooltip"
+                data-placement="top" title="Aprovar" (click)="selecionarPedido(pedido)" data-toggle="modal"
+                data-target="#modalAprovar">
                 <i class="fas fa-check"></i>
               </button>
-              <button id="btnReprovar" *ngIf="false" class="btn btn-dark btn-circle ml-3" (click)="selecionarPedido(pedido)"
-                data-toggle="modal" data-target="#modalReprovar">
+              <button id="btnReprovar" *ngIf="false" class="btn btn-dark btn-circle ml-3"
+                (click)="selecionarPedido(pedido)" data-toggle="modal" data-target="#modalReprovar">
                 <i class="fas fa-times"></i>
               </button>
               <button class="btn btn-primary btn-circle ml-3" routerLink="/pedidos/form/{{ pedido.id }}">

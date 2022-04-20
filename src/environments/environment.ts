@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  appName: 'e-Stock',
   production: false,
   apiURLBase: 'http://localhost:8080',
   clientId: 'my-angular-app',

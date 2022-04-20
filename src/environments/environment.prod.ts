@@ -1,4 +1,5 @@
 export const environment = {
+  appName: 'e-Stock',
   production: true,
   apiURLBase: 'https://api-estock.herokuapp.com',
   clientId: 'my-angular-app',

@@ -33,11 +33,11 @@
 
     <br />
 
-      <div class="col-md-6">
-        <button type="submit" class="btn btn-primary">
-          <i class="fa fa-search"></i> Consultar
-        </button>
-      </div>
+    <div class="col-md-6">
+      <button type="submit" class="btn btn-primary">
+        <i class="fa fa-search"></i> Consultar
+      </button>
+    </div>
   </div>
 </form>
 
@@ -51,18 +51,24 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th>Produto</th>
+            <th>Id</th>
+            <th>Código</th>
+            <th>Descrição</th>
             <th>Quantidade</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
-            <th>Produto</th>
+            <th>Id</th>
+            <th>Código</th>
+            <th>Descrição</th>
             <th>Quantidade</th>
           </tr>
         </tfoot>
         <tbody>
           <tr *ngFor="let estoque of estoques">
+            <td>{{ estoque.produto.id }}</td>
+            <td>{{ estoque.produto.codigo }}</td>
             <td>{{ estoque.produto.descricao }}</td>
             <td>{{ estoque.quantidade }}</td>
           </tr>

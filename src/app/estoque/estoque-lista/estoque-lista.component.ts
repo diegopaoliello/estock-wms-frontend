@@ -21,7 +21,7 @@ export class EstoqueListaComponent implements OnInit {
   produtos: Produto[] = [];
   idProduto: number;
   quantidade: number;
-  tableConfig: TableConfig = new TableConfig('Lista de produtos em estoque', [0, 1, 2, 3]);
+  tableConfig: TableConfig = new TableConfig('Lista de produtos em estoque', [0, 1, 2, 3], null);
 
   constructor(private produtoService: ProdutoService, private service: EstoqueService, private router: Router) { }
 

@@ -2,22 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Cliente } from '../cliente';
-import { ClientesService } from '../clientes.service';
+import { ClienteService } from '../cliente.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-clientes-form',
-  templateUrl: './clientes-form.component.html',
-  styleUrls: ['./clientes-form.component.css'],
+  selector: 'app-cliente-form',
+  templateUrl: './cliente-form.component.html',
+  styleUrls: ['./cliente-form.component.css'],
 })
-export class ClientesFormComponent implements OnInit {
+export class ClienteFormComponent implements OnInit {
   cliente: Cliente;
   success: boolean = false;
   errors: String[];
   id: number;
 
   constructor(
-    private service: ClientesService,
+    private service: ClienteService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -38,7 +38,7 @@ export class ClientesFormComponent implements OnInit {
   }
 
   voltarParaListagem() {
-    this.router.navigate(['/clientes/lista']);
+    this.router.navigate(['/clientees/lista']);
   }
 
   onSubmit() {
@@ -49,7 +49,7 @@ export class ClientesFormComponent implements OnInit {
           this.errors = null;
         },
         (errorResponse) => {
-          this.errors = ['Erro ao atualizar o cliente.'];
+          this.errors = ['Erro ao atualizar a cliente.'];
         }
       );
     } else {

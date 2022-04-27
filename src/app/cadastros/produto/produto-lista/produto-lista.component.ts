@@ -16,7 +16,7 @@ export class ProdutoListaComponent implements OnInit {
   produtoSelecionado: Produto;
   mensagemSucesso: string;
   mensagemErro: string;
-  tableConfig: TableConfig = new TableConfig('Lista de Produtos', [0, 1, 2, 3, 4]);
+  tableConfig: TableConfig = new TableConfig('Lista de Produtos', [0, 1, 2, 3, 4], null);
 
   constructor(private service: ProdutoService, private router: Router) { }
 

@@ -1,47 +1,47 @@
-import { PedidoService } from './../../pedido/pedido.service';
-import { Pedido } from './../../pedido/pedido';
+import { VendaService } from './../../venda/venda.service';
+import { Venda } from './../../venda/venda';
 import { DataTableUtil } from './../../../../util/DataTableUtil';
 import { TableConfig } from './../../../../util/tableConfig';
 import { Observable } from 'rxjs';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
-import { ItemPedido } from '../item-pedido';
-import { ItemPedidoService } from '../item-pedido.service';
+import { ItemVenda } from '../item-venda';
+import { ItemVendaService } from '../item-venda.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-item-pedido-lista',
-  templateUrl: './item-pedido-lista.component.html',
-  styleUrls: ['./item-pedido-lista.component.css'],
+  selector: 'app-item-venda-lista',
+  templateUrl: './item-venda-lista.component.html',
+  styleUrls: ['./item-venda-lista.component.css'],
 })
-export class ItemPedidoListaComponent implements OnInit {
-  itens: ItemPedido[] = [];
-  itemSelecionado: ItemPedido;
+export class ItemVendaListaComponent implements OnInit {
+  itens: ItemVenda[] = [];
+  itemSelecionado: ItemVenda;
   mensagemSucesso: string;
   mensagemErro: string;
-  idPedido: number;
-  pedido: Pedido;
-  tableConfig: TableConfig = new TableConfig('Pedido de Compras', [0, 1, 2], null);
+  idVenda: number;
+  venda: Venda;
+  tableConfig: TableConfig = new TableConfig('Venda de Compras', [0, 1, 2], null);
 
   @Output() existeItem = new EventEmitter();
 
-  constructor(private service: ItemPedidoService, private pedidoService: PedidoService, private router: Router,
+  constructor(private service: ItemVendaService, private vendaService: VendaService, private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     let params: Observable<Params> = this.activatedRoute.params;
 
     params.subscribe((urlParams) => {
-      this.idPedido = urlParams['id'];
+      this.idVenda = urlParams['id'];
       this.existeItem.emit(false);
 
-      this.pedidoService.getPedidoById(this.idPedido).subscribe((resposta) => (this.pedido = resposta));
+      this.vendaService.getVendaById(this.idVenda).subscribe((resposta) => (this.venda = resposta));
 
       this.service
-        .getItensPedido(this.idPedido)
+        .getItensVenda(this.idVenda)
         .subscribe((resposta) => {
           this.itens = resposta;
-          this.tableConfig.tableHeader = this.getTableHeader(this.pedido);
+          this.tableConfig.tableHeader = this.getTableHeader(this.venda);
           DataTableUtil.enableTable(this.tableConfig);
           this.existeItem.emit(this.itens.length > 0);
         });
@@ -50,24 +50,24 @@ export class ItemPedidoListaComponent implements OnInit {
   }
 
   novoCadastro() {
-    this.router.navigate(['/itens-pedido/form']);
+    this.router.navigate(['/itens-venda/form']);
   }
 
-  preparaDelecao(itemPedido: ItemPedido) {
-    this.itemSelecionado = itemPedido;
+  preparaDelecao(itemVenda: ItemVenda) {
+    this.itemSelecionado = itemVenda;
   }
 
-  deletarPedido() {
+  deletarVenda() {
     this.service.deletar(this.itemSelecionado).subscribe(
       (response) => {
-        this.mensagemSucesso = 'Item do Pedido deletado com sucesso!';
+        this.mensagemSucesso = 'Item do Venda deletado com sucesso!';
         this.ngOnInit();
       },
-      (erro) => (this.mensagemErro = 'Ocorreu um erro ao deletar o Item do Pedido.')
+      (erro) => (this.mensagemErro = 'Ocorreu um erro ao deletar o Item do Venda.')
     );
   }
 
-  getTableHeader(pedido: Pedido): Object {
+  getTableHeader(venda: Venda): Object {
     let tableHeader: Object = [
       {
         margin: [0, 0, 0, 10],
@@ -82,14 +82,14 @@ export class ItemPedidoListaComponent implements OnInit {
           body: [
             [
               {
-                text: 'Pedido: ' + pedido.id,
+                text: 'Venda: ' + venda.id,
                 fontSize: 9,
                 bold: true,
               }
             ],
             [
               {
-                text: 'Fornecedor: ' + pedido.fornecedor.nomeFantasia,
+                text: 'Fornecedor: ' + venda.cliente.nomeFantasia,
                 fontSize: 9,
                 bold: true
               }

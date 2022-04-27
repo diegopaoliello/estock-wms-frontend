@@ -16,7 +16,7 @@ export class PedidoListaComponent implements OnInit {
   pedidoSelecionado: Pedido;
   mensagemSucesso: string;
   mensagemErro: string;
-  tableConfig: TableConfig = new TableConfig('Lista de Pedidos de Compras', [0, 1, 2]);
+  tableConfig: TableConfig = new TableConfig('Lista de Pedidos de Compras', [0, 1, 2], null);
 
   constructor(private service: PedidoService, private router: Router) { }
 

@@ -1,0 +1,158 @@
+<h1 class="mt-4">Venda</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">
+    {{ venda.id ? "Edição" : "Cadastro" }}
+  </li>
+</ol>
+<div class="container">
+  <form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success" role="alert" *ngIf="success == true">
+          Venda salva/atualizada com sucesso!
+        </div>
+        <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+          {{ erro }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="venda.id && (btnAprovar || btnReprovar || btnConcluir)">
+      <div class="col-md-6" *ngIf="venda.id">
+        <div class="form-group">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalAprovar"
+              (click)="exibirModalStatus()" *ngIf="btnAprovar">Aprovar</button>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalReprovar"
+              (click)="exibirModalStatus()" *ngIf="btnReprovar">Reprovar</button>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalConcluir"
+              (click)="exibirModalStatus()" *ngIf="btnConcluir">Concluir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6" *ngIf="venda.id">
+        <div class="form-group">
+          <label>ID:</label>
+          <input type="text" [ngModel]="venda.id" name="id" class="form-control" disabled="true" />
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="venda.id">
+        <div class="form-group">
+          <label>Status:</label>
+          <input type="text" [ngModel]="venda.status" name="status" class="form-control" disabled="true" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Fornecedor: </label>
+          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="venda.cliente.id">
+            <option value="">Selecione...</option>
+            <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">
+              {{ cliente.razaoSocial }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="venda.id">
+        <div class="form-group">
+          <label>Data Cadastro:</label>
+          <input type="text" class="form-control" name="dataCadastro" [ngModel]="venda.dataCadastro" disabled="true" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-success" *ngIf="!venda.id">
+          <i class="fa fa-save"></i> Salvar
+        </button>
+
+        <button type="submit" class="btn btn-primary" *ngIf="venda.id">
+          <i class="fa fa-sync-alt"></i> Atualizar
+        </button>
+
+        <button type="button" class="btn btn-danger ml-1" (click)="voltarParaListagem()">
+          <i class="fa fa-arrow-alt-circle-left"></i> Voltar
+        </button>
+
+        <button type="button" class="btn btn-warning ml-1" *ngIf="venda.id" (click)="novoItem()">
+          <i class="fas fa-plus"></i> Item
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<br />
+<app-item-venda-lista (existeItem)="existeItemOut($event)"></app-item-venda-lista>
+
+<div id="modalAprovar" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirmação</h4>
+      </div>
+
+      <div class="modal-body" *ngIf="exibirModal">
+        Confirma a aprovação da Venda
+        {{ venda.id }}?
+      </div>
+
+      <div class="modal-footer" id="cancelarModal">
+        <button class="btn btn-success" (click)="alterarStatus('APROVADO')" data-dismiss="modal">
+          Confirmar
+        </button>
+        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalReprovar" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirmação</h4>
+      </div>
+
+      <div class="modal-body" *ngIf="exibirModal">
+        Confirma a reprovação da Venda
+        {{ venda.id }}?
+      </div>
+
+      <div class="modal-footer" id="cancelarModal">
+        <button class="btn btn-success" (click)="alterarStatus('REPROVADO')" data-dismiss="modal">
+          Confirmar
+        </button>
+        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalConcluir" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirmação</h4>
+      </div>
+
+      <div class="modal-body" *ngIf="exibirModal">
+        Confirma a reprovação da Venda
+        {{ venda.id }}?
+      </div>
+
+      <div class="modal-footer" id="cancelarModal">
+        <button class="btn btn-success" (click)="alterarStatus('CONCLUIDO')" data-dismiss="modal">
+          Confirmar
+        </button>
+        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

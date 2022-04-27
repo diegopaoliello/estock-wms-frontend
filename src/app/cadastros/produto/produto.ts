@@ -7,6 +7,8 @@ export class Produto {
   codigo: string;
   categoria: Categoria;
   unidadeMedida: UnidadeMedida;
+  quantidadeMinima: number;
+  precoMedio: string;
   dataCadastro: string;
 
   constructor() {

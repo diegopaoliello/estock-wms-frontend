@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ClientesFormComponent } from './clientes-form/clientes-form.component';
-import { ClientesListaComponent } from './clientes-lista/clientes-lista.component';
+import { ClienteFormComponent } from './cliente-form/cliente-form.component';
+import { ClienteListaComponent } from './cliente-lista/cliente-lista.component';
 import { LayoutComponent } from 'src/app/layout/layout.component';
 import { AuthGuard } from 'src/app/auth.guard';
 
@@ -11,9 +11,9 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'form', component: ClientesFormComponent },
-      { path: 'form/:id', component: ClientesFormComponent },
-      { path: 'lista', component: ClientesListaComponent },
+      { path: 'form', component: ClienteFormComponent },
+      { path: 'form/:id', component: ClienteFormComponent },
+      { path: 'lista', component: ClienteListaComponent },
       { path: '', redirectTo: '/clientes/lista', pathMatch: 'full' },
     ],
   },
@@ -23,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ClientesRoutingModule {}
+export class ClientesRoutingModule { }

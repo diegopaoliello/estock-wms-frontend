@@ -1,0 +1,98 @@
+<h1 class="h3 mb-2 text-gray-800">Venda</h1>
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+      {{ mensagemSucesso }}
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+      {{ mensagemErro }}
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1">
+    <button class="btn btn-warning btn-icon-split" (click)="novoCadastro()">
+      <span class="icon text-white-50">
+        <i class="fas fa-plus"></i>
+      </span>
+      <span class="text">Novo</span>
+    </button>
+  </div>
+</div>
+<br />
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">{{tableConfig.title}}</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Cliente</th>
+            <th>Status</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Id</th>
+            <th>Cliente</th>
+            <th>Status</th>
+            <th>Ação</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <tr *ngFor="let venda of vendas">
+            <td>{{ venda.id }}</td>
+            <td>{{ venda.cliente.razaoSocial }}</td>
+            <td>{{ venda.status }}</td>
+            <td>
+              <button *ngIf="false" id="btnAprovar" class="btn btn-success btn-circle ml-3" data-toggle="tooltip"
+                data-placement="top" title="Aprovar" (click)="selecionarVenda(venda)" data-toggle="modal"
+                data-target="#modalAprovar">
+                <i class="fas fa-check"></i>
+              </button>
+              <button id="btnReprovar" *ngIf="false" class="btn btn-dark btn-circle ml-3"
+                (click)="selecionarVenda(venda)" data-toggle="modal" data-target="#modalReprovar">
+                <i class="fas fa-times"></i>
+              </button>
+              <button class="btn btn-primary btn-circle ml-3" routerLink="/vendas/form/{{ venda.id }}">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button id="btnDeletar" class="btn btn-danger btn-circle ml-3 delete" (click)="selecionarVenda(venda)"
+                data-toggle="modal" data-target="#modalDeletar">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="modalDeletar" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirmação</h4>
+      </div>
+
+      <div class="modal-body" *ngIf="vendaSelecionado">
+        Confirma a deleção do Venda
+        {{ vendaSelecionado.id }}?
+      </div>
+
+      <div class="modal-footer" id="cancelarModal">
+        <button class="btn btn-success" (click)="deletarVenda()" data-dismiss="modal">
+          Confirmar
+        </button>
+        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

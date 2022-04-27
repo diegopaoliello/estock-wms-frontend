@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cliente } from '../cliente';
-import { ClientesService } from '../clientes.service';
+import { ClienteService } from '../cliente.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-clientes-lista',
-  templateUrl: './clientes-lista.component.html',
-  styleUrls: ['./clientes-lista.component.css'],
+  selector: 'app-cliente-lista',
+  templateUrl: './cliente-lista.component.html',
+  styleUrls: ['./cliente-lista.component.css'],
 })
-export class ClientesListaComponent implements OnInit {
+export class ClienteListaComponent implements OnInit {
   clientes: Cliente[] = [];
   clienteSelecionado: Cliente;
   mensagemSucesso: string;
   mensagemErro: string;
 
-  constructor(private service: ClientesService, private router: Router) { }
+  constructor(private service: ClienteService, private router: Router) { }
 
   ngOnInit(): void {
     this.service

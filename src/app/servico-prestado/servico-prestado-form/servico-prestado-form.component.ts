@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServicoPrestado } from '../servicoPrestado';
 import { ServicoPrestadoService } from '../../servico-prestado.service';
 import { Cliente } from 'src/app/cadastros/clientes/cliente';
-import { ClientesService } from 'src/app/cadastros/clientes/clientes.service';
+import { ClienteService } from 'src/app/cadastros/clientes/cliente.service';
 
 @Component({
   selector: 'app-servico-prestado-form',
@@ -16,7 +16,7 @@ export class ServicoPrestadoFormComponent implements OnInit {
   errors: String[];
 
   constructor(
-    private clienteService: ClientesService,
+    private clienteService: ClienteService,
     private service: ServicoPrestadoService
   ) {
     this.servico = new ServicoPrestado();

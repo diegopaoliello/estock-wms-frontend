@@ -1,3 +1,5 @@
+import { VendaService } from './operacoes/saida/venda/venda.service';
+import { VendaModule } from './operacoes/saida/venda/venda.module';
 import { EstoqueService } from './estoque/estoque.service';
 import { EstoqueModule } from './estoque/estoque.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,8 +18,8 @@ import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthService } from './auth.service';
 import { TokenInterceptor } from './token.interceptor';
-import { ClientesModule } from './cadastros/clientes/clientes.module';
-import { ClientesService } from './cadastros/clientes/clientes.service';
+import { ClienteModule } from './cadastros/clientes/cliente.module';
+import { ClienteService } from './cadastros/clientes/cliente.service';
 import { UnidadeMedidaService } from './cadastros/unidade-medida/unidade-medida.service';
 import { CategoriaService } from './cadastros/categoria/categoria.service';
 import { ProdutoService } from './cadastros/produto/produto.service';
@@ -45,11 +47,12 @@ import { environment } from 'src/environments/environment';
     TemplateModule,
     UnidadeMedidaModule,
     CategoriaaModule,
-    ClientesModule,
+    ClienteModule,
     FornecedorModule,
     ProdutoaModule,
     EstoqueModule,
     PedidoModule,
+    VendaModule,
     ServicoPrestadoModule,
     SocialLoginModule,
   ],
@@ -59,7 +62,8 @@ import { environment } from 'src/environments/environment';
     ProdutoService,
     EstoqueService,
     PedidoService,
-    ClientesService,
+    VendaService,
+    ClienteService,
     FornecedorService,
     ServicoPrestadoService,
     AuthService,

@@ -49,7 +49,7 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          <label>Fornecedor: </label>
+          <label>Cliente: </label>
           <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="venda.cliente.id">
             <option value="">Selecione...</option>
             <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">

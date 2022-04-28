@@ -24,6 +24,7 @@
             <th>Quantidade</th>
             <th>Preço</th>
             <th>Desconto</th>
+            <th>Valor Final</th>
             <th>Ação</th>
           </tr>
         </thead>
@@ -34,6 +35,7 @@
             <th>Quantidade</th>
             <th>Preço</th>
             <th>Desconto</th>
+            <th>Valor Final</th>
             <th>Ação</th>
           </tr>
         </tfoot>
@@ -44,6 +46,7 @@
             <td>{{ item.quantidade }}</td>
             <td>{{ item.preco }}</td>
             <td>{{ item.desconto }}</td>
+            <td>{{ item.valorFinal }}</td>
             <td>
               <button class="btn btn-primary btn-circle ml-5"
                 routerLink="/pedidos/{{item.pedido.id}}/itens-pedido/form/{{ item.id }}">

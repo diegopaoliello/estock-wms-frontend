@@ -36,6 +36,8 @@
             <th>Código</th>
             <th>Categoria</th>
             <th>Unidad de Medida</th>
+            <th>Quantidade Mínima</th>
+            <th>Preço Médio</th>
             <th>Ação</th>
           </tr>
         </thead>
@@ -46,6 +48,8 @@
             <th>Código</th>
             <th>Categoria</th>
             <th>Unidad de Medida</th>
+            <th>Quantidade Mínima</th>
+            <th>Preço Médio</th>
             <th>Ação</th>
           </tr>
         </tfoot>
@@ -56,6 +60,8 @@
             <td>{{ produto.codigo }}</td>
             <td>{{ produto.categoria.descricao }}</td>
             <td>{{ produto.unidadeMedida.descricao }}</td>
+            <td>{{ produto.quantidadeMinima }}</td>
+            <td>{{ produto.precoMedio }}</td>
             <td>
               <button class="btn btn-primary btn-circle ml-5" routerLink="/produtos/form/{{ produto.id }}">
                 <i class="fas fa-edit"></i>

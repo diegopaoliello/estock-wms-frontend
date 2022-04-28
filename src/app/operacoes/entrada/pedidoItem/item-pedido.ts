@@ -4,13 +4,10 @@ import { Produto } from './../../../cadastros/produto/produto';
 export class ItemPedido {
   id: number;
   pedido: Pedido;
-  produto: Produto;
+  produto: Produto = new Produto();
   quantidade: number;
-  preco: string;
-  desconto: string;
+  preco: number = 0;
+  desconto: number = 0;
   dataCadastro: string;
 
-  constructor() {
-    this.produto = new Produto();
-  }
 }

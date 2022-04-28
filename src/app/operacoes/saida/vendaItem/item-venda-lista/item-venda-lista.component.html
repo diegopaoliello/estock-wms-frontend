@@ -46,10 +46,9 @@
             <td>{{ item.quantidade }}</td>
             <td>{{ item.preco }}</td>
             <td>{{ item.desconto }}</td>
-            <td>{{ item.valorFinal }}</td>
             <td>
               <button class="btn btn-primary btn-circle ml-5"
-                routerLink="/pedidos/{{item.pedido.id}}/itens-pedido/form/{{ item.id }}">
+                routerLink="/vendas/{{item.venda.id}}/itens-venda/form/{{ item.id }}">
                 <i class="fas fa-edit"></i>
               </button>
               <button class="btn btn-danger btn-circle ml-2 delete" (click)="preparaDelecao(item)" data-toggle="modal"

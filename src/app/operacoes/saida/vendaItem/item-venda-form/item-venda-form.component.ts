@@ -49,6 +49,18 @@ export class ItemVendaFormComponent implements OnInit {
     });
   }
 
+  onChange(produto: Produto) {
+    console.log(produto);
+    this.itemVenda.preco = produto.precoMedio;
+
+
+    this.produtoService
+    .calcularPrecoMedio(produto.id)
+    .subscribe((resposta) => {
+      this.itemVenda.preco = resposta.toString();
+    });
+  }
+
   voltarParaListagem() {
     this.router.navigate(['/vendas/form/' + this.idVenda]);
   }

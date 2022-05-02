@@ -65,7 +65,7 @@ export class ProdutoFormComponent implements OnInit {
           this.errors = null;
         },
         (errorResponse) => {
-          this.errors = ['Erro ao atualizar o produto.'];
+          this.errors = errorResponse.error.errors;
         }
       );
     } else {

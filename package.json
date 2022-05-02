@@ -30,6 +30,7 @@
     "jquery": "^3.6.0",
     "jquery.easing": "^1.4.1",
     "jszip": "^2.5.0",
+    "ngx-mask": "^13.1.12",
     "pdfmake": "^0.1.36",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

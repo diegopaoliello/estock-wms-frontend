@@ -8,6 +8,7 @@ export class Produto {
   categoria: Categoria;
   unidadeMedida: UnidadeMedida;
   quantidadeMinima: number;
+  quantidadeMaxima: number;
   precoMedio: string;
   dataCadastro: string;
 

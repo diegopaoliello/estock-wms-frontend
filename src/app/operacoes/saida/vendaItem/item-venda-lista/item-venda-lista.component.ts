@@ -3,7 +3,7 @@ import { Venda } from './../../venda/venda';
 import { DataTableUtil } from './../../../../util/DataTableUtil';
 import { TableConfig } from './../../../../util/tableConfig';
 import { Observable } from 'rxjs';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, AfterContentInit, Input } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { ItemVenda } from '../item-venda';
 import { ItemVendaService } from '../item-venda.service';
@@ -24,6 +24,7 @@ export class ItemVendaListaComponent implements OnInit {
   tableConfig: TableConfig = new TableConfig('Venda de Compras', [0, 1, 2], null);
 
   @Output() existeItem = new EventEmitter();
+  @Input('venda') vendas: Venda = new Venda();
 
   constructor(private service: ItemVendaService, private vendaService: VendaService, private router: Router,
     private activatedRoute: ActivatedRoute) { }
@@ -35,17 +36,24 @@ export class ItemVendaListaComponent implements OnInit {
       this.idVenda = urlParams['id'];
       this.existeItem.emit(false);
 
-      this.vendaService.getVendaById(this.idVenda).subscribe((resposta) => (this.venda = resposta));
+      if (this.idVenda) {
+        this.vendaService.getVendaById(this.idVenda).subscribe((resposta) => (this.venda = resposta));
 
-      this.service
-        .getItensVenda(this.idVenda)
-        .subscribe((resposta) => {
-          this.itens = resposta;
-          this.tableConfig.tableHeader = this.getTableHeader(this.venda);
-          DataTableUtil.enableTable(this.tableConfig);
-          this.existeItem.emit(this.itens.length > 0);
-        });
+        this.service
+          .getItensVenda(this.idVenda)
+          .subscribe((resposta) => {
+            this.itens = resposta;
 
+            this.tableConfig.tableHeader = this.getTableHeader(this.venda);
+            DataTableUtil.enableTable(this.tableConfig);
+            this.existeItem.emit(this.itens.length > 0);
+          });
+
+      } else {
+        this.tableConfig.tableHeader = this.getTableHeader(this.venda);
+        DataTableUtil.enableTable(this.tableConfig);
+        this.existeItem.emit(this.itens.length > 0);
+      }
     });
   }
 
@@ -82,14 +90,14 @@ export class ItemVendaListaComponent implements OnInit {
           body: [
             [
               {
-                text: 'Venda: ' + venda.id,
+                text: 'Venda: ' + venda?.id ?? '',
                 fontSize: 9,
                 bold: true,
               }
             ],
             [
               {
-                text: 'Fornecedor: ' + venda.cliente.nomeFantasia,
+                text: 'Cliente: ' + venda?.cliente.nomeFantasia ?? '',
                 fontSize: 9,
                 bold: true
               }

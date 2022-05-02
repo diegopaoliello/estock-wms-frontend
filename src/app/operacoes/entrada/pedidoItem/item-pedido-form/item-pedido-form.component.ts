@@ -61,7 +61,7 @@ export class ItemPedidoFormComponent implements OnInit {
           this.errors = null;
         },
         (errorResponse) => {
-          this.errors = ['Erro ao atualizar o Item do Pedido.'];
+          this.errors = errorResponse.error.errors;
         }
       );
     } else {

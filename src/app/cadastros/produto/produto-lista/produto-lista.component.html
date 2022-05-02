@@ -37,6 +37,7 @@
             <th>Categoria</th>
             <th>Unidad de Medida</th>
             <th>Quantidade Mínima</th>
+            <th>Quantidade Máxima</th>
             <th>Preço Médio</th>
             <th>Ação</th>
           </tr>
@@ -49,6 +50,7 @@
             <th>Categoria</th>
             <th>Unidad de Medida</th>
             <th>Quantidade Mínima</th>
+            <th>Quantidade Máxima</th>
             <th>Preço Médio</th>
             <th>Ação</th>
           </tr>
@@ -61,6 +63,7 @@
             <td>{{ produto.categoria.descricao }}</td>
             <td>{{ produto.unidadeMedida.descricao }}</td>
             <td>{{ produto.quantidadeMinima }}</td>
+            <td>{{ produto.quantidadeMaxima }}</td>
             <td>{{ produto.precoMedio }}</td>
             <td>
               <button class="btn btn-primary btn-circle ml-5" routerLink="/produtos/form/{{ produto.id }}">

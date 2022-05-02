@@ -18,7 +18,7 @@
     </div>
 
     <div class="row" *ngIf="venda.id && (btnAprovar || btnReprovar || btnConcluir)">
-      <div class="col-md-6" *ngIf="venda.id">
+      <div class="col-md-6">
         <div class="form-group">
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalAprovar"
@@ -36,21 +36,22 @@
       <div class="col-md-6" *ngIf="venda.id">
         <div class="form-group">
           <label>ID:</label>
-          <input type="text" [ngModel]="venda.id" name="id" class="form-control" disabled="true" />
+          <input type="text" [ngModel]="venda.id" name="id" class="form-control" disabled />
         </div>
       </div>
 
       <div class="col-md-6" *ngIf="venda.id">
         <div class="form-group">
           <label>Status:</label>
-          <input type="text" [ngModel]="venda.status" name="status" class="form-control" disabled="true" />
+          <input type="text" [ngModel]="venda.status" name="status" class="form-control" disabled />
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
           <label>Cliente: </label>
-          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="venda.cliente.id">
+          <select [disabled]="!btnSalvar" class="form-control" [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="venda.cliente.id">
             <option value="">Selecione...</option>
             <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">
               {{ cliente.razaoSocial }}
@@ -62,26 +63,20 @@
       <div class="col-md-6" *ngIf="venda.id">
         <div class="form-group">
           <label>Data Cadastro:</label>
-          <input type="text" class="form-control" name="dataCadastro" [ngModel]="venda.dataCadastro" disabled="true" />
+          <input type="text" class="form-control" name="dataCadastro" [ngModel]="venda.dataCadastro" disabled />
         </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6">
-        <button type="submit" class="btn btn-success" *ngIf="!venda.id">
+        <button type="submit" class="btn btn-success" *ngIf="btnSalvar">
           <i class="fa fa-save"></i> Salvar
         </button>
-
-        <button type="submit" class="btn btn-primary" *ngIf="venda.id">
-          <i class="fa fa-sync-alt"></i> Atualizar
-        </button>
-
         <button type="button" class="btn btn-danger ml-1" (click)="voltarParaListagem()">
           <i class="fa fa-arrow-alt-circle-left"></i> Voltar
         </button>
-
-        <button type="button" class="btn btn-warning ml-1" *ngIf="venda.id" (click)="novoItem()">
+        <button type="button" class="btn btn-warning ml-1" *ngIf="btnAddItem" (click)="novoItem()">
           <i class="fas fa-plus"></i> Item
         </button>
       </div>
@@ -89,7 +84,7 @@
   </form>
 </div>
 <br />
-<app-item-venda-lista (existeItem)="existeItemOut($event)"></app-item-venda-lista>
+<app-item-venda-lista [venda]="venda" (existeItem)="existeItemOut($event)"></app-item-venda-lista>
 
 <div id="modalAprovar" class="modal fade" role="dialog">
   <div class="modal-dialog">

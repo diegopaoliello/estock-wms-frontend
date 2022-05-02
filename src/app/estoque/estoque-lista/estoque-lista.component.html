@@ -55,6 +55,8 @@
             <th>Código</th>
             <th>Descrição</th>
             <th>Quantidade</th>
+            <th>Quantidade Mínima</th>
+            <th>Quantidade Máxima</th>
           </tr>
         </thead>
         <tfoot>
@@ -63,6 +65,8 @@
             <th>Código</th>
             <th>Descrição</th>
             <th>Quantidade</th>
+            <th>Quantidade Mínima</th>
+            <th>Quantidade Máxima</th>
           </tr>
         </tfoot>
         <tbody>
@@ -71,6 +75,8 @@
             <td>{{ estoque.produto.codigo }}</td>
             <td>{{ estoque.produto.descricao }}</td>
             <td>{{ estoque.quantidade }}</td>
+            <td>{{ estoque.produto.quantidadeMinima }}</td>
+            <td>{{ estoque.produto.quantidadeMaxima }}</td>
           </tr>
         </tbody>
       </table>

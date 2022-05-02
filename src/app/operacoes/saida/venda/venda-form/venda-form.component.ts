@@ -1,5 +1,5 @@
 import { ItemVenda } from './../../vendaItem/item-venda';
-import { Component, OnInit, Output, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, AfterViewInit, AfterContentInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 
 import { Venda } from '../venda';
@@ -13,7 +13,7 @@ import { ClienteService } from 'src/app/cadastros/clientes/cliente.service';
   templateUrl: './venda-form.component.html',
   styleUrls: ['./venda-form.component.css'],
 })
-export class VendaFormComponent implements OnInit {
+export class VendaFormComponent implements OnInit, AfterContentInit {
   venda: Venda;
   success: boolean = false;
   errors: String[];
@@ -25,6 +25,8 @@ export class VendaFormComponent implements OnInit {
   btnAprovar: boolean = false;
   btnReprovar: boolean = false;
   btnConcluir: boolean = false;
+  btnSalvar: boolean = false;
+  btnAddItem: boolean = false;
 
   constructor(
     private clienteService: ClienteService,
@@ -36,13 +38,19 @@ export class VendaFormComponent implements OnInit {
     this.venda.cliente = new Cliente();
   }
 
+  ngAfterContentInit(): void {
+    this.ativarBotoes();
+  }
+
   ngOnInit(): void {
     let params: Observable<Params> = this.activatedRoute.params;
     params.subscribe((urlParams) => {
       this.id = urlParams['id'];
       if (this.id) {
         this.service.getVendaById(this.id).subscribe(
-          (response) => (this.venda = response),
+          (response) => {
+            this.venda = response;
+          },
           (errorResponse) => (this.venda = new Venda())
         );
       }
@@ -55,10 +63,14 @@ export class VendaFormComponent implements OnInit {
   }
 
   ativarBotoes(): void {
+
+
     if (this.venda) {
       this.btnAprovar = this.venda.status == 'ABERTO' && this.existeItem;
       this.btnReprovar = this.btnAprovar;
       this.btnConcluir = this.venda.status == 'APROVADO';
+      this.btnSalvar = (this.venda.status == null || !(this.venda.status == 'CONCLUIDO' || this.venda.status == 'REPROVADO'));
+      this.btnAddItem = this.venda.status == 'ABERTO';
     }
   }
 
@@ -101,6 +113,7 @@ export class VendaFormComponent implements OnInit {
           this.success = true;
           this.errors = null;
           this.venda = response;
+          this.ativarBotoes();
         },
         (errorResponse) => {
           this.success = false;

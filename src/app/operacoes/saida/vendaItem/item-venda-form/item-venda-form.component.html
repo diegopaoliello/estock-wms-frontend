@@ -39,7 +39,7 @@
         <div class="form-group">
           <label>Produto: *</label>
           <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="itemVenda.produto.id"
-          (ngModelChange)="onChange(itemVenda.produto)">
+            (ngModelChange)="onChange(itemVenda.produto)">
             <option value="">Selecione...</option>
             <option *ngFor="let produto of produtos" [ngValue]="produto.id">
               {{ produto.descricao }}
@@ -50,13 +50,14 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>Quantidade: *</label>
-          <input type="text" class="form-control" [(ngModel)]="itemVenda.quantidade" name="quantidade" />
+          <input type="text" class="form-control" [(ngModel)]="itemVenda.quantidade" mask="separator.2" thousandSeparator="." name="quantidade" />
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label>Preço: *</label>
-          <input type="number" class="form-control" [(ngModel)]="itemVenda.preco" name="preco" />
+          <input type="number" mask="separator.2" thousandSeparator="" separatorLimit="99999999999999"
+            class="form-control" [(ngModel)]="itemVenda.preco" name="preco" />
         </div>
       </div>
       <div class="col-md-6">

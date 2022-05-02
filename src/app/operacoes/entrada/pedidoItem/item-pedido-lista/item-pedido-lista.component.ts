@@ -3,7 +3,7 @@ import { Pedido } from './../../pedido/pedido';
 import { DataTableUtil } from './../../../../util/DataTableUtil';
 import { TableConfig } from './../../../../util/tableConfig';
 import { Observable } from 'rxjs';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, AfterContentInit, Input } from '@angular/core';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { ItemPedido } from '../item-pedido';
 import { ItemPedidoService } from '../item-pedido.service';
@@ -24,6 +24,7 @@ export class ItemPedidoListaComponent implements OnInit {
   tableConfig: TableConfig = new TableConfig('Pedido de Compras', [0, 1, 2], null);
 
   @Output() existeItem = new EventEmitter();
+  @Input('pedido') pedidos: Pedido = new Pedido();
 
   constructor(private service: ItemPedidoService, private pedidoService: PedidoService, private router: Router,
     private activatedRoute: ActivatedRoute) { }
@@ -35,17 +36,24 @@ export class ItemPedidoListaComponent implements OnInit {
       this.idPedido = urlParams['id'];
       this.existeItem.emit(false);
 
-      this.pedidoService.getPedidoById(this.idPedido).subscribe((resposta) => (this.pedido = resposta));
+      if (this.idPedido) {
+        this.pedidoService.getPedidoById(this.idPedido).subscribe((resposta) => (this.pedido = resposta));
 
-      this.service
-        .getItensPedido(this.idPedido)
-        .subscribe((resposta) => {
-          this.itens = resposta;
-          this.tableConfig.tableHeader = this.getTableHeader(this.pedido);
-          DataTableUtil.enableTable(this.tableConfig);
-          this.existeItem.emit(this.itens.length > 0);
-        });
+        this.service
+          .getItensPedido(this.idPedido)
+          .subscribe((resposta) => {
+            this.itens = resposta;
 
+            this.tableConfig.tableHeader = this.getTableHeader(this.pedido);
+            DataTableUtil.enableTable(this.tableConfig);
+            this.existeItem.emit(this.itens.length > 0);
+          });
+
+      } else {
+        this.tableConfig.tableHeader = this.getTableHeader(this.pedido);
+        DataTableUtil.enableTable(this.tableConfig);
+        this.existeItem.emit(this.itens.length > 0);
+      }
     });
   }
 
@@ -82,14 +90,14 @@ export class ItemPedidoListaComponent implements OnInit {
           body: [
             [
               {
-                text: 'Pedido: ' + pedido.id,
+                text: 'Pedido: ' + pedido?.id ?? '',
                 fontSize: 9,
                 bold: true,
               }
             ],
             [
               {
-                text: 'Fornecedor: ' + pedido.fornecedor.nomeFantasia,
+                text: 'Cliente: ' + pedido?.fornecedor.nomeFantasia ?? '',
                 fontSize: 9,
                 bold: true
               }

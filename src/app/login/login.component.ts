@@ -21,12 +21,14 @@ export class LoginComponent implements OnInit {
   errors: String[];
   socialUser: SocialUser;
   usuario: Usuario;
+  isLoginGoogle: Boolean = false;
+  existsUserName: Boolean = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private socialAuthService: SocialAuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.socialAuthService.authState.subscribe((user) => {
@@ -36,7 +38,7 @@ export class LoginComponent implements OnInit {
         this.username = this.socialUser.email;
         this.password = this.socialUser.id;
 
-        this.cadastrar();
+        this.cadastrarGoogle();
       }
     });
   }
@@ -59,12 +61,14 @@ export class LoginComponent implements OnInit {
   }
 
   loginGoogle(event): void {
+    this.isLoginGoogle = true;
     event.preventDefault();
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
   preparaCadastrar(event) {
     event.preventDefault();
+    this.isLoginGoogle = false;
     this.cadastrando = true;
   }
 
@@ -73,10 +77,30 @@ export class LoginComponent implements OnInit {
   }
 
   cadastrar() {
-    this.authService.getUsuario(this.username).subscribe(
+    const usuario: Usuario = new Usuario();
+    usuario.username = this.username;
+    usuario.password = this.password;
+
+    this.authService.salvar(usuario).subscribe(
       (response) => {
-        this.usuario = response;
-        this.password = this.usuario.password;
+        this.mensagemSucesso =
+          'Cadastro realizado com sucesso! Efetue o login.';
+        this.cadastrando = false;
+        this.username = '';
+        this.password = '';
+        this.errors = [];
+      },
+      (errorResponse) => {
+        this.mensagemSucesso = null;
+        this.errors = errorResponse.error.errors;
+      }
+    );
+  }
+
+  cadastrarGoogle() {
+    this.authService.existeUsuario(this.username).subscribe(
+      (response) => {
+        this.onSubmit();
       },
       (errorResponse) => {
         const usuario: Usuario = new Usuario();
@@ -85,26 +109,14 @@ export class LoginComponent implements OnInit {
 
         this.authService.salvar(usuario).subscribe(
           (response) => {
-            this.mensagemSucesso =
-              'Cadastro realizado com sucesso! Efetue o login.';
-            this.cadastrando = false;
-            this.username = '';
-            this.password = '';
             this.errors = [];
+            this.onSubmit();
           },
           (errorResponse) => {
             this.mensagemSucesso = null;
             this.errors = errorResponse.error.errors;
           }
         );
-      },
-      () => {
-        if (
-          this.errors == undefined ||
-          (this.errors != undefined && this.errors.length == 0)
-        ) {
-          this.login();
-        }
       }
     );
   }

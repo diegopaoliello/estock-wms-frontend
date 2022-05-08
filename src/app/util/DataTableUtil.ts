@@ -37,7 +37,6 @@ export class DataTableUtil {
             'customize': function (doc) {
 
               if (tableConfig.tableHeader) {
-                console.log(tableConfig.tableHeader);
                 let content = doc.content;
                 let dataTable = content[1];
 

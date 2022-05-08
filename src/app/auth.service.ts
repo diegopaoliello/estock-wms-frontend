@@ -56,11 +56,13 @@ export class AuthService {
     return this.http.post<any>(this.apiURL, usuario);
   }
 
-  getUsuario(username: string): Observable<any> {
-    const httpParams = new HttpParams().set('username', username);
 
-    const url = this.apiURL + '?' + httpParams.toString();
-    return this.http.get<any>(url);
+  getUsuario(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiURL}/${id}`);
+  }
+
+  existeUsuario(userName: string): Observable<any> {
+    return this.http.get<any>(`${this.apiURL}/${userName}`);
   }
 
   tentarLogar(username: string, password: string): Observable<any> {

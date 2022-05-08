@@ -6,21 +6,18 @@
         <div class="card-body p-0">
           <!-- Nested Row within Card Body -->
           <div class="row">
-            <div
-              class="col-lg-6 d-none d-lg-block bg-login-image"
-              [ngClass]="{
+            <div class="col-lg-6 d-none d-lg-block bg-login-image" [ngClass]="{
                 'col-lg-6 d-none d-lg-block bg-login-image': !cadastrando,
                 'col-lg-5 d-none d-lg-block bg-register-image': cadastrando
-              }"
-            ></div>
+              }"></div>
             <div class="col-lg-6">
               <div class="p-5">
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">
                     {{
-                      cadastrando
-                        ? "Cadastro de Novo Usuário"
-                        : "Bem vindo ao e-stock WMS!"
+                    cadastrando
+                    ? "Cadastro de Novo Usuário"
+                    : "Bem vindo ao e-stock WMS!"
                     }}
                   </h1>
                 </div>
@@ -34,99 +31,58 @@
                 </div>
                 <form class="user" #loginForm="ngForm" (submit)="onSubmit()">
                   <div class="form-group">
-                    <input
-                      type="text"
-                      name="username"
-                      [(ngModel)]="username"
-                      class="form-control form-control-user"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter Email Address..."
-                    />
+                    <input type="text" name="username" [(ngModel)]="username" class="form-control form-control-user"
+                      aria-describedby="emailHelp" placeholder="Enter Email Address..." />
                   </div>
                   <div class="form-group">
-                    <input
-                      type="password"
-                      name="password"
-                      [(ngModel)]="password"
-                      class="form-control form-control-user"
-                      placeholder="Password"
-                    />
+                    <input type="password" name="password" [(ngModel)]="password" class="form-control form-control-user"
+                      placeholder="Password" />
                   </div>
                   <div class="form-group">
                     <div class="custom-control custom-checkbox small">
-                      <input
-                        type="checkbox"
-                        class="custom-control-input"
-                        id="customCheck"
-                      />
-                      <label class="custom-control-label" for="customCheck"
-                        >Lembrar senha</label
-                      >
+                      <input type="checkbox" class="custom-control-input" id="customCheck" />
+                      <label class="custom-control-label" for="customCheck">Lembrar senha</label>
                     </div>
                   </div>
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-user btn-block"
-                    *ngIf="!cadastrando"
-                  >
+                  <button id="btnEntrar" type="submit" class="btn btn-primary btn-user btn-block" *ngIf="!cadastrando">
                     Entrar
                   </button>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <button
-                        type="button"
-                        class="btn btn-primary btn-user btn-block"
-                        (click)="cadastrar()"
-                        *ngIf="cadastrando"
-                      >
+                      <button type="button" class="btn btn-primary btn-user btn-block" (click)="cadastrar()"
+                        *ngIf="cadastrando">
                         Cadastrar
                       </button>
                     </div>
                     <div class="col-sm-6">
-                      <button
-                        type="button"
-                        (click)="cancelaCadastro()"
-                        class="btn btn-danger btn-user btn-block"
-                        *ngIf="cadastrando"
-                      >
+                      <button type="button" (click)="cancelaCadastro()" class="btn btn-danger btn-user btn-block"
+                        *ngIf="cadastrando">
                         Cancelar
                       </button>
                     </div>
                   </div>
                   <hr />
-                  <a
-                    href="#"
-                    (click)="loginGoogle($event)"
-                    class="btn btn-google btn-user btn-block"
-                  >
+                  <a href="#" (click)="loginGoogle($event)" class="btn btn-google btn-user btn-block">
                     <i class="fab fa-google fa-fw"></i>
                     {{
-                      cadastrando ? "Cadastrar com Google" : "Login com Google"
+                    cadastrando ? "Cadastrar com Google" : "Login com Google"
                     }}
                   </a>
                   <a href="#" class="btn btn-facebook btn-user btn-block">
                     <i class="fab fa-facebook-f fa-fw"></i>
                     {{
-                      cadastrando
-                        ? "Cadastrar com Facebook"
-                        : "Login com Facebook"
+                    cadastrando
+                    ? "Cadastrar com Facebook"
+                    : "Login com Facebook"
                     }}
                   </a>
                 </form>
                 <hr />
                 <div class="text-center">
-                  <a class="small" href="#" *ngIf="!cadastrando"
-                    >Esqueceu a senha?</a
-                  >
+                  <a class="small" href="#" *ngIf="!cadastrando">Esqueceu a senha?</a>
                 </div>
                 <div class="text-center">
-                  <a
-                    class="small"
-                    href="#"
-                    (click)="preparaCadastrar($event)"
-                    *ngIf="!cadastrando"
-                    >Criar uma conta!</a
-                  >
+                  <a class="small" href="#" (click)="preparaCadastrar($event)" *ngIf="!cadastrando">Criar uma conta!</a>
                 </div>
               </div>
             </div>

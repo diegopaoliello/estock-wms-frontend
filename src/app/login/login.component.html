@@ -31,12 +31,20 @@
                 </div>
                 <form class="user" #loginForm="ngForm" (submit)="onSubmit()">
                   <div class="form-group">
-                    <input type="text" name="username" [(ngModel)]="username" class="form-control form-control-user"
-                      aria-describedby="emailHelp" placeholder="Enter Email Address..." />
+                    <input type="text" name="nome" [(ngModel)]="usuario.nome" class="form-control form-control-user"
+                      placeholder="Nome" />
                   </div>
                   <div class="form-group">
-                    <input type="password" name="password" [(ngModel)]="password" class="form-control form-control-user"
-                      placeholder="Password" />
+                    <input type="text" name="sobrenome" [(ngModel)]="usuario.sobrenome"
+                      class="form-control form-control-user" placeholder="Sobrenome" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="email" [(ngModel)]="usuario.email" class="form-control form-control-user"
+                      aria-describedby="emailHelp" placeholder="Email" />
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="password" [(ngModel)]="usuario.password"
+                      class="form-control form-control-user" placeholder="Password" />
                   </div>
                   <div class="form-group">
                     <div class="custom-control custom-checkbox small">

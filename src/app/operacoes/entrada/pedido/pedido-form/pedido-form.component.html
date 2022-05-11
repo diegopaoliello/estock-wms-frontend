@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="alert alert-success" role="alert" *ngIf="success == true">
-          Pedido salvo/atualizado com sucesso!
+          Pedido salva/atualizada com sucesso!
         </div>
         <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
           {{ erro }}
@@ -17,8 +17,8 @@
       </div>
     </div>
 
-    <div class="row" *ngIf="pedido.id && (btnAprovar || btnReprovar || btnConcluir)">
-      <div class="col-md-6" *ngIf="pedido.id">
+    <div class="row" *ngIf="habilitarTrocaStatus">
+      <div class="col-md-6">
         <div class="form-group">
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalAprovar"
@@ -36,21 +36,22 @@
       <div class="col-md-6" *ngIf="pedido.id">
         <div class="form-group">
           <label>ID:</label>
-          <input type="text" [ngModel]="pedido.id" name="id" class="form-control" disabled="true" />
+          <input type="text" [ngModel]="pedido.id" name="id" class="form-control" disabled />
         </div>
       </div>
 
       <div class="col-md-6" *ngIf="pedido.id">
         <div class="form-group">
           <label>Status:</label>
-          <input type="text" [ngModel]="pedido.status" name="status" class="form-control" disabled="true" />
+          <input type="text" [ngModel]="pedido.status.descricao" name="status" class="form-control" disabled />
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
-          <label>Fornecedor: </label>
-          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="pedido.fornecedor.id">
+          <label>Cliente: </label>
+          <select [disabled]="!permiteEdicao" class="form-control" [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="pedido.fornecedor.id">
             <option value="">Selecione...</option>
             <option *ngFor="let fornecedor of fornecedores" [ngValue]="fornecedor.id">
               {{ fornecedor.razaoSocial }}
@@ -62,26 +63,23 @@
       <div class="col-md-6" *ngIf="pedido.id">
         <div class="form-group">
           <label>Data Cadastro:</label>
-          <input type="text" class="form-control" name="dataCadastro" [ngModel]="pedido.dataCadastro" disabled="true" />
+          <input type="text" class="form-control" name="dataCadastro" [ngModel]="pedido.dataCadastro" disabled />
         </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6">
-        <button type="submit" class="btn btn-success" *ngIf="!pedido.id">
+        <button type="submit" class="btn btn-success" *ngIf="btnSalvar">
           <i class="fa fa-save"></i> Salvar
         </button>
-
-        <button type="submit" class="btn btn-primary" *ngIf="pedido.id">
+        <button type="submit" class="btn btn-primary" *ngIf="btnAtualizar">
           <i class="fa fa-sync-alt"></i> Atualizar
         </button>
-
         <button type="button" class="btn btn-danger ml-1" (click)="voltarParaListagem()">
           <i class="fa fa-arrow-alt-circle-left"></i> Voltar
         </button>
-
-        <button type="button" class="btn btn-warning ml-1" *ngIf="pedido.id" (click)="novoItem()">
+        <button type="button" class="btn btn-warning ml-1" *ngIf="btnAddItem" (click)="novoItem()">
           <i class="fas fa-plus"></i> Item
         </button>
       </div>
@@ -89,7 +87,7 @@
   </form>
 </div>
 <br />
-<app-item-pedido-lista (existeItem)="existeItemOut($event)"></app-item-pedido-lista>
+<app-item-pedido-lista [pedido]="pedido" (existeItem)="existeItemOut($event)"></app-item-pedido-lista>
 
 <div id="modalAprovar" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -99,7 +97,7 @@
       </div>
 
       <div class="modal-body" *ngIf="exibirModal">
-        Confirma a aprovação do Pedido
+        Confirma a aprovação da Pedido
         {{ pedido.id }}?
       </div>
 
@@ -121,7 +119,7 @@
       </div>
 
       <div class="modal-body" *ngIf="exibirModal">
-        Confirma a reprovação do Pedido
+        Confirma a reprovação da Pedido
         {{ pedido.id }}?
       </div>
 
@@ -143,7 +141,7 @@
       </div>
 
       <div class="modal-body" *ngIf="exibirModal">
-        Confirma a reprovação do Pedido
+        Confirma a reprovação da Pedido
         {{ pedido.id }}?
       </div>
 

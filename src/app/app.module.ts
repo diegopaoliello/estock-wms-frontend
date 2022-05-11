@@ -1,3 +1,8 @@
+import { TipoLoginService } from './cadastros/tipo-login/tipo-login.service';
+import { PerfilService } from './cadastros/perfil/perfil.service';
+import { VendaStatusService } from './cadastros/venda-status/venda-status.service';
+import { PedidoStatusService } from './cadastros/pedido-status/pedido-status.service';
+import { UsuarioModule } from './cadastros/usuario/usuario.module';
 import { VendaService } from './operacoes/saida/venda/venda.service';
 import { VendaModule } from './operacoes/saida/venda/venda.module';
 import { EstoqueService } from './estoque/estoque.service';
@@ -36,6 +41,7 @@ import {
   SocialLoginModule,
 } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
+import { UsuarioService } from './cadastros/usuario/usuario.service';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, LayoutComponent],
@@ -45,6 +51,7 @@ import { environment } from 'src/environments/environment';
     HttpClientModule,
     AppRoutingModule,
     TemplateModule,
+    UsuarioModule,
     UnidadeMedidaModule,
     CategoriaaModule,
     ClienteModule,
@@ -57,6 +64,7 @@ import { environment } from 'src/environments/environment';
     SocialLoginModule,
   ],
   providers: [
+    UsuarioService,
     UnidadeMedidaService,
     CategoriaService,
     ProdutoService,
@@ -66,6 +74,10 @@ import { environment } from 'src/environments/environment';
     ClienteService,
     FornecedorService,
     ServicoPrestadoService,
+    PedidoStatusService,
+    VendaStatusService,
+    PerfilService,
+    TipoLoginService,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,

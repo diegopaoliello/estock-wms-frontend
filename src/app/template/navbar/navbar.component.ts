@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/auth.service';
+import { Usuario } from './../../cadastros/usuario/usuario';
+import { UsuarioService } from './../../cadastros/usuario/usuario.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,11 +10,15 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  usuarioLogado: string;
+  usuario: string;
+  usuarioLogado: Usuario = new Usuario;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
-    this.usuarioLogado = this.authService.getUsuarioAutenticado();
+    this.usuario = this.authService.getUsuarioAutenticado();
+    this.usuarioService.getUsuarioAutenticado().subscribe((usuario) => {
+      this.usuarioLogado = usuario;
+    });
   }
 }

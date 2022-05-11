@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Pedido } from '../pedido/pedido';
+import { Pedido } from './pedido';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -17,7 +17,7 @@ export class PedidoService {
     return this.http.post<Pedido>(`${this.apiURL}`, pedido);
   }
 
-  atualizar(pedido: Pedido): Observable<any> {
+  atualizar(pedido: Pedido): Observable<Pedido> {
     return this.http.put<Pedido>(`${this.apiURL}/${pedido.id}`, pedido);
   }
 

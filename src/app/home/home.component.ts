@@ -1,5 +1,5 @@
+import { UsuarioService } from './../cadastros/usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +9,12 @@ import { AuthService } from '../auth.service';
 export class HomeComponent implements OnInit {
   usuarioLogado: string;
 
-  constructor(private authService: AuthService) {}
+  constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
-    this.usuarioLogado = this.authService.getUsuarioAutenticado();
+    this.usuarioService.getUsuarioAutenticado().subscribe((usuario) => {
+      this.usuarioLogado = usuario.nome + ' ' + usuario.sobrenome;
+    });
+
   }
 }

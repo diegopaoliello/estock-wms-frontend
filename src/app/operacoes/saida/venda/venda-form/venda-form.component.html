@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="row" *ngIf="venda.id && (btnAprovar || btnReprovar || btnConcluir)">
+    <div class="row" *ngIf="habilitarTrocaStatus">
       <div class="col-md-6">
         <div class="form-group">
           <div class="btn-group" role="group">
@@ -43,14 +43,14 @@
       <div class="col-md-6" *ngIf="venda.id">
         <div class="form-group">
           <label>Status:</label>
-          <input type="text" [ngModel]="venda.status" name="status" class="form-control" disabled />
+          <input type="text" value="venda.status" name="status" class="form-control" disabled />
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
           <label>Cliente: </label>
-          <select [disabled]="!btnSalvar" class="form-control" [ngModelOptions]="{ standalone: true }"
+          <select [disabled]="!permiteEdicao" class="form-control" [ngModelOptions]="{ standalone: true }"
             [(ngModel)]="venda.cliente.id">
             <option value="">Selecione...</option>
             <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">
@@ -72,6 +72,9 @@
       <div class="col-md-6">
         <button type="submit" class="btn btn-success" *ngIf="btnSalvar">
           <i class="fa fa-save"></i> Salvar
+        </button>
+        <button type="submit" class="btn btn-primary" *ngIf="btnAtualizar">
+          <i class="fa fa-sync-alt"></i> Atualizar
         </button>
         <button type="button" class="btn btn-danger ml-1" (click)="voltarParaListagem()">
           <i class="fa fa-arrow-alt-circle-left"></i> Voltar

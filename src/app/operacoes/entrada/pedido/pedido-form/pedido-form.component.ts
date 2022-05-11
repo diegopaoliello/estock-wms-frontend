@@ -1,6 +1,7 @@
-import { ItemPedido } from './../../pedidoItem/item-pedido';
-import { Component, OnInit, Output, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
+import { PedidoStatusService } from '../../../../cadastros/pedido-status/pedido-status.service';
+import { PedidoStatus } from '../../../../cadastros/pedido-status/pedido-status';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Pedido } from '../pedido';
 import { PedidoService } from '../pedido.service';
@@ -13,27 +14,37 @@ import { FornecedorService } from 'src/app/cadastros/fornecedor/fornecedor.servi
   templateUrl: './pedido-form.component.html',
   styleUrls: ['./pedido-form.component.css'],
 })
-export class PedidoFormComponent implements OnInit {
-  pedido: Pedido;
+export class PedidoFormComponent implements OnInit, AfterContentInit {
+  pedido: Pedido = new Pedido();
   success: boolean = false;
   errors: String[];
   id: number;
   fornecedores: Fornecedor[] = [];
+  status: PedidoStatus[] = [];
   exibirModal: boolean = false;
 
   existeItem: boolean = false;
   btnAprovar: boolean = false;
   btnReprovar: boolean = false;
   btnConcluir: boolean = false;
+  btnSalvar: boolean = false;
+  btnAtualizar: boolean = false;
+  btnAddItem: boolean = false;
+  habilitarTrocaStatus: boolean = false;
+  permiteEdicao: boolean = false;
 
   constructor(
     private fornecedorService: FornecedorService,
+    private statusService: PedidoStatusService,
     private service: PedidoService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
     this.pedido = new Pedido();
-    this.pedido.fornecedor = new Fornecedor();
+  }
+
+  ngAfterContentInit(): void {
+    this.ativarBotoes();
   }
 
   ngOnInit(): void {
@@ -42,28 +53,38 @@ export class PedidoFormComponent implements OnInit {
       this.id = urlParams['id'];
       if (this.id) {
         this.service.getPedidoById(this.id).subscribe(
-          (response) => (this.pedido = response),
+          (response) => {
+            this.pedido = response;
+          },
           (errorResponse) => (this.pedido = new Pedido())
         );
       }
     });
 
+    this.
+      statusService.getPedidoStatus()
+      .subscribe((response) => (this.status = response));
+
     this.fornecedorService
       .getFornecedores()
       .subscribe((response) => (this.fornecedores = response));
-
   }
 
   ativarBotoes(): void {
     if (this.pedido) {
-      this.btnAprovar = this.pedido.status == 'ABERTO' && this.existeItem;
+      this.btnAprovar = (this.status && this.pedido.status.codigo == 'ABERTO') && this.existeItem;
       this.btnReprovar = this.btnAprovar;
-      this.btnConcluir = this.pedido.status == 'APROVADO';
+      this.btnConcluir = this.pedido.status && this.pedido.status.codigo == 'APROVADO';
+      this.btnSalvar = !this.pedido.id;
+      this.btnAtualizar = this.pedido.id && (this.pedido.status && (this.pedido.status.codigo == 'ABERTO' || this.pedido.status.codigo == 'APROVADO'));
+      this.btnAddItem = this.pedido.status && this.pedido.status.codigo == 'ABERTO';
+      this.habilitarTrocaStatus = (this.btnAprovar || this.btnAtualizar || this.btnReprovar || this.btnConcluir);
+      this.permiteEdicao = ((this.btnSalvar && !this.btnAtualizar) || (!this.btnSalvar && this.btnAtualizar));
     }
   }
 
   alterarStatus(status: string): void {
-    this.pedido.status = status;
+    this.pedido.status = this.status.find(s => s.codigo === status);
   }
 
   exibirModalStatus(): void {
@@ -80,11 +101,11 @@ export class PedidoFormComponent implements OnInit {
   }
 
   novoItem() {
-    this.router.navigate(['pedidos/' + this.pedido.id + '/itens-pedido/form']);
+    this.router.navigate(['pedidos/' + this.pedido.id + '/itens/form']);
   }
 
   onSubmit() {
-    if (this.id) {
+    if (this.pedido.id) {
       this.service.atualizar(this.pedido).subscribe(
         (response) => {
           this.success = true;
@@ -101,6 +122,7 @@ export class PedidoFormComponent implements OnInit {
           this.success = true;
           this.errors = null;
           this.pedido = response;
+          this.ativarBotoes();
         },
         (errorResponse) => {
           this.success = false;

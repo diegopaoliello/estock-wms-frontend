@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Usuario } from './login/usuario';
+import { Usuario } from './cadastros/usuario/usuario';
 import { Observable } from 'rxjs';
 
 import { environment } from '../environments/environment';
@@ -18,7 +18,7 @@ export class AuthService {
   jwtHelper: JwtHelperService = new JwtHelperService();
   isLogoutAction: Boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   obterToken() {
     const tokenString = localStorage.getItem('access_token');
@@ -38,6 +38,7 @@ export class AuthService {
     const token = this.obterToken();
     if (token) {
       const usuario = this.jwtHelper.decodeToken(token).user_name;
+      console.log(this.jwtHelper.decodeToken(token));
       return usuario;
     }
     return null;
@@ -50,19 +51,6 @@ export class AuthService {
       return !expired;
     }
     return false;
-  }
-
-  salvar(usuario: Usuario): Observable<any> {
-    return this.http.post<any>(this.apiURL, usuario);
-  }
-
-
-  getUsuario(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiURL}/${id}`);
-  }
-
-  existeUsuario(userName: string): Observable<any> {
-    return this.http.get<any>(`${this.apiURL}/${userName}`);
   }
 
   tentarLogar(username: string, password: string): Observable<any> {

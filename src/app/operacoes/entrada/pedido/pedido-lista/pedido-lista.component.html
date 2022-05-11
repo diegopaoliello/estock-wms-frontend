@@ -49,7 +49,7 @@
           <tr *ngFor="let pedido of pedidos">
             <td>{{ pedido.id }}</td>
             <td>{{ pedido.fornecedor.razaoSocial }}</td>
-            <td>{{ pedido.status }}</td>
+            <td>{{ pedido.status.descricao }}</td>
             <td>
               <button *ngIf="false" id="btnAprovar" class="btn btn-success btn-circle ml-3" data-toggle="tooltip"
                 data-placement="top" title="Aprovar" (click)="selecionarPedido(pedido)" data-toggle="modal"

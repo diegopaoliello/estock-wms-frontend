@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { ItemPedido } from '../pedidoItem/item-pedido';
+import { ItemPedido } from './item-pedido';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ItemPedidoService {
-  apiURL: string = environment.apiURLBase + '/api/pedidos/{id}/itens-pedido';
+  apiURL: string = environment.apiURLBase + '/api/pedidos/{id}/itens';
 
   constructor(private http: HttpClient) { }
 

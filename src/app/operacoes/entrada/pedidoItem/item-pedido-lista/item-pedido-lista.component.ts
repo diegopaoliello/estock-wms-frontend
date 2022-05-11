@@ -58,7 +58,7 @@ export class ItemPedidoListaComponent implements OnInit {
   }
 
   novoCadastro() {
-    this.router.navigate(['/itens-pedido/form']);
+    this.router.navigate(['/itens/form']);
   }
 
   preparaDelecao(itemPedido: ItemPedido) {

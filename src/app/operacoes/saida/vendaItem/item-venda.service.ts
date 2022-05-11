@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ItemVendaService {
-  apiURL: string = environment.apiURLBase + '/api/vendas/{id}/itens-venda';
+  apiURL: string = environment.apiURLBase + '/api/vendas/{id}/itens';
 
   constructor(private http: HttpClient) { }
 

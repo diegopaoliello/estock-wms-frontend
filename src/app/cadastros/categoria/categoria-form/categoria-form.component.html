@@ -11,11 +11,7 @@
         <div class="alert alert-success" role="alert" *ngIf="success == true">
           Categoria salva/atualizada com sucesso!
         </div>
-        <div
-          class="alert alert-danger"
-          role="alert"
-          *ngFor="let erro of errors"
-        >
+        <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
           {{ erro }}
         </div>
       </div>
@@ -25,26 +21,15 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>ID:</label>
-          <input
-            type="text"
-            [ngModel]="categoria.id"
-            name="id"
-            class="form-control"
-            disabled="true"
-          />
+          <input type="text" [ngModel]="categoria.id" name="id" class="form-control" disabled="true" />
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
           <label>Data Cadastro:</label>
-          <input
-            type="text"
-            class="form-control"
-            name="dataCadastro"
-            [ngModel]="categoria.dataCadastro"
-            disabled="true"
-          />
+          <input type="text" class="form-control" name="dataCadastro" [ngModel]="categoria.dataCadastro"
+            disabled="true" />
         </div>
       </div>
     </div>
@@ -53,12 +38,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>Descrição: *</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="categoria.descricao"
-            name="descricao"
-          />
+          <input type="text" class="form-control" [(ngModel)]="categoria.descricao" name="descricao" />
         </div>
       </div>
     </div>
@@ -73,11 +53,7 @@
           <i class="fa fa-sync-alt"></i> Atualizar
         </button>
 
-        <button
-          type="button"
-          class="btn btn-danger ml-1"
-          (click)="voltarParaListagem()"
-        >
+        <button type="button" class="btn btn-danger ml-1" (click)="voltarParaListagem()">
           <i class="fa fa-arrow-alt-circle-left"></i> Voltar
         </button>
       </div>

@@ -30,11 +30,11 @@
                   {{ erro }}
                 </div>
                 <form class="user" #loginForm="ngForm" (submit)="onSubmit()">
-                  <div class="form-group">
+                  <div class="form-group" *ngIf="cadastrando">
                     <input type="text" name="nome" [(ngModel)]="usuario.nome" class="form-control form-control-user"
                       placeholder="Nome" />
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" *ngIf="cadastrando">
                     <input type="text" name="sobrenome" [(ngModel)]="usuario.sobrenome"
                       class="form-control form-control-user" placeholder="Sobrenome" />
                   </div>
@@ -46,7 +46,7 @@
                     <input type="password" name="password" [(ngModel)]="usuario.password"
                       class="form-control form-control-user" placeholder="Password" />
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" *ngIf="false">
                     <div class="custom-control custom-checkbox small">
                       <input type="checkbox" class="custom-control-input" id="customCheck" />
                       <label class="custom-control-label" for="customCheck">Lembrar senha</label>
@@ -55,28 +55,27 @@
                   <button id="btnEntrar" type="submit" class="btn btn-primary btn-user btn-block" *ngIf="!cadastrando">
                     Entrar
                   </button>
-                  <div class="form-group row">
+                  <div class="form-group row" *ngIf="cadastrando">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <button type="button" class="btn btn-primary btn-user btn-block" (click)="cadastrar()"
-                        *ngIf="cadastrando">
+                      <button type="button" class="btn btn-primary btn-user btn-block" (click)="cadastrar()">
                         Cadastrar
                       </button>
                     </div>
                     <div class="col-sm-6">
-                      <button type="button" (click)="cancelaCadastro()" class="btn btn-danger btn-user btn-block"
-                        *ngIf="cadastrando">
+                      <button type="button" (click)="cancelaCadastro()" class="btn btn-danger btn-user btn-block">
                         Cancelar
                       </button>
                     </div>
                   </div>
-                  <hr />
-                  <a href="#" (click)="loginGoogle($event)" class="btn btn-google btn-user btn-block">
+                  <hr *ngIf="false" />
+                  <a href="#" (click)="loginGoogle($event)" class="btn btn-google btn-user btn-block"
+                    *ngIf="!cadastrando">
                     <i class="fab fa-google fa-fw"></i>
                     {{
                     cadastrando ? "Cadastrar com Google" : "Login com Google"
                     }}
                   </a>
-                  <a href="#" class="btn btn-facebook btn-user btn-block">
+                  <a href="#" class="btn btn-facebook btn-user btn-block" *ngIf="false">
                     <i class="fab fa-facebook-f fa-fw"></i>
                     {{
                     cadastrando
@@ -85,9 +84,9 @@
                     }}
                   </a>
                 </form>
-                <hr />
+                <hr *ngIf="!cadastrando" />
                 <div class="text-center">
-                  <a class="small" href="#" *ngIf="!cadastrando">Esqueceu a senha?</a>
+                  <a class="small" href="#" *ngIf="false">Esqueceu a senha?</a>
                 </div>
                 <div class="text-center">
                   <a class="small" href="#" (click)="preparaCadastrar($event)" *ngIf="!cadastrando">Criar uma conta!</a>

@@ -1,12 +1,17 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { PerfilService } from './../cadastros/perfil/perfil.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from './usuario';
+import { Usuario } from '../cadastros/usuario/usuario';
 import { AuthService } from '../auth.service';
 import {
   GoogleLoginProvider,
   SocialAuthService,
   SocialUser,
 } from 'angularx-social-login';
+import { TipoLogin } from './../cadastros/tipo-login/tipo-login';
+import { Perfil } from './../cadastros/perfil/perfil';
+import { TipoLoginService } from './../cadastros/tipo-login/tipo-login.service';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -22,9 +27,11 @@ export class LoginComponent implements OnInit {
   existsUserName: Boolean = false;
 
   constructor(
+    private service: LoginService,
     private router: Router,
     private authService: AuthService,
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService,
+
   ) { this.usuario = new Usuario(); }
 
   ngOnInit() {
@@ -34,6 +41,8 @@ export class LoginComponent implements OnInit {
       if (!this.authService.isLogoutAction) {
         this.usuario.email = this.socialUser.email;
         this.usuario.password = this.socialUser.id;
+        this.usuario.nome = this.socialUser.name;
+        this.usuario.sobrenome = this.socialUser.lastName;
 
         this.cadastrarGoogle();
       }
@@ -72,7 +81,9 @@ export class LoginComponent implements OnInit {
   }
 
   cadastrar() {
-    this.authService.salvar(this.usuario).subscribe(
+    this.usuario.tipoLogin.id = 1;
+
+    this.service.salvar(this.usuario).subscribe(
       (response) => {
         this.mensagemSucesso =
           'Cadastro realizado com sucesso! Efetue o login.';
@@ -89,12 +100,14 @@ export class LoginComponent implements OnInit {
   }
 
   cadastrarGoogle() {
-    this.authService.existeUsuario(this.usuario.email).subscribe(
+    this.service.existeUsuario(this.usuario.email).subscribe(
       (response) => {
         this.onSubmit();
       },
       (errorResponse) => {
-        this.authService.salvar(this.usuario).subscribe(
+        this.usuario.tipoLogin.id = 2;
+
+        this.service.salvar(this.usuario).subscribe(
           (response) => {
             this.errors = [];
             this.onSubmit();

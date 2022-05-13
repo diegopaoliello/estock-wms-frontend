@@ -32,12 +32,4 @@ export class ProdutoService {
   deletar(produto: Produto): Observable<any> {
     return this.http.delete<any>(`${this.apiURL}/${produto.id}`);
   }
-
-  calcularPrecoMedio(idProduto: number): Observable<String> {
-    const httpParams = new HttpParams()
-      .set('idProduto', idProduto.toString());
-
-    const url = this.apiURL + '/' + idProduto.toString() + '/calcularPrecoMedio';
-    return this.http.get<any>(url);
-  }
 }

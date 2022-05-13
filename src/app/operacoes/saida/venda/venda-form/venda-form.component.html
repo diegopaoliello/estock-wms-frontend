@@ -43,7 +43,7 @@
       <div class="col-md-6" *ngIf="venda.id">
         <div class="form-group">
           <label>Status:</label>
-          <input type="text" value="venda.status" name="status" class="form-control" disabled />
+          <input type="text" [ngModel]="venda.status.descricao" name="status" class="form-control" disabled />
         </div>
       </div>
 

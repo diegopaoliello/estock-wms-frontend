@@ -1,13 +1,7 @@
 <!-- Sidebar -->
-<ul
-  class="navbar-nav sidebar sidebar-dark accordion"
-  id="accordionSidebar"
->
+<ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
   <!-- Sidebar - Brand -->
-  <a
-    class="sidebar-brand d-flex align-items-center justify-content-center"
-    href="#"
-  >
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
     <div class="sidebar-brand-icon">
       <i class="fas fa-dolly"></i>
     </div>
@@ -24,8 +18,7 @@
   <li class="nav-item active">
     <a class="nav-link" href="index.html">
       <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Home</span></a
-    >
+      <span>Home</span></a>
   </li>
 
   <!-- Divider -->
@@ -36,32 +29,17 @@
 
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
-    <a
-      class="nav-link collapsed"
-      href="#"
-      data-toggle="collapse"
-      data-target="#collapseCadastros"
-      aria-expanded="true"
-      aria-controls="collapseCadastros"
-    >
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCadastros" aria-expanded="true"
+      aria-controls="collapseCadastros">
       <i class="fas fa-fw fa-folder"></i>
       <span>Básicos</span>
     </a>
-    <div
-      id="collapseCadastros"
-      class="collapse"
-      aria-labelledby="headingPages"
-      data-parent="#accordionSidebar"
-    >
+    <div id="collapseCadastros" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" routerLink="/fornecedores">Fornecedores</a>
         <a class="collapse-item" routerLink="/clientes">Clientes</a>
-        <a class="collapse-item" routerLink="/servicos-prestados"
-          >Serviços Prestados</a
-        >
-        <a class="collapse-item" routerLink="/unidades-medida"
-          >Unidades Medida</a
-        >
+        <a class="collapse-item" routerLink="/servicos-prestados">Serviços Prestados</a>
+        <a class="collapse-item" routerLink="/unidades-medida">Unidades Medida</a>
         <a class="collapse-item" routerLink="/categorias">Categorias</a>
         <a class="collapse-item" routerLink="/produtos">Produtos</a>
       </div>
@@ -77,29 +55,29 @@
   <li class="nav-item active">
     <a class="nav-link" routerLink="/estoques">
       <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Consulta</span></a
-    >
+      <span>Consulta</span></a>
+  </li>
+
+  <li class="nav-item active">
+    <a class="nav-link" routerLink="/entradas-estoque">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Entradas</span></a>
+  </li>
+
+  <li class="nav-item active">
+    <a class="nav-link" routerLink="/saidas-estoque">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Saídas</span></a>
   </li>
 
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
-    <a
-      class="nav-link collapsed"
-      href="#"
-      data-toggle="collapse"
-      data-target="#collapseEntrada"
-      aria-expanded="true"
-      aria-controls="collapseEntrada"
-    >
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEntrada" aria-expanded="true"
+      aria-controls="collapseEntrada">
       <i class="fas fa-fw fa-folder"></i>
       <span>Operações de Entrada</span>
     </a>
-    <div
-      id="collapseEntrada"
-      class="collapse"
-      aria-labelledby="headingPages"
-      data-parent="#accordionSidebar"
-    >
+    <div id="collapseEntrada" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" routerLink="/estoques">Consulta de Estoque</a>
         <a class="collapse-item" routerLink="/pedidos">Pedido de Compra</a>
@@ -109,23 +87,12 @@
   </li>
 
   <li class="nav-item">
-    <a
-      class="nav-link collapsed"
-      href="#"
-      data-toggle="collapse"
-      data-target="#collapseSaida"
-      aria-expanded="true"
-      aria-controls="collapseSaida"
-    >
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSaida" aria-expanded="true"
+      aria-controls="collapseSaida">
       <i class="fas fa-fw fa-folder"></i>
       <span>Operações de Saída</span>
     </a>
-    <div
-      id="collapseSaida"
-      class="collapse"
-      aria-labelledby="headingPages"
-      data-parent="#accordionSidebar"
-    >
+    <div id="collapseSaida" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" routerLink="/vendas">Venda</a>
       </div>

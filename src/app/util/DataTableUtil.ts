@@ -5,7 +5,7 @@ declare var $: any;
 export class DataTableUtil {
 
   static enableTable(tableConfig: TableConfig): void {
-    let title: string = environment.appName + ' - ' + tableConfig.title;
+    let title: string = tableConfig.title;
     let tamanhoColunas: string;
     let iDataTableElement: number = 1;
 

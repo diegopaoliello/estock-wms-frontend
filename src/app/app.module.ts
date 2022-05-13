@@ -1,3 +1,5 @@
+import { EstoqueEntradaService } from './estoque/estoque-entrada/estoque-entrada.service';
+import { EstoqueEntradaModule } from './estoque/estoque-entrada/estoque-entrada.module';
 import { TipoLoginService } from './cadastros/tipo-login/tipo-login.service';
 import { PerfilService } from './cadastros/perfil/perfil.service';
 import { VendaStatusService } from './cadastros/venda-status/venda-status.service';
@@ -58,6 +60,7 @@ import { UsuarioService } from './cadastros/usuario/usuario.service';
     FornecedorModule,
     ProdutoaModule,
     EstoqueModule,
+    EstoqueEntradaModule,
     PedidoModule,
     VendaModule,
     ServicoPrestadoModule,
@@ -69,6 +72,7 @@ import { UsuarioService } from './cadastros/usuario/usuario.service';
     CategoriaService,
     ProdutoService,
     EstoqueService,
+    EstoqueEntradaService,
     PedidoService,
     VendaService,
     ClienteService,

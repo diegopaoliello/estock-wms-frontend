@@ -63,8 +63,9 @@
               <button class="btn btn-primary btn-circle ml-3" routerLink="/pedidos/form/{{ pedido.id }}">
                 <i class="fas fa-edit"></i>
               </button>
-              <button id="btnDeletar" class="btn btn-danger btn-circle ml-3 delete" (click)="selecionarPedido(pedido)"
-                data-toggle="modal" data-target="#modalDeletar">
+              <button id="btnDeletar" [disabled]="pedido.status.codigo !== 'ABERTO'"
+                class="btn btn-danger btn-circle ml-3 delete" (click)="selecionarPedido(pedido)" data-toggle="modal"
+                data-target="#modalDeletar">
                 <i class="fas fa-trash"></i>
               </button>
             </td>

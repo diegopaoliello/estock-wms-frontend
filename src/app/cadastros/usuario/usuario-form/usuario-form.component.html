@@ -53,6 +53,33 @@
           <input type="text" class="form-control" [(ngModel)]="usuario.email" name="email" disabled />
         </div>
       </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Tipo Login: </label>
+          <input type="text" class="form-control" [(ngModel)]="usuario.tipoLogin.descricao" name="tipoLogin" disabled />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Senha: *</label>
+          <input type="password" class="form-control" [(ngModel)]="usuario.password" name="password"
+            [disabled]="usuario.tipoLogin.codigo=='GOOGLE'" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Perfil: *</label>
+          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="usuario.perfil.id">
+            <option value="">Selecione...</option>
+            <option *ngFor="let perfil of perfis" [ngValue]="perfil.id">
+              {{ perfil.descricao }}
+            </option>
+          </select>
+        </div>
+      </div>
     </div>
 
     <div class="row">

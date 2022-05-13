@@ -1,3 +1,4 @@
+import { Chart } from 'chart.js';
 import { UsuarioService } from './../cadastros/usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioService.getUsuarioAutenticado().subscribe((usuario) => {
-      this.usuarioLogado = usuario.nome + ' ' + usuario.sobrenome;
+      this.usuarioLogado = usuario.nome + ' ' + usuario.sobrenome + ' (' + usuario.perfil.descricao + ')';
     });
 
   }

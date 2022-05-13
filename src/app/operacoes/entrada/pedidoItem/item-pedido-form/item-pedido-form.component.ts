@@ -65,6 +65,8 @@ export class ItemPedidoFormComponent implements OnInit {
         }
       );
     } else {
+      console.log('this.itemPedido:' +  JSON.stringify(this.itemPedido) );
+      console.log('this.idPedido:' +  this.idPedido);
       this.service.salvar(this.idPedido, this.itemPedido).subscribe(
         (response) => {
           this.success = true;

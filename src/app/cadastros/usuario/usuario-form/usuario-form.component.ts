@@ -1,8 +1,10 @@
+import { PerfilService } from './../../perfil/perfil.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
+import { Perfil } from '../../perfil/perfil';
 
 @Component({
   selector: 'app-usuario-form',
@@ -14,9 +16,11 @@ export class UsuarioFormComponent implements OnInit {
   success: boolean = false;
   errors: String[];
   id: number;
+  perfis: Perfil[] = [];
 
   constructor(
     private service: UsuarioService,
+    private perfilService: PerfilService,
     private router: Router
   ) {
     this.usuario = new Usuario();
@@ -27,6 +31,10 @@ export class UsuarioFormComponent implements OnInit {
       (response) => (this.usuario = response),
       (errorResponse) => (this.usuario = new Usuario())
     );
+
+    this.perfilService
+      .getPerfis()
+      .subscribe((response) => (this.perfis = response));
   }
 
   voltarParaHome() {

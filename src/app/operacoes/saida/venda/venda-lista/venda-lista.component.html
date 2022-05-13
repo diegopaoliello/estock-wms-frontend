@@ -49,7 +49,7 @@
           <tr *ngFor="let venda of vendas">
             <td>{{ venda.id }}</td>
             <td>{{ venda.cliente.razaoSocial }}</td>
-            <td>{{ venda.status }}</td>
+            <td>{{ venda.status.descricao }}</td>
             <td>
               <button *ngIf="false" id="btnAprovar" class="btn btn-success btn-circle ml-3" data-toggle="tooltip"
                 data-placement="top" title="Aprovar" (click)="selecionarVenda(venda)" data-toggle="modal"
@@ -63,8 +63,9 @@
               <button class="btn btn-primary btn-circle ml-3" routerLink="/vendas/form/{{ venda.id }}">
                 <i class="fas fa-edit"></i>
               </button>
-              <button id="btnDeletar" class="btn btn-danger btn-circle ml-3 delete" (click)="selecionarVenda(venda)"
-                data-toggle="modal" data-target="#modalDeletar">
+              <button id="btnDeletar" [disabled]="venda.status.codigo !== 'ABERTO'"
+                class="btn btn-danger btn-circle ml-3 delete" (click)="selecionarVenda(venda)" data-toggle="modal"
+                data-target="#modalDeletar">
                 <i class="fas fa-trash"></i>
               </button>
             </td>

@@ -97,7 +97,7 @@ export class ItemPedidoListaComponent implements OnInit {
             ],
             [
               {
-                text: 'Cliente: ' + pedido?.fornecedor.nomeFantasia ?? '',
+                text: 'Fornecedor: ' + pedido?.fornecedor.nomeFantasia ?? '',
                 fontSize: 9,
                 bold: true
               }

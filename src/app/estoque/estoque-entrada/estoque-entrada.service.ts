@@ -1,4 +1,3 @@
-import { EstoqueEntradaManual } from './estoque-entrada-manual';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
@@ -14,10 +13,14 @@ export class EstoqueEntradaService {
 
   constructor(private http: HttpClient) { }
 
-  salvar(entrada: EstoqueEntradaManual): Observable<EstoqueEntradaManual> {
-    return this.http.post<EstoqueEntradaManual>(`${this.apiURL}`, entrada);
+  salvar(entrada: EstoqueEntrada): Observable<EstoqueEntrada> {
+    return this.http.post<EstoqueEntrada>(`${this.apiURL}`, entrada);
   }
   getEntradasEstoque(): Observable<EstoqueEntrada[]> {
     return this.http.get<EstoqueEntrada[]>(this.apiURL);
+  }
+
+  getEntradaEstoqueById(id: number): Observable<EstoqueEntrada> {
+    return this.http.get<any>(`${this.apiURL}/${id}`);
   }
 }

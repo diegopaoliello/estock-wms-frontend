@@ -50,24 +50,22 @@
   <hr class="sidebar-divider d-none d-md-block" />
 
   <!-- Heading -->
-  <div class="sidebar-heading">Gestão do Estoque</div>
+  <div class="sidebar-heading">Estoque</div>
 
-  <li class="nav-item active">
-    <a class="nav-link" routerLink="/estoques">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Consulta</span></a>
-  </li>
-
-  <li class="nav-item active">
-    <a class="nav-link" routerLink="/entradas-estoque">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Entradas</span></a>
-  </li>
-
-  <li class="nav-item active">
-    <a class="nav-link" routerLink="/saidas-estoque">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Saídas</span></a>
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestEstoque"
+      aria-expanded="true" aria-controls="collapseCadastros">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Gestão de Estoque</span>
+    </a>
+    <div id="collapseGestEstoque" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" routerLink="/estoques">Consultar Estoque</a>
+        <a class="collapse-item" routerLink="/entradas-estoque">Entradas de Estoque</a>
+        <a class="collapse-item" routerLink="/saidas-estoque">Saídas de Estoque</a>
+      </div>
+    </div>
   </li>
 
   <!-- Nav Item - Pages Collapse Menu -->
@@ -79,9 +77,8 @@
     </a>
     <div id="collapseEntrada" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" routerLink="/estoques">Consulta de Estoque</a>
-        <a class="collapse-item" routerLink="/pedidos">Pedido de Compra</a>
-        <a class="collapse-item" routerLink="/pedidos">Entrada Manual</a>
+        <a class="collapse-item" routerLink="/entradas-estoque/form">Entrada Manual</a>
+        <a class="collapse-item" routerLink="/pedidos">Pedido de Compras</a>
       </div>
     </div>
   </li>

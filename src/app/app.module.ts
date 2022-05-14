@@ -1,3 +1,5 @@
+import { EstoqueSaidaService } from './estoque/estoque-saida/estoque-saida.service';
+import { EstoqueSaidaModule } from './estoque/estoque-saida/estoque-saida.module';
 import { EstoqueEntradaService } from './estoque/estoque-entrada/estoque-entrada.service';
 import { EstoqueEntradaModule } from './estoque/estoque-entrada/estoque-entrada.module';
 import { TipoLoginService } from './cadastros/tipo-login/tipo-login.service';
@@ -61,6 +63,7 @@ import { UsuarioService } from './cadastros/usuario/usuario.service';
     ProdutoaModule,
     EstoqueModule,
     EstoqueEntradaModule,
+    EstoqueSaidaModule,
     PedidoModule,
     VendaModule,
     ServicoPrestadoModule,
@@ -73,6 +76,7 @@ import { UsuarioService } from './cadastros/usuario/usuario.service';
     ProdutoService,
     EstoqueService,
     EstoqueEntradaService,
+    EstoqueSaidaService,
     PedidoService,
     VendaService,
     ClienteService,

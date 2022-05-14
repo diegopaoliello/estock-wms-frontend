@@ -4,14 +4,9 @@ import { Produto } from './../../cadastros/produto/produto';
 export class EstoqueEntrada {
   id: number;
   produto: Produto;
-  preco: number = 0;
+  preco: string;
   quantidade: number;
-  observacao: string;
+  justificativa: string;
   dataCadastro: string;
   itemPedido: ItemPedido;
-
-  constructor() {
-    this.produto = new Produto();
-    this.itemPedido = new ItemPedido();
-  }
 }

@@ -16,7 +16,7 @@ export class ProdutoListaComponent implements OnInit {
   produtoSelecionado: Produto;
   mensagemSucesso: string;
   mensagemErro: string;
-  tableConfig: TableConfig = new TableConfig('Lista de Produtos', [0, 1, 2, 3, 4], null);
+  tableConfig: TableConfig = new TableConfig('Produtos', [0, 1, 2, 3, 4], null);
 
   constructor(private service: ProdutoService, private router: Router) { }
 
@@ -40,10 +40,10 @@ export class ProdutoListaComponent implements OnInit {
   deletarProduto() {
     this.service.deletar(this.produtoSelecionado).subscribe(
       (response) => {
-        this.mensagemSucesso = 'Produto deletada com sucesso!';
+        this.mensagemSucesso = 'Produto deletado com sucesso!';
         this.ngOnInit();
       },
-      (erro) => (this.mensagemErro = 'Ocorreu um erro ao deletar a produto.')
+      (erro) => (this.mensagemErro = 'Ocorreu um erro ao deletar o produto.')
     );
   }
 }

@@ -1,8 +1,8 @@
-import { EstoqueEntradaManual } from './../estoque-entrada-manual';
+import { Observable } from 'rxjs';
 import { ProdutoService } from './../../../cadastros/produto/produto.service';
 import { Produto } from './../../../cadastros/produto/produto';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Params, ActivatedRoute } from '@angular/router';
 
 import { EstoqueEntrada } from '../estoque-entrada';
 import { EstoqueEntradaService } from '../estoque-entrada.service';
@@ -13,21 +13,42 @@ import { EstoqueEntradaService } from '../estoque-entrada.service';
   styleUrls: ['./estoque-entrada-form.component.css'],
 })
 export class EstoqueEntradaFormComponent {
-  entradaEstoque: EstoqueEntradaManual;
+  entradaEstoque: EstoqueEntrada;
   success: boolean = false;
   errors: String[];
   id: number;
   produtos: Produto[] = [];
+  produto: Produto;
+  permiteEdicao: boolean = false;
 
   constructor(
     private service: EstoqueEntradaService,
     private produtoService: ProdutoService,
+    private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
-    this.entradaEstoque = new EstoqueEntradaManual();
+    this.entradaEstoque = new EstoqueEntrada();
   }
 
   ngOnInit(): void {
+    let params: Observable<Params> = this.activatedRoute.params;
+    params.subscribe((urlParams) => {
+      this.id = urlParams['id'];
+      if (this.id) {
+        this.service.getEntradaEstoqueById(this.id).subscribe(
+          (response) => {
+            this.entradaEstoque = response;
+            this.permiteEdicao = false;
+            this.produto = this.entradaEstoque.produto;
+          },
+          (errorResponse) => (this.entradaEstoque = new EstoqueEntrada())
+        );
+      } else {
+        this.produto = new Produto();
+        this.permiteEdicao = true;
+      }
+    });
+
     this.produtoService
       .getProdutos()
       .subscribe((response) => (this.produtos = response));
@@ -38,6 +59,10 @@ export class EstoqueEntradaFormComponent {
   }
 
   onSubmit() {
+    if (this.produto.id) {
+      this.entradaEstoque.produto = this.produto;
+    }
+
     this.service.salvar(this.entradaEstoque).subscribe(
       (response) => {
         this.success = true;

@@ -1,6 +1,6 @@
 import { PerfilService } from './../../perfil/perfil.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Location } from '@angular/common';
 
 import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
@@ -17,18 +17,22 @@ export class UsuarioFormComponent implements OnInit {
   errors: String[];
   id: number;
   perfis: Perfil[] = [];
+  perfilSelecionado: Perfil;
 
   constructor(
     private service: UsuarioService,
     private perfilService: PerfilService,
-    private router: Router
+    private _location: Location
   ) {
     this.usuario = new Usuario();
   }
 
   ngOnInit(): void {
     this.service.getUsuarioAutenticado().subscribe(
-      (response) => (this.usuario = response),
+      (response) => {
+        this.usuario = response;
+        this.perfilSelecionado = this.usuario.perfil;
+      },
       (errorResponse) => (this.usuario = new Usuario())
     );
 
@@ -38,14 +42,24 @@ export class UsuarioFormComponent implements OnInit {
   }
 
   voltarParaHome() {
-    this.router.navigate(['/home']);
+    this._location.back();
   }
 
   onSubmit() {
+    if (this.perfilSelecionado.id) {
+      this.usuario.perfil = this.perfilSelecionado;
+    }
+
     this.service.atualizar(this.usuario).subscribe(
       (response) => {
         this.success = true;
         this.errors = null;
+
+        this.service.getUsuarioAutenticado().subscribe((usuario) => {
+          localStorage.setItem('usuario_autenticado', JSON.stringify(usuario));
+          console.log('usuario EMIT: ' + JSON.stringify(usuario));
+          this.service.usuarioAutenticado.emit(usuario);
+        });
       },
       (errorResponse) => {
         this.errors = ['Erro ao atualizar a usuario.'];

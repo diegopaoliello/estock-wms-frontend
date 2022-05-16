@@ -11,7 +11,6 @@ export class Usuario {
   dataCadastro: string;
 
   constructor() {
-    this.perfil = new Perfil();
     this.tipoLogin = new TipoLogin();
   }
 }

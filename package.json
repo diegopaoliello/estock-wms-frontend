@@ -33,6 +33,7 @@
     "ngx-mask": "^13.1.12",
     "pdfmake": "^0.1.36",
     "rxjs": "~6.5.4",
+    "singleton-event-emitter": "0.0.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

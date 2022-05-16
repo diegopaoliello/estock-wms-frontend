@@ -1,6 +1,7 @@
 import { Chart } from 'chart.js';
 import { UsuarioService } from './../cadastros/usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from '../cadastros/usuario/usuario';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  usuarioLogado: string;
+  usuarioDescricao: string;
+  usuarioAutenticado: Usuario = new Usuario();
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor() { }
 
   ngOnInit(): void {
-    this.usuarioService.getUsuarioAutenticado().subscribe((usuario) => {
-      this.usuarioLogado = usuario.nome + ' ' + usuario.sobrenome + ' (' + usuario.perfil.descricao + ')';
-    });
-
+    this.usuarioAutenticado = JSON.parse(localStorage.getItem('usuario_autenticado'));
+    this.usuarioDescricao = this.usuarioAutenticado.nome;
   }
 }

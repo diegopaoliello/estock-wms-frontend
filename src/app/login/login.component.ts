@@ -1,3 +1,4 @@
+import { UsuarioService } from './../cadastros/usuario/usuario.service';
 import { PerfilService } from './../cadastros/perfil/perfil.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
     private service: LoginService,
     private router: Router,
     private authService: AuthService,
+    private usuarioService: UsuarioService,
     private socialAuthService: SocialAuthService,
 
   ) { this.usuario = new Usuario(); }
@@ -56,9 +58,13 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.authService.tentarLogar(this.usuario.email, this.usuario.password).subscribe(
       (response) => {
-        const access_token = JSON.stringify(response);
+        let access_token = JSON.stringify(response);
         localStorage.setItem('access_token', access_token);
-        this.router.navigate(['/home']);
+
+        this.usuarioService.getUsuarioAutenticado().subscribe((usuario) => {
+          this.usuarioService.setUsuarioSessao(usuario);
+          this.router.navigate(['/home']);
+        });
       },
       (errorResponse) => {
         this.errors = ['Usuário e/ou senha incorreto(s).'];

@@ -72,7 +72,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>Perfil: *</label>
-          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="usuario.perfil.id">
+          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="perfilSelecionado.id">
             <option value="">Selecione...</option>
             <option *ngFor="let perfil of perfis" [ngValue]="perfil.id">
               {{ perfil.descricao }}

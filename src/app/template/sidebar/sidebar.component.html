@@ -22,13 +22,13 @@
   </li>
 
   <!-- Divider -->
-  <hr class="sidebar-divider" />
+  <hr class="sidebar-divider" *ngIf="exibeMenuCadastros" />
 
   <!-- Heading -->
-  <div class="sidebar-heading">Cadastros</div>
+  <div class="sidebar-heading" *ngIf="exibeMenuCadastros">Cadastros</div>
 
   <!-- Nav Item - Pages Collapse Menu -->
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="exibeMenuCadastros">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCadastros" aria-expanded="true"
       aria-controls="collapseCadastros">
       <i class="fas fa-fw fa-folder"></i>
@@ -47,13 +47,13 @@
   </li>
 
   <!-- Divider -->
-  <hr class="sidebar-divider d-none d-md-block" />
+  <hr class="sidebar-divider d-none d-md-block" *ngIf="exibeMenuPrincipal" />
 
   <!-- Heading -->
-  <div class="sidebar-heading">Estoque</div>
+  <div class="sidebar-heading" *ngIf="exibeMenuPrincipal">Estoque</div>
 
   <!-- Nav Item - Pages Collapse Menu -->
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="exibeMenuPrincipal">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestEstoque"
       aria-expanded="true" aria-controls="collapseCadastros">
       <i class="fas fa-fw fa-folder"></i>
@@ -69,7 +69,7 @@
   </li>
 
   <!-- Nav Item - Pages Collapse Menu -->
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="exibeMenuOperEntrada">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEntrada" aria-expanded="true"
       aria-controls="collapseEntrada">
       <i class="fas fa-fw fa-folder"></i>
@@ -77,13 +77,13 @@
     </a>
     <div id="collapseEntrada" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" routerLink="/entradas-estoque/form">Entrada Manual</a>
+        <a *ngIf="exibeMenuEntradaManual" class="collapse-item" routerLink="/entradas-estoque/form">Entrada Manual</a>
         <a class="collapse-item" routerLink="/pedidos">Pedido de Compras</a>
       </div>
     </div>
   </li>
 
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="exibeMenuOperSaida">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSaida" aria-expanded="true"
       aria-controls="collapseSaida">
       <i class="fas fa-fw fa-folder"></i>

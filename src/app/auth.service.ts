@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { UsuarioService } from './cadastros/usuario/usuario.service';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Usuario } from './cadastros/usuario/usuario';
 import { Observable } from 'rxjs';
@@ -18,7 +19,7 @@ export class AuthService {
   jwtHelper: JwtHelperService = new JwtHelperService();
   isLogoutAction: Boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private usuarioService: UsuarioService) { console.log('auth') }
 
   obterToken() {
     const tokenString = localStorage.getItem('access_token');
@@ -31,6 +32,7 @@ export class AuthService {
 
   encerrarSessao() {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('usuario_autenticado');
     this.isLogoutAction = true;
   }
 

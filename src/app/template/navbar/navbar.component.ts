@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from 'src/app/auth.service';
 import { Usuario } from './../../cadastros/usuario/usuario';
 import { UsuarioService } from './../../cadastros/usuario/usuario.service';
 
@@ -10,15 +9,18 @@ import { UsuarioService } from './../../cadastros/usuario/usuario.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  usuario: string;
-  usuarioLogado: Usuario = new Usuario;
+  usuarioDescricao: string;
+  usuarioAutenticado: Usuario = new Usuario();
 
-  constructor(private authService: AuthService, private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
-    this.usuario = this.authService.getUsuarioAutenticado();
-    this.usuarioService.getUsuarioAutenticado().subscribe((usuario) => {
-      this.usuarioLogado = usuario;
+    this.usuarioAutenticado = JSON.parse(localStorage.getItem('usuario_autenticado'));
+    this.usuarioDescricao = this.usuarioAutenticado.nome + ' (' + this.usuarioAutenticado.perfil.descricao + ')';
+
+    this.usuarioService.usuarioAutenticado.subscribe((usuario: Usuario) => {
+      this.usuarioAutenticado = usuario;
+      this.usuarioDescricao = this.usuarioAutenticado.nome + ' (' + this.usuarioAutenticado.perfil.descricao + ')';
     });
   }
 }

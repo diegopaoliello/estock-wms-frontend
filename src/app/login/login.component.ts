@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit {
   cadastrarGoogle() {
     this.service.existeUsuario(this.usuario.email).subscribe(
       (response) => {
-        this.onSubmit();
+        document.getElementById("btnEntrar").click();
       },
       (errorResponse) => {
         this.usuario.tipoLogin.id = 2;
@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
         this.service.salvar(this.usuario).subscribe(
           (response) => {
             this.errors = [];
-            this.onSubmit();
+            document.getElementById("btnEntrar").click();
           },
           (errorResponse) => {
             this.mensagemSucesso = null;

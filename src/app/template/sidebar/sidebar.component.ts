@@ -24,10 +24,9 @@ export class SidebarComponent implements OnInit {
 
     this.usuarioService.usuarioAutenticado.subscribe((usuario: Usuario) => {
       this.usuarioAutenticado = usuario;
-      console.log('aqui 1');
       this.validaAcessos();
     });
-    console.log('aqui 2');
+
     this.validaAcessos();
   }
 

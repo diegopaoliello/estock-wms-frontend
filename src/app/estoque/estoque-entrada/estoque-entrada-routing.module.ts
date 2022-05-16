@@ -4,6 +4,7 @@ import { EstoqueEntradaFormComponent } from './estoque-entrada-form/estoque-entr
 import { EstoqueEntradaListaComponent } from './estoque-entrada-lista/estoque-entrada-lista.component';
 import { LayoutComponent } from 'src/app/layout/layout.component';
 import { AuthGuard } from 'src/app/auth.guard';
+import { PerfilGuard } from 'src/app/perfil.guard';
 
 const routes: Routes = [
   {
@@ -11,8 +12,14 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'form', component: EstoqueEntradaFormComponent },
-      { path: 'form/:id', component: EstoqueEntradaFormComponent },
+      { path: 'form', component: EstoqueEntradaFormComponent, canActivate: [PerfilGuard], data: {
+        autorizacao: 'ENTRADA_ESTOQUE', acao: 'INSERIR'
+      } },
+      {
+        path: 'form/:id', component: EstoqueEntradaFormComponent, canActivate: [PerfilGuard], data: {
+          role: 'GERENTE'
+        }
+      },
       { path: 'lista', component: EstoqueEntradaListaComponent },
       { path: '', redirectTo: '/entradas-estoque/lista', pathMatch: 'full' },
     ],

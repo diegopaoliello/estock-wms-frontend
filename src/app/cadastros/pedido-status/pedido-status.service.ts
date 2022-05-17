@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class PedidoStatusService {
-  apiURL: string = environment.apiURLBase + '/api/pedido-status';
+  apiURL: string = environment.apiURLBase + '/api/pedidos-status';
 
   constructor(private http: HttpClient) { }
 

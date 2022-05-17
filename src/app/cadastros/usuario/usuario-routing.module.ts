@@ -10,7 +10,7 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'form/:id', component: UsuarioFormComponent },
+      { path: 'form', component: UsuarioFormComponent },
     ],
   },
 ];

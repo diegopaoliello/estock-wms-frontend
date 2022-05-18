@@ -46,6 +46,7 @@ import {
 } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
 import { UsuarioService } from './cadastros/usuario/usuario.service';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, LayoutComponent],
@@ -68,6 +69,7 @@ import { UsuarioService } from './cadastros/usuario/usuario.service';
     VendaModule,
     ServicoPrestadoModule,
     SocialLoginModule,
+    ChartsModule
   ],
   providers: [
     UsuarioService,

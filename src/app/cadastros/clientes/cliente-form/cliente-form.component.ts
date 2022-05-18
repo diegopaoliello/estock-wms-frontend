@@ -38,7 +38,7 @@ export class ClienteFormComponent implements OnInit {
   }
 
   voltarParaListagem() {
-    this.router.navigate(['/clientees/lista']);
+    this.router.navigate(['/clientes/lista']);
   }
 
   onSubmit() {

@@ -23,7 +23,7 @@ export class LayoutComponent implements AfterViewInit {
       "use strict"; // Start of use strict
 
       // Toggle the side navigation
-      $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
+      $("#sidebarToggle, #sidebarToggleTop, .collapse-item").on('click', function (e) {
         $("body").toggleClass("sidebar-toggled");
         $(".sidebar").toggleClass("toggled");
         if ($(".sidebar").hasClass("toggled")) {

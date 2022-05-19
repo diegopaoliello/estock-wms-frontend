@@ -1,3 +1,4 @@
+import { LoaderModule } from './loader/loader.module';
 import { EstoqueSaidaService } from './estoque/estoque-saida/estoque-saida.service';
 import { EstoqueSaidaModule } from './estoque/estoque-saida/estoque-saida.module';
 import { EstoqueEntradaService } from './estoque/estoque-entrada/estoque-entrada.service';
@@ -54,6 +55,7 @@ import { ChartsModule } from 'ng2-charts';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    LoaderModule,
     AppRoutingModule,
     TemplateModule,
     UsuarioModule,

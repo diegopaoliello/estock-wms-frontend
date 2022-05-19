@@ -5,14 +5,12 @@ import { finalize } from 'rxjs/operators'
 
 import { LoaderService } from './loader.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
 
-  constructor(public loaderService: LoaderService) { }
+  constructor(public loaderService: LoaderService) { console.log("interceptor") }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.loaderService.show();
 
     return next.handle(req).pipe(finalize(() => this.loaderService.hide()))

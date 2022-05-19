@@ -1,3 +1,6 @@
+import { LoaderInterceptor } from './loader/loader.interceptor';
+import { LoaderService } from './loader/loader.service';
+import { NgxLoadingModule } from 'ngx-loading';
 import { LoaderModule } from './loader/loader.module';
 import { EstoqueSaidaService } from './estoque/estoque-saida/estoque-saida.service';
 import { EstoqueSaidaModule } from './estoque/estoque-saida/estoque-saida.module';
@@ -94,6 +97,11 @@ import { ChartsModule } from 'ng2-charts';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
       multi: true,
     },
     {

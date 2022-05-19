@@ -57,7 +57,6 @@ export class UsuarioFormComponent implements OnInit {
 
         this.service.getUsuarioAutenticado().subscribe((usuario) => {
           localStorage.setItem('usuario_autenticado', JSON.stringify(usuario));
-          console.log('usuario EMIT: ' + JSON.stringify(usuario));
           this.service.usuarioAutenticado.emit(usuario);
         });
       },

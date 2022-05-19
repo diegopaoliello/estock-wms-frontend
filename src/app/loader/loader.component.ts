@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'loader',
+  selector: 'app-loader',
   template: '<ngx-loading [show]="loading | async"></ngx-loading>'
 })
 export class LoaderComponent {

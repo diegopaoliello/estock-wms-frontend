@@ -33,11 +33,11 @@ export class HomeComponent implements OnInit {
     var myPieChart = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ["Direct", "Referral", "Social"],
+        labels: ["Entrada", "Saídas"],
         datasets: [{
-          data: [55, 30, 15],
-          backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-          hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+          data: [55, 45],
+          backgroundColor: ['#4e73df', '#1cc88a'],
+          hoverBackgroundColor: ['#2e59d9', '#17a673'],
           hoverBorderColor: "rgba(234, 236, 244, 1)",
         }],
       },
@@ -96,9 +96,9 @@ export class HomeComponent implements OnInit {
     var myLineChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
         datasets: [{
-          label: "Earnings",
+          label: "Ganhos",
           lineTension: 0.3,
           backgroundColor: "rgba(78, 115, 223, 0.05)",
           borderColor: "rgba(78, 115, 223, 1)",
@@ -217,9 +217,9 @@ export class HomeComponent implements OnInit {
     var myBarChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ["January", "February", "March", "April", "May", "June"],
+        labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"],
         datasets: [{
-          label: "Revenue",
+          label: "Quantidade",
           backgroundColor: "#4e73df",
           hoverBackgroundColor: "#2e59d9",
           borderColor: "#4e73df",
@@ -258,7 +258,7 @@ export class HomeComponent implements OnInit {
               padding: 10,
               // Include a dollar sign in the ticks
               callback: function (value, index, values) {
-                return '$' + number_format(value, null, null, '.');
+                return number_format(value, null, null, '.');
               }
             },
             gridLines: {
@@ -288,7 +288,7 @@ export class HomeComponent implements OnInit {
           callbacks: {
             label: function (tooltipItem, chart) {
               var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-              return datasetLabel + ': $' + number_format(tooltipItem.yLabel, null, null, '.');
+              return datasetLabel + ': ' + number_format(tooltipItem.yLabel, null, null, '.');
             }
           }
         },

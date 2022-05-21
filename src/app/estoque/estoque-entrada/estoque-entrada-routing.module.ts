@@ -19,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'form/:id', component: EstoqueEntradaFormComponent, canActivate: [PerfilGuard], data: {
-          role: 'ESTOQUE_ENTRADA', acao: 'EDITAR'
+          autorizacao: 'ESTOQUE_ENTRADA', acao: 'VISUALIZAR'
         }
       },
       { path: 'lista', component: EstoqueEntradaListaComponent },

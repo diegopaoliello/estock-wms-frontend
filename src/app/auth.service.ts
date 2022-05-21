@@ -19,7 +19,7 @@ export class AuthService {
   jwtHelper: JwtHelperService = new JwtHelperService();
   isLogoutAction: Boolean = false;
 
-  constructor(private http: HttpClient, private usuarioService: UsuarioService) { console.log('auth') }
+  constructor(private http: HttpClient) { }
 
   obterToken() {
     const tokenString = localStorage.getItem('access_token');
@@ -30,9 +30,13 @@ export class AuthService {
     return null;
   }
 
+  limparCache(): void {
+    localStorage.clear();
+    sessionStorage.clear();
+  }
+
   encerrarSessao() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('usuario_autenticado');
+    this.limparCache();
     this.isLogoutAction = true;
   }
 

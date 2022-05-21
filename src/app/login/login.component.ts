@@ -37,8 +37,7 @@ export class LoginComponent implements OnInit {
   ) { this.usuario = new Usuario(); }
 
   ngOnInit() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('usuario_autenticado');
+    this.authService.limparCache();
 
     this.socialAuthService.authState.subscribe((user) => {
       this.socialUser = user;

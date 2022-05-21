@@ -12,12 +12,14 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'form', component: EstoqueEntradaFormComponent, canActivate: [PerfilGuard], data: {
-        autorizacao: 'ESTOQUE_ENTRADA', acao: 'INSERIR'
-      } },
+      {
+        path: 'form', component: EstoqueEntradaFormComponent, canActivate: [PerfilGuard], data: {
+          autorizacao: 'ESTOQUE_ENTRADA', acao: 'INSERIR'
+        }
+      },
       {
         path: 'form/:id', component: EstoqueEntradaFormComponent, canActivate: [PerfilGuard], data: {
-          role: 'GERENTE'
+          role: 'ESTOQUE_ENTRADA', acao: 'EDITAR'
         }
       },
       { path: 'lista', component: EstoqueEntradaListaComponent },

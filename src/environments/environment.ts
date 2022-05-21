@@ -6,9 +6,9 @@ export const environment = {
   appName: 'e-Stock',
   production: false,
   apiURLBase: 'http://localhost:8080',
-  clientId: 'my-angular-app',
+  clientId: 'estock-app',
   googleId: '500901473946-67h7h05slq3n10cnrnbsiuqi3nvh4248.apps.googleusercontent.com',
-  clientSecret: '@321',
+  clientSecret: '#estock2022',
   obterTokenUrl: '/api/oauth/token',
 };
 

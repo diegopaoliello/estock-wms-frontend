@@ -11,19 +11,21 @@ import { Usuario } from 'src/app/cadastros/usuario/usuario';
 })
 export class SidebarComponent implements OnInit {
   usuarioAutenticado: Usuario = new Usuario();
-  exibeMenuPrincipal: boolean = false;
-  exibeMenuCadastros: boolean = false;
-  exibeMenuOperEntrada: boolean = false;
-  exibeMenuOperSaida: boolean = false;
-  exibeMenuEntradaManual: boolean = false;
+  exibeMenuCadastro: boolean = false;
+  exibeMenuPedido: boolean = false;
+  exibeMenuVenda: boolean = false;
+  exibeMenuEstoque: boolean = false;
+  exibeMenuEstoqueEntrada: boolean = false;
+  exibeMenuEstoqueSaida: boolean = false;
 
   constructor(private authService: AuthService, private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
-    this.usuarioAutenticado = JSON.parse(localStorage.getItem('usuario_autenticado'));
+    this.usuarioAutenticado = this.usuarioService.getUsuarioSessao();
 
     this.usuarioService.usuarioAutenticado.subscribe((usuario: Usuario) => {
       this.usuarioAutenticado = usuario;
+      this.usuarioService.setUsuarioSessao(this.usuarioAutenticado);
       this.validaAcessos();
     });
 
@@ -31,11 +33,12 @@ export class SidebarComponent implements OnInit {
   }
 
   validaAcessos(): void {
-    this.exibeMenuPrincipal = this.usuarioService.temAutorizacao(this.usuarioAutenticado, 'MENU_PRINCIPAL', 'VISUALIZAR');
-    this.exibeMenuCadastros = this.usuarioService.temAutorizacao(this.usuarioAutenticado, 'MENU_CADASTROS', 'VISUALIZAR');
-    this.exibeMenuOperEntrada = this.usuarioService.temAutorizacao(this.usuarioAutenticado, 'MENU_OPER_ENTRADA', 'VISUALIZAR');
-    this.exibeMenuOperSaida = this.usuarioService.temAutorizacao(this.usuarioAutenticado, 'MENU_OPER_SAIDA', 'VISUALIZAR');
-    this.exibeMenuEntradaManual = this.usuarioService.temAutorizacao(this.usuarioAutenticado, 'ENTRADA_ESTOQUE', 'VISUALIZAR');
+    this.exibeMenuCadastro = this.usuarioService.temAutorizacao('CADASTRO', 'VISUALIZAR');
+    this.exibeMenuPedido = this.usuarioService.temAutorizacao('PEDIDO', 'VISUALIZAR');
+    this.exibeMenuVenda = this.usuarioService.temAutorizacao('VENDA', 'VISUALIZAR');
+    this.exibeMenuEstoque = this.usuarioService.temAutorizacao('ESTOQUE', 'VISUALIZAR');
+    this.exibeMenuEstoqueEntrada = this.usuarioService.temAutorizacao('ESTOQUE_ENTRADA', 'INSERIR');
+    this.exibeMenuEstoqueSaida = this.usuarioService.temAutorizacao('ESTOQUE_ENTRADA', 'VISUALIZAR');
   }
 
   logout() {

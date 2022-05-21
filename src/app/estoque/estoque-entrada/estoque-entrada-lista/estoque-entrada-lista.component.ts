@@ -37,7 +37,7 @@ export class EstoqueEntradaListaComponent implements OnInit {
   }
 
   validaAcessos(): void {
-    this.permiteInserir = this.usuarioService.temAutorizacao(null, 'ENTRADA_ESTOQUE', 'INSERIR');
+    this.permiteInserir = this.usuarioService.temAutorizacao('ENTRADA_ESTOQUE', 'INSERIR');
   }
 
   novoCadastro() {

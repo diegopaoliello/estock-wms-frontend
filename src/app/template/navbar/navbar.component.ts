@@ -15,11 +15,12 @@ export class NavbarComponent implements OnInit {
   constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
-    this.usuarioAutenticado = JSON.parse(localStorage.getItem('usuario_autenticado'));
+    this.usuarioAutenticado = this.usuarioService.getUsuarioSessao();
     this.usuarioDescricao = this.usuarioAutenticado.nome + ' (' + this.usuarioAutenticado.perfil.descricao + ')';
 
     this.usuarioService.usuarioAutenticado.subscribe((usuario: Usuario) => {
       this.usuarioAutenticado = usuario;
+      this.usuarioService.setUsuarioSessao(this.usuarioAutenticado);
       this.usuarioDescricao = this.usuarioAutenticado.nome + ' (' + this.usuarioAutenticado.perfil.descricao + ')';
     });
   }

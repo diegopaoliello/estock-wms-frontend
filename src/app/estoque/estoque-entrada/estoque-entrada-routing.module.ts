@@ -13,7 +13,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'form', component: EstoqueEntradaFormComponent, canActivate: [PerfilGuard], data: {
-        autorizacao: 'ENTRADA_ESTOQUE', acao: 'INSERIR'
+        autorizacao: 'ESTOQUE_ENTRADA', acao: 'INSERIR'
       } },
       {
         path: 'form/:id', component: EstoqueEntradaFormComponent, canActivate: [PerfilGuard], data: {

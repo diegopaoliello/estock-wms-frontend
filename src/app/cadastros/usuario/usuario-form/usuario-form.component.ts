@@ -56,7 +56,7 @@ export class UsuarioFormComponent implements OnInit {
         this.errors = null;
 
         this.service.getUsuarioAutenticado().subscribe((usuario) => {
-          localStorage.setItem('usuario_autenticado', JSON.stringify(usuario));
+          this.service.setUsuarioSessao(this.usuario);
           this.service.usuarioAutenticado.emit(usuario);
         });
       },

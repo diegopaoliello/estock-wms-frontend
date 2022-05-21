@@ -22,15 +22,7 @@ export class PerfilGuard implements CanActivate {
   usuarioAutenticado: Usuario;
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-
-    this.usuarioAutenticado = JSON.parse(localStorage.getItem('usuario_autenticado'));
-
-    this.usuarioService.usuarioAutenticado.subscribe((usuario: Usuario) => {
-      this.usuarioAutenticado = usuario;
-      this.temAcesso = this.usuarioService.temAutorizacao(this.usuarioAutenticado, route.data.autorizacao, route.data.acao);
-    });
-
-    this.temAcesso = this.usuarioService.temAutorizacao(this.usuarioAutenticado, route.data.autorizacao, route.data.acao);
+    this.temAcesso = this.usuarioService.temAutorizacao(route.data.autorizacao, route.data.acao);
 
     if (this.temAcesso) {
       return true;

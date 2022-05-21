@@ -12,10 +12,10 @@ export class HomeComponent implements OnInit {
   usuarioDescricao: string;
   usuarioAutenticado: Usuario = new Usuario();
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
-    this.usuarioAutenticado = JSON.parse(localStorage.getItem('usuario_autenticado'));
+    this.usuarioAutenticado = this.usuarioService.getUsuarioSessao();;
     this.usuarioDescricao = this.usuarioAutenticado.nome;
 
     this.criarPieChart();

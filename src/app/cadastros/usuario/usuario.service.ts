@@ -36,12 +36,9 @@ export class UsuarioService {
     return JSON.parse(localStorage.getItem('usuario_autenticado'));
   }
 
-  temAutorizacao(usuario: Usuario, nomeAutorizacao: string, nomeAcao: string): boolean {
+  temAutorizacao(nomeAutorizacao: string, nomeAcao: string): boolean {
+    let usuario:Usuario  = this.getUsuarioSessao();
     let temAcesso: boolean = false;
-
-    if (!usuario) {
-      usuario = this.getUsuarioSessao();
-    }
 
     if (usuario.perfil.autorizacoes) {
       let autorizacao: PerfilAutorizacao = usuario.perfil.autorizacoes.find(

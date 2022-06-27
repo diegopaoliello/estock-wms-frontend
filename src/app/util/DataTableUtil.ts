@@ -121,10 +121,16 @@ export class DataTableUtil {
       table.buttons().container()
         .appendTo('#dataTable_wrapper .col-md-6:eq(0)');
 
+      let linhaAtual;
+
       $('#dataTable').on('click', '.delete', function () {
+        linhaAtual = this;
+      });
+
+      $('#modalDelecao').on('click', '.confirmar', function () {
         var table = $('#dataTable').DataTable();
         table
-          .row($(this).parents('tr'))
+          .row($(linhaAtual).parents('tr'))
           .remove()
           .draw();
       });

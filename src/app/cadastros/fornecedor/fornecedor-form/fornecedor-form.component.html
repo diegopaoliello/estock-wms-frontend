@@ -43,7 +43,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label>Nome Fantasia: *</label>
+          <label>Nome Fantasia: </label>
           <input type="text" class="form-control" [(ngModel)]="fornecedor.nomeFantasia" name="nomeFantasia" />
         </div>
       </div>
@@ -53,7 +53,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>CNPJ: *</label>
-          <input type="text" class="form-control" [(ngModel)]="fornecedor.cnpj" name="cnpj" />
+          <input type="text" mask="00.000.000/0000-00" class="form-control" [(ngModel)]="fornecedor.cnpj" name="cnpj" />
         </div>
       </div>
     </div>

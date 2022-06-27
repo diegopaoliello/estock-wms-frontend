@@ -1,3 +1,4 @@
+import { PerfilGuard } from './../../perfil.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CategoriaFormComponent } from './categoria-form/categoria-form.component';
@@ -11,9 +12,21 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'form', component: CategoriaFormComponent },
-      { path: 'form/:id', component: CategoriaFormComponent },
-      { path: 'lista', component: CategoriaListaComponent },
+      {
+        path: 'form', component: CategoriaFormComponent, canActivate: [PerfilGuard], data: {
+          autorizacao: 'CADASTRO', acoes: 'INSERIR'
+        }
+      },
+      {
+        path: 'form/:id', component: CategoriaFormComponent, canActivate: [PerfilGuard], data: {
+          autorizacao: 'CADASTRO', acoes: ['EDITAR', "VISUALIZAR"]
+        }
+      },
+      {
+        path: 'lista', component: CategoriaListaComponent, canActivate: [PerfilGuard], data: {
+          autorizacao: 'CADASTRO', acoes: ['EDITAR', "VISUALIZAR"]
+        }
+      },
       { path: '', redirectTo: '/categorias/lista', pathMatch: 'full' },
     ],
   },
@@ -23,4 +36,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CategoriaRoutingModule {}
+export class CategoriaRoutingModule { }

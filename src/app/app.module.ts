@@ -51,6 +51,7 @@ import {
 import { environment } from 'src/environments/environment';
 import { UsuarioService } from './cadastros/usuario/usuario.service';
 import { ChartsModule } from 'ng2-charts';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, LayoutComponent],
@@ -74,7 +75,8 @@ import { ChartsModule } from 'ng2-charts';
     VendaModule,
     ServicoPrestadoModule,
     SocialLoginModule,
-    ChartsModule
+    ChartsModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [
     UsuarioService,

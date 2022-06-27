@@ -16,13 +16,16 @@ import { Usuario } from './cadastros/usuario/usuario';
   providedIn: 'root',
 })
 export class PerfilGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private usuarioService: UsuarioService) { }
+  constructor(private router: Router, private usuarioService: UsuarioService) { }
 
   temAcesso: boolean = false;
   usuarioAutenticado: Usuario;
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    this.temAcesso = this.usuarioService.temAutorizacao(route.data.autorizacao, route.data.acao);
+
+    route.data.acoes.forEach((acao: string) => {
+      this.temAcesso = this.usuarioService.temAutorizacao(route.data.autorizacao, acao);
+    });
 
     if (this.temAcesso) {
       return true;

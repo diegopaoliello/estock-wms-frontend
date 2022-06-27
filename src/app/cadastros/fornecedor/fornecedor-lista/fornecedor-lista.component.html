@@ -49,13 +49,13 @@
           <tr *ngFor="let fornecedor of fornecedores">
             <td>{{ fornecedor.id }}</td>
             <td>{{ fornecedor.razaoSocial }}</td>
-            <td>{{ fornecedor.cnpj }}</td>
+            <td>{{ fornecedor.cnpj | mask:"00.000.000/0000-00"}}</td>
             <td>
               <button class="btn btn-primary btn-circle ml-5" routerLink="/fornecedores/form/{{ fornecedor.id }}">
                 <i class="fas fa-edit"></i>
               </button>
-              <button class="btn btn-danger btn-circle ml-2 delete" (click)="preparaDelecao(fornecedor)" data-toggle="modal"
-                data-target="#modalDelecao">
+              <button class="btn btn-danger btn-circle ml-2 delete" (click)="preparaDelecao(fornecedor)"
+                data-toggle="modal" data-target="#modalDelecao">
                 <i class="fas fa-trash"></i>
               </button>
             </td>
@@ -79,7 +79,7 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-success" (click)="deletarFornecedor()" data-dismiss="modal">
+        <button class="btn btn-success confirmar" (click)="deletarFornecedor()" data-dismiss="modal">
           Confirmar
         </button>
         <button class="btn btn-default" data-dismiss="modal">Cancelar</button>

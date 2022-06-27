@@ -14,12 +14,12 @@ const routes: Routes = [
     children: [
       {
         path: 'form', component: EstoqueEntradaFormComponent, canActivate: [PerfilGuard], data: {
-          autorizacao: 'ESTOQUE_ENTRADA', acao: 'INSERIR'
+          autorizacao: 'ESTOQUE_ENTRADA', acoes: ['INSERIR']
         }
       },
       {
         path: 'form/:id', component: EstoqueEntradaFormComponent, canActivate: [PerfilGuard], data: {
-          autorizacao: 'ESTOQUE_ENTRADA', acao: 'VISUALIZAR'
+          autorizacao: 'ESTOQUE_ENTRADA', acoes: ['EDITAR', 'VISUALIZAR']
         }
       },
       { path: 'lista', component: EstoqueEntradaListaComponent },

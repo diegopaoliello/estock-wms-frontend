@@ -1,3 +1,4 @@
+import { NgxMaskModule } from 'ngx-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +9,7 @@ import { FornecedorListaComponent } from './fornecedor-lista/fornecedor-lista.co
 
 @NgModule({
   declarations: [FornecedorFormComponent, FornecedorListaComponent],
-  imports: [CommonModule, FornecedorRoutingModule, FormsModule],
+  imports: [CommonModule, FornecedorRoutingModule, FormsModule, NgxMaskModule.forChild()],
   exports: [FornecedorFormComponent, FornecedorListaComponent],
 })
 export class FornecedorModule {}

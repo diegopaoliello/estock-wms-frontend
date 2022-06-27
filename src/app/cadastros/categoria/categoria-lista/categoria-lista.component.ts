@@ -31,10 +31,16 @@ export class CategoriaListaComponent implements OnInit {
             'responsive': true
           });
 
+          let linhaAtual;
+
           $('#dataTable').on('click', '.delete', function () {
+            linhaAtual = this;
+          });
+
+          $('#modalDelecao').on('click', '.confirmar', function () {
             var table = $('#dataTable').DataTable();
             table
-              .row($(this).parents('tr'))
+              .row($(linhaAtual).parents('tr'))
               .remove()
               .draw();
           });

@@ -1,3 +1,5 @@
+import { DataTableUtil } from './../../../util/DataTableUtil';
+import { TableConfig } from './../../../util/tableConfig';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Categoria } from '../categoria';
@@ -14,6 +16,7 @@ export class CategoriaListaComponent implements OnInit {
   categoriaSelecionado: Categoria;
   mensagemSucesso: string;
   mensagemErro: string;
+  tableConfig: TableConfig = new TableConfig('Listagem de categorias', [0, 1, 2], null);
 
   constructor(private service: CategoriaService, private router: Router) { }
 
@@ -22,29 +25,7 @@ export class CategoriaListaComponent implements OnInit {
       .getCategorias()
       .subscribe((resposta) => {
         this.categorias = resposta;
-        $(function () {
-          $('#dataTable').DataTable({
-            'retrieve': true,
-            'language': {
-              'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
-            },
-            'responsive': true
-          });
-
-          let linhaAtual;
-
-          $('#dataTable').on('click', '.delete', function () {
-            linhaAtual = this;
-          });
-
-          $('#modalDelecao').on('click', '.confirmar', function () {
-            var table = $('#dataTable').DataTable();
-            table
-              .row($(linhaAtual).parents('tr'))
-              .remove()
-              .draw();
-          });
-        });
+        DataTableUtil.enableTable(this.tableConfig);
       });
   }
 

@@ -22,6 +22,7 @@ export class VendaFormComponent implements OnInit, AfterContentInit {
   status: VendaStatus[] = [];
   clientes: Cliente[] = [];
   exibirModal: boolean = false;
+  clienteSelecionado: Cliente;
 
   existeItem: boolean = false;
   btnAprovar: boolean = false;
@@ -55,9 +56,12 @@ export class VendaFormComponent implements OnInit, AfterContentInit {
         this.service.getVendaById(this.id).subscribe(
           (response) => {
             this.venda = response;
+            this.clienteSelecionado = this.venda.cliente;
           },
           (errorResponse) => (this.venda = new Venda())
         );
+      } else {
+        this.clienteSelecionado = new Cliente();
       }
     });
 
@@ -106,6 +110,12 @@ export class VendaFormComponent implements OnInit, AfterContentInit {
   }
 
   onSubmit() {
+    if (this.clienteSelecionado.id) {
+      this.venda.cliente = this.clienteSelecionado;
+    } else {
+      this.venda.cliente = null;
+    }
+
     if (this.venda.id) {
       this.service.atualizar(this.venda).subscribe(
         (response) => {

@@ -20,7 +20,9 @@ export class ProdutoFormComponent implements OnInit {
   errors: String[];
   id: number;
   categorias: Categoria[] = [];
+  categoriaSelecionado: Categoria;
   unidadesMedida: UnidadeMedida[] = [];
+  unidadesMedidaSelecionado: UnidadeMedida;
 
   constructor(
     private categoriaService: CategoriaService,
@@ -30,6 +32,8 @@ export class ProdutoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.produto = new Produto();
+    this.categoriaSelecionado = new Categoria();
+    this.unidadesMedidaSelecionado = new UnidadeMedida();
   }
 
   ngOnInit(): void {
@@ -46,7 +50,11 @@ export class ProdutoFormComponent implements OnInit {
       this.id = urlParams['id'];
       if (this.id) {
         this.service.getProdutoById(this.id).subscribe(
-          (response) => (this.produto = response),
+          (response) => {
+            this.produto = response;
+            this.categoriaSelecionado = this.produto.categoria;
+            this.unidadesMedidaSelecionado = this.produto.unidadeMedida;
+          },
           (errorResponse) => (this.produto = new Produto())
         );
       }
@@ -58,6 +66,18 @@ export class ProdutoFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.unidadesMedidaSelecionado.id) {
+      this.produto.unidadeMedida = this.unidadesMedidaSelecionado;
+    } else {
+      this.produto.unidadeMedida = null;
+    }
+
+    if (this.categoriaSelecionado.id) {
+      this.produto.categoria = this.categoriaSelecionado;
+    } else {
+      this.produto.categoria = null;
+    }
+
     if (this.id) {
       this.service.atualizar(this.produto).subscribe(
         (response) => {

@@ -19,6 +19,7 @@ export class ItemVendaFormComponent implements OnInit {
   id: number;
   idVenda: number;
   produtos: Produto[] = [];
+  produtoSelecionado: Produto;
 
   constructor(
     private produtoService: ProdutoService,
@@ -42,15 +43,24 @@ export class ItemVendaFormComponent implements OnInit {
 
       if (this.id) {
         this.service.getItemVendaById(this.idVenda, this.id).subscribe(
-          (response) => (this.itemVenda = response),
+          (response) => {
+            this.itemVenda = response;
+            this.produtoSelecionado = this.itemVenda.produto;
+          },
           (errorResponse) => (this.itemVenda = new ItemVenda())
         );
+      } else {
+        this.produtoSelecionado = new Produto();
       }
     });
   }
 
   onChange(produto: Produto) {
-    this.itemVenda.preco = this.produtos.find(p => p.id === produto.id).precoMedio;
+    if (produto.id) {
+      this.itemVenda.preco = this.produtos.find(p => p.id === produto.id).precoMedio;
+    } else {
+      this.itemVenda.preco = null;
+    }
   }
 
   voltarParaListagem() {
@@ -58,6 +68,12 @@ export class ItemVendaFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.produtoSelecionado.id) {
+      this.itemVenda.produto = this.produtoSelecionado;
+    } else {
+      this.itemVenda.produto = null;
+    }
+
     if (this.id) {
       this.service.atualizar(this.itemVenda).subscribe(
         (response) => {

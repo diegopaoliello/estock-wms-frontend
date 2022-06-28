@@ -18,7 +18,7 @@ export class EstoqueEntradaFormComponent {
   errors: String[];
   id: number;
   produtos: Produto[] = [];
-  produto: Produto;
+  produtoSelecionado: Produto;
   permiteEdicao: boolean = false;
 
   constructor(
@@ -39,12 +39,12 @@ export class EstoqueEntradaFormComponent {
           (response) => {
             this.entradaEstoque = response;
             this.permiteEdicao = false;
-            this.produto = this.entradaEstoque.produto;
+            this.produtoSelecionado = this.entradaEstoque.produto;
           },
           (errorResponse) => (this.entradaEstoque = new EstoqueEntrada())
         );
       } else {
-        this.produto = new Produto();
+        this.produtoSelecionado = new Produto();
         this.permiteEdicao = true;
       }
     });
@@ -59,8 +59,10 @@ export class EstoqueEntradaFormComponent {
   }
 
   onSubmit() {
-    if (this.produto.id) {
-      this.entradaEstoque.produto = this.produto;
+    if (this.produtoSelecionado.id) {
+      this.entradaEstoque.produto = this.produtoSelecionado;
+    } else {
+      this.entradaEstoque.produto = null;
     }
 
     this.service.salvar(this.entradaEstoque).subscribe(
@@ -77,6 +79,10 @@ export class EstoqueEntradaFormComponent {
   }
 
   onChange(produto: Produto) {
-    this.entradaEstoque.preco = this.produtos.find(p => p.id === produto.id).precoMedio;
+    if (produto.id) {
+      this.entradaEstoque.preco = this.produtos.find(p => p.id === produto.id).precoMedio;
+    } else {
+      this.entradaEstoque.preco = null;
+    }
   }
 }

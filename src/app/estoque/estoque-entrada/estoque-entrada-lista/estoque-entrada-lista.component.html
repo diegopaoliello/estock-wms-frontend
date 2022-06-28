@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="false">
   <div class="col-md-1">
     <button class="btn btn-warning btn-icon-split" (click)="novoCadastro()" [disabled]="!permiteInserir">
       <span class="icon text-white-50">
@@ -56,8 +56,8 @@
             <td>{{ entradaEstoque.quantidade }}</td>
             <td>{{ entradaEstoque.preco }}</td>
             <td>{{ entradaEstoque.itemPedido?.pedido.id }}</td>
-            <td>
-              <button class="btn btn-primary btn-circle ml-5"
+            <td style="width: 15%;" align="center">
+              <button class="btn btn-primary btn-circle ml-2"
                 routerLink="/entradas-estoque/form/{{ entradaEstoque.id }}">
                 <i class="fas fa-edit"></i>
               </button>

@@ -38,7 +38,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>Produto: *</label>
-          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="itemPedido.produto.id">
+          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="produtoSelecionado.id">
             <option value="">Selecione...</option>
             <option *ngFor="let produto of produtos" [ngValue]="produto.id">
               {{ produto.descricao }}
@@ -64,7 +64,7 @@
           <input type="text" class="form-control" [(ngModel)]="itemPedido.desconto" name="desconto" />
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" *ngIf="false">
         <div class="form-group">
           <label>Valor Final: </label>
           <input type="text" class="form-control" [value]="itemPedido.preco-itemPedido.desconto" name="preco"

@@ -50,7 +50,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>Categoria: *</label>
-          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="produto.categoria.id">
+          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="categoriaSelecionado.id">
             <option value="">Selecione...</option>
             <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
               {{ categoria.descricao }}
@@ -61,7 +61,8 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>Unidade medida: *</label>
-          <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="produto.unidadeMedida.id">
+          <select class="form-control" [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="unidadesMedidaSelecionado.id">
             <option value="">Selecione...</option>
             <option *ngFor="let unidadeMedida of unidadesMedida" [ngValue]="unidadeMedida.id">
               {{ unidadeMedida.descricao }}
@@ -71,13 +72,13 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label>Quantidade Mínima: *</label>
+          <label>Quantidade Mínima: </label>
           <input type="text" class="form-control" [(ngModel)]="produto.quantidadeMinima" name="quantidadeMinima" />
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label>Quantidade Máxima: *</label>
+          <label>Quantidade Máxima: </label>
           <input type="text" class="form-control" [(ngModel)]="produto.quantidadeMaxima" name="quantidadeMaxima" />
         </div>
       </div>

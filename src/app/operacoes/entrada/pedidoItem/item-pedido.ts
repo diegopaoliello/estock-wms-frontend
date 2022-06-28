@@ -6,8 +6,8 @@ export class ItemPedido {
   pedido: Pedido;
   produto: Produto = new Produto();
   quantidade: number;
-  preco: number = 0;
-  desconto: number = 0;
+  preco: number;
+  desconto: number;
   dataCadastro: string;
 
 }

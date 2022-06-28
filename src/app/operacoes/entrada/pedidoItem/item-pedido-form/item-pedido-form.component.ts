@@ -19,6 +19,7 @@ export class ItemPedidoFormComponent implements OnInit {
   id: number;
   idPedido: number;
   produtos: Produto[] = [];
+  produtoSelecionado: Produto;
 
   constructor(
     private produtoService: ProdutoService,
@@ -42,9 +43,14 @@ export class ItemPedidoFormComponent implements OnInit {
 
       if (this.id) {
         this.service.getItemPedidoById(this.idPedido, this.id).subscribe(
-          (response) => (this.itemPedido = response),
+          (response) => {
+            this.itemPedido = response;
+            this.produtoSelecionado = this.itemPedido.produto;
+          },
           (errorResponse) => (this.itemPedido = new ItemPedido())
         );
+      } else {
+        this.produtoSelecionado = new Produto();
       }
     });
   }
@@ -54,6 +60,12 @@ export class ItemPedidoFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.produtoSelecionado.id) {
+      this.itemPedido.produto = this.produtoSelecionado;
+    } else {
+      this.itemPedido.produto = null;
+    }
+
     if (this.id) {
       this.service.atualizar(this.itemPedido).subscribe(
         (response) => {

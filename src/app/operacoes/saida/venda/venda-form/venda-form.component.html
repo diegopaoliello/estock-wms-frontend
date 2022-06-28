@@ -51,7 +51,7 @@
         <div class="form-group">
           <label>Cliente: </label>
           <select [disabled]="!permiteEdicao" class="form-control" [ngModelOptions]="{ standalone: true }"
-            [(ngModel)]="venda.cliente.id">
+            [(ngModel)]="clienteSelecionado.id">
             <option value="">Selecione...</option>
             <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">
               {{ cliente.razaoSocial }}

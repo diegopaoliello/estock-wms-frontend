@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: 'form', component: CategoriaFormComponent, canActivate: [PerfilGuard], data: {
-          autorizacao: 'CADASTRO', acoes: 'INSERIR'
+          autorizacao: 'CADASTRO', acoes: ['INSERIR']
         }
       },
       {

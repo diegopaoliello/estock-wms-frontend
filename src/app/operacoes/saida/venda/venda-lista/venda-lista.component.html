@@ -50,7 +50,7 @@
             <td>{{ venda.id }}</td>
             <td>{{ venda.cliente.razaoSocial }}</td>
             <td>{{ venda.status.descricao }}</td>
-            <td>
+            <td style="width: 15%;" align="center">
               <button *ngIf="false" id="btnAprovar" class="btn btn-success btn-circle ml-3" data-toggle="tooltip"
                 data-placement="top" title="Aprovar" (click)="selecionarVenda(venda)" data-toggle="modal"
                 data-target="#modalAprovar">

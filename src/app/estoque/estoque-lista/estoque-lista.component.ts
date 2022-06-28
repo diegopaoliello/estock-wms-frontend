@@ -21,7 +21,7 @@ export class EstoqueListaComponent implements OnInit {
   produtos: Produto[] = [];
   idProduto: number;
   quantidade: number;
-  tableConfig: TableConfig = new TableConfig('Lista de produtos em estoque', [0, 1, 2, 3], null);
+  tableConfig: TableConfig = new TableConfig('Lista de produtos em estoque', [0, 1, 2, 3, 4, 5], null);
 
   constructor(private produtoService: ProdutoService, private service: EstoqueService, private router: Router) { }
 
@@ -38,6 +38,12 @@ export class EstoqueListaComponent implements OnInit {
       .getEstoques(this.idProduto, this.quantidade)
       .subscribe((resposta) => {
         this.estoques = resposta;
+        console.log(resposta);
+        if (this.estoques == null) {
+          console.log("aqui");
+          this.estoques = [];
+        }
+
         DataTableUtil.enableTable(this.tableConfig);
       });
   }

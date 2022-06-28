@@ -53,7 +53,20 @@ export class DataTableUtil {
               cols[1] = { text: 'Right part', alignment: 'right', margin: [0, 0, 20] };
               var objFooter = {};
               objFooter['columns'] = cols;
-              doc['footer'] = objFooter;
+              doc['footer'] = (function (page, pages) {
+                return {
+                  columns: [
+                    {
+                      alignment: 'center',
+                      text: [
+                        { text: page.toString() },
+                        ' de ',
+                        { text: pages.toString() }
+                      ]
+                    }],
+                  margin: [10, 0]
+                }
+              });
               doc.content[iDataTableElement].table.widths = tamanhoColunas,
 
                 doc.content.splice(1, 0, {

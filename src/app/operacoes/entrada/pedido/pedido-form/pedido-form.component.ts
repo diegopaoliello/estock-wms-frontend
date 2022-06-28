@@ -22,6 +22,7 @@ export class PedidoFormComponent implements OnInit, AfterContentInit {
   fornecedores: Fornecedor[] = [];
   status: PedidoStatus[] = [];
   exibirModal: boolean = false;
+  fornecedorSelecionado;
 
   existeItem: boolean = false;
   btnAprovar: boolean = false;
@@ -55,9 +56,12 @@ export class PedidoFormComponent implements OnInit, AfterContentInit {
         this.service.getPedidoById(this.id).subscribe(
           (response) => {
             this.pedido = response;
+            this.fornecedorSelecionado = this.pedido.fornecedor;
           },
           (errorResponse) => (this.pedido = new Pedido())
         );
+      } else {
+        this.fornecedorSelecionado = new Fornecedor();
       }
     });
 
@@ -105,6 +109,12 @@ export class PedidoFormComponent implements OnInit, AfterContentInit {
   }
 
   onSubmit() {
+    if (this.fornecedorSelecionado.id) {
+      this.pedido.fornecedor = this.fornecedorSelecionado;
+    } else {
+      this.pedido.fornecedor = null;
+    }
+
     if (this.pedido.id) {
       this.service.atualizar(this.pedido).subscribe(
         (response) => {

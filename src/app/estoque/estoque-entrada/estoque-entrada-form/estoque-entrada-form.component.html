@@ -45,7 +45,7 @@
         <div class="form-group">
           <label>Produto: *</label>
           <select [disabled]="!permiteEdicao" class="form-control" [ngModelOptions]="{ standalone: true }"
-            [(ngModel)]="produto.id" (ngModelChange)="onChange(produto)">
+            [(ngModel)]="produtoSelecionado.id" (ngModelChange)="onChange(produtoSelecionado)">
             <option value="">Selecione...</option>
             <option *ngFor="let produto of produtos" [ngValue]="produto.id">
               {{ produto.descricao }}

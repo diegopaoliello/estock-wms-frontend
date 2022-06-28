@@ -51,7 +51,7 @@
         <div class="form-group">
           <label>Fornecedor: </label>
           <select [disabled]="!permiteEdicao" class="form-control" [ngModelOptions]="{ standalone: true }"
-            [(ngModel)]="pedido.fornecedor.id">
+            [(ngModel)]="fornecedorSelecionado.id">
             <option value="">Selecione...</option>
             <option *ngFor="let fornecedor of fornecedores" [ngValue]="fornecedor.id">
               {{ fornecedor.razaoSocial }}

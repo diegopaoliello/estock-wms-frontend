@@ -25,8 +25,6 @@ import { AppComponent } from './app.component';
 
 import { TemplateModule } from './template/template.module';
 import { HomeComponent } from './home/home.component';
-import { ServicoPrestadoModule } from './servico-prestado/servico-prestado.module';
-import { ServicoPrestadoService } from './servico-prestado.service';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthService } from './auth.service';
@@ -73,7 +71,6 @@ import { NgxMaskModule } from 'ngx-mask';
     EstoqueSaidaModule,
     PedidoModule,
     VendaModule,
-    ServicoPrestadoModule,
     SocialLoginModule,
     ChartsModule,
     NgxMaskModule.forRoot()
@@ -90,7 +87,6 @@ import { NgxMaskModule } from 'ngx-mask';
     VendaService,
     ClienteService,
     FornecedorService,
-    ServicoPrestadoService,
     PedidoStatusService,
     VendaStatusService,
     PerfilService,

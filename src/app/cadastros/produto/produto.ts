@@ -13,7 +13,6 @@ export class Produto {
   dataCadastro: string;
 
   constructor() {
-    this.unidadeMedida = new UnidadeMedida();
     this.categoria = new Categoria();
   }
 }

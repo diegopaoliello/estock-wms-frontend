@@ -39,7 +39,7 @@
         <div class="form-group">
           <label>Produto: *</label>
           <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="produtoSelecionado.id"
-            (ngModelChange)="onChange(itemVenda.produto)">
+            (ngModelChange)="onChange(produtoSelecionado)">
             <option value="">Selecione...</option>
             <option *ngFor="let produto of produtos" [ngValue]="produto.id">
               {{ produto.descricao }}

@@ -56,14 +56,14 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>Preço: *</label>
-          <input [disabled]="!permiteEdicao" type="text" class="form-control" [(ngModel)]="entradaEstoque.preco"
+          <input [disabled]="!permiteEdicao" type="number" class="form-control" [(ngModel)]="entradaEstoque.preco"
             name="preco" />
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label>Quantidade: *</label>
-          <input [disabled]="!permiteEdicao" type="text" class="form-control" [(ngModel)]="entradaEstoque.quantidade"
+          <input [disabled]="!permiteEdicao" type="number" class="form-control" [(ngModel)]="entradaEstoque.quantidade"
             name="quantidade" />
         </div>
       </div>

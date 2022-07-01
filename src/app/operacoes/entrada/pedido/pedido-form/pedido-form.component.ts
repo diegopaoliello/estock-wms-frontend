@@ -83,7 +83,7 @@ export class PedidoFormComponent implements OnInit, AfterContentInit {
       this.btnAtualizar = this.pedido.id && (this.pedido.status && (this.pedido.status.codigo == 'ABERTO' || this.pedido.status.codigo == 'APROVADO'));
       this.btnAddItem = this.pedido.status && this.pedido.status.codigo == 'ABERTO';
       this.habilitarTrocaStatus = (this.btnAprovar || this.btnAtualizar || this.btnReprovar || this.btnConcluir);
-      this.permiteEdicao = ((this.btnSalvar && !this.btnAtualizar) || (!this.btnSalvar && this.btnAtualizar));
+      this.permiteEdicao = (this.btnSalvar || this.pedido.status.codigo == 'ABERTO');
     }
   }
 

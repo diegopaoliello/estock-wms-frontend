@@ -84,7 +84,7 @@ export class VendaFormComponent implements OnInit, AfterContentInit {
       this.btnAtualizar = this.venda.id && (this.venda.status && (this.venda.status.codigo == 'ABERTO' || this.venda.status.codigo == 'APROVADO'));
       this.btnAddItem = this.venda.status && this.venda.status.codigo == 'ABERTO';
       this.habilitarTrocaStatus = (this.btnAprovar || this.btnAtualizar || this.btnReprovar || this.btnConcluir);
-      this.permiteEdicao = ((this.btnSalvar && !this.btnAtualizar) || (!this.btnSalvar && this.btnAtualizar));
+      this.permiteEdicao = (this.btnSalvar || this.venda.status.codigo == 'ABERTO');
     }
   }
 

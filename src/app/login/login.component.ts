@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
 
     this.socialAuthService.authState.subscribe((user) => {
       this.socialUser = user;
+      console.log(this.socialUser);
 
       if (!this.authService.isLogoutAction) {
         this.usuario.email = this.socialUser.email;
